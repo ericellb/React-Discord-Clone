@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Simple-Chat/static/css/main.c4cf139a.chunk.css",
+    "main.js": "/Simple-Chat/static/js/main.e2d069f4.chunk.js",
+    "main.js.map": "/Simple-Chat/static/js/main.e2d069f4.chunk.js.map",
+    "runtime~main.js": "/Simple-Chat/static/js/runtime~main.29395272.js",
+    "runtime~main.js.map": "/Simple-Chat/static/js/runtime~main.29395272.js.map",
+    "static/js/2.1e1d2387.chunk.js": "/Simple-Chat/static/js/2.1e1d2387.chunk.js",
+    "static/js/2.1e1d2387.chunk.js.map": "/Simple-Chat/static/js/2.1e1d2387.chunk.js.map",
+    "index.html": "/Simple-Chat/index.html",
+    "precache-manifest.d1ef95dde452eabd8b8241f06eafc8d6.js": "/Simple-Chat/precache-manifest.d1ef95dde452eabd8b8241f06eafc8d6.js",
+    "service-worker.js": "/Simple-Chat/service-worker.js",
+    "static/css/main.c4cf139a.chunk.css.map": "/Simple-Chat/static/css/main.c4cf139a.chunk.css.map"
+  }
+}
