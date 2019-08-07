@@ -24,20 +24,20 @@ export default function SendMessage(props) {
   }
 
   return (
-    <div className="send-messages-grid">
+    <React.Fragment>
+      <div className="send-message-border" />
       <div class="send-message-container">
         <TextField
           autoComplete="off"
           color="blue"
           id="filled-name"
           className="message-input"
-          label="Type a message..."
+          label={`Message # ${activeTopic}`}
           value={chatMessage}
           onChange={(e) => changeChatMessage(e.target.value)}
           onKeyPress={(e) => handleKeyPress(e)}
         />
-        <Button color="primary" variant="contained" className="message-button" onClick={() => handleSubmit({ topic: activeTopic, from: user, msg: chatMessage })}>Send</Button>
       </div>
-    </div >
+    </React.Fragment>
   )
 }

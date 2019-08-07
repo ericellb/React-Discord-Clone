@@ -18,15 +18,13 @@ export default function Messages(props) {
   })
 
   return (
-    <div className="messages-grid">
-      <div className="messages-container">
-        {chatStore[activeTopic].map((message, i) => (
-          <div className="message" key={i}>
-            <Chip avatar={<Icon>person</Icon>} label={message.from + ' ' + message.msg} />
-          </div>
-        ))}
-        <div ref={(element) => messageContainer = element}></div>
-      </div>
+    <div className="messages-container">
+      {chatStore[activeTopic].map((message, i) => (
+        <div className="message" key={i}>
+          <Chip avatar={<Icon>person</Icon>} label={message.from + ' ' + message.msg} />
+        </div>
+      ))}
+      <div ref={(element) => messageContainer = element}></div>
     </div>
   )
 }

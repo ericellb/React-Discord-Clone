@@ -19,12 +19,25 @@ export default function Dashboard() {
 
   return (
     <div>
-      <Header activeTopic={activeTopic} />
+
+      <Header topics={topics} activeTopic={activeTopic} />
+
       <div className="grid-container">
-        <Topics topics={topics} changeActiveTopic={changeActiveTopic} />
-        <Messages activeTopic={activeTopic} />
-        <SendMessage chatMessage={chatMessage} changeChatMessage={changeChatMessage} user={user} activeTopic={activeTopic} />
+
+        <div className="topics-grid">
+          <Topics topics={topics} changeActiveTopic={changeActiveTopic} />
+        </div>
+
+        <div className="messages-grid">
+          <Messages activeTopic={activeTopic} />
+        </div>
+
+        <div className="send-messages-grid">
+          <SendMessage chatMessage={chatMessage} changeChatMessage={changeChatMessage} user={user} activeTopic={activeTopic} />
+        </div>
+
       </div >
+
     </div>
   )
 }
