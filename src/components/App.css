@@ -5,8 +5,7 @@ body {
 
 /* Header.jsx */
 
-.app-header {
-
+.navbar {
   z-index: 100;
 }
 
@@ -14,77 +13,69 @@ body {
 
 /* Dashboard */
 
-.main-container {
-  display: flex;
-  flex-wrap: wrap;
+.grid-container {
+  height: calc(100vh - 64px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1.5fr 0.5fr;
+  grid-template-areas: "Topics Messages Messages Messages" "Topics Messages Messages Messages" "Topics Send-Messages Send-Messages Send-Messages";
 }
 
+.topics-grid { 
+  grid-area: Topics; 
+  background: #23272a;
+}
+
+.messages-grid { 
+  grid-area: Messages; 
+  position: relative;
+  background: #2c2f33;
+
+}
+
+.send-messages-grid { 
+  grid-area: Send-Messages; 
+  background: #2c2f33;
+}
 
 /* Topics.jsx */
-.topics-flex-container {
-  flex-basis: 15%;
-  height: 673px;
+.topics-container {
+  height: 100%;
+  padding: 1em;
   box-sizing: border-box;
-  background: #2f3136;
-  color: #ffffff;
+  color: white;
 }
-
 
 /* Messages.jsx */
-.messages-flex-container {
-  flex-basis: 85%;
-  height: 673px;
-  box-sizing: border-box;
-  background: #36393f;
-  color: #ffffff;
-  position: relative;
-}
-
 .messages-container {
-  position: absolute;
   bottom: 0px;
   padding: 1em;
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  max-height: 100%;
   overflow-y: auto;
-  width: 96%;
-  max-height: 95%;
 }
 
 .message {
-  padding: 0.2em;
+  padding: 0.3em;
 }
 
 /* SendMessage.jsx */
-.send-message-flex-container {
-  display: flex;
-  flex-basis: 100%;
-  height: 200px;
-  box-sizing: border-box;
-  background: #36393f;
-  position: relative;
-}
-
 .send-message-container {
-  position: absolute;
-  display: flex;
   height: 100%;
-  width: 100%;
-  align-items: center;
-  padding: 2em;
-  box-sizing: border-box;
-}
-
-.message-box {
-  flex-basis: 90%;
   padding: 1em;
-  color: white;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
-.message-box input {
-  color: white;
+.message-input {
+  flex-basis: 85%;
 }
 
 .message-button {
-  flex-basis: 10%;
-  padding: 1em;
+  flex-basis: 15%;
 }
 

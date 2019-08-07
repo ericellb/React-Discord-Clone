@@ -6,6 +6,7 @@ export const socketMiddleware = (baseUrl) => {
   return storeAPI => {
     let socket = io(baseUrl);
 
+    // Dispatch chat to reducers when we receive data
     socket.on("simple-chat", (message) => {
       storeAPI.dispatch({
         type: UPDATE_CHAT,
@@ -13,6 +14,7 @@ export const socketMiddleware = (baseUrl) => {
       });
     });
 
+    // Emit when SEND_MESSAGE action
     return next => action => {
       if (action.type === SEND_MESSAGE) {
         socket.emit('simple-chat', action.payload);

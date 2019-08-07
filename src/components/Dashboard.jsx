@@ -19,10 +19,10 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div className="main-container">
-        <Header activeTopic={activeTopic} />
+      <Header activeTopic={activeTopic} />
+      <div className="grid-container">
         <Topics topics={topics} changeActiveTopic={changeActiveTopic} />
-        <Messages chats={chatStore} activeTopic={activeTopic} />
+        <Messages activeTopic={activeTopic} />
         <SendMessage chatMessage={chatMessage} changeChatMessage={changeChatMessage} user={user} activeTopic={activeTopic} />
       </div >
     </div>
