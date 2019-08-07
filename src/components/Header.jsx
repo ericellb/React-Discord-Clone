@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Menu, SwipeableDrawer } from '@material-ui/core';
-import Topics from './Topics';
+import { SwipeableDrawer } from '@material-ui/core';
+import Sidebar from './Sidebar';
 
 export default function Header(props) {
 
-  // Local state
-  const [drawerVisible, changeDrawerVisible] = React.useState(false);
+  // Get store
+  const { activeServer, activeTopic } = useSelector(state => state.chat);
 
-  const { topics, activeTopic } = props;
+  // Local state
+  const [drawerVisible, changeDrawerVisible] = useState(false);
+
+  const { topics, servers } = props;
 
   return (
     <AppBar position="static">
@@ -26,10 +30,10 @@ export default function Header(props) {
           open={drawerVisible}
           onClose={() => changeDrawerVisible(false)}
         >
-          <Topics topics={topics} activeTopic={activeTopic} />
+          <Sidebar topics={topics} servers={servers} />
         </SwipeableDrawer>
         <Typography variant="h6">
-          {activeTopic}
+          {activeServer} - {activeTopic}
         </Typography>
       </Toolbar>
     </AppBar>

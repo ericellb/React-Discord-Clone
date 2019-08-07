@@ -1,7 +1,7 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 
 
 import { useDispatch } from 'react-redux';
@@ -9,9 +9,12 @@ import { sendMessage } from '../actions';
 
 export default function SendMessage(props) {
 
+  // Get store
+  const { activeServer, activeTopic } = useSelector(state => state.chat);
+
   const dispatch = useDispatch();
 
-  const { chatMessage, changeChatMessage, activeTopic, user } = props;
+  const { chatMessage, changeChatMessage, user } = props;
 
   function handleSubmit(message) {
     dispatch(sendMessage(message));
@@ -20,13 +23,13 @@ export default function SendMessage(props) {
 
   function handleKeyPress(e) {
     if (e.key === "Enter")
-      handleSubmit({ topic: activeTopic, from: user, msg: chatMessage });
+      handleSubmit({ server: activeServer, topic: activeTopic, from: user, msg: chatMessage });
   }
 
   return (
     <React.Fragment>
       <div className="send-message-border" />
-      <div class="send-message-container">
+      <div className="send-message-container">
         <TextField
           autoComplete="off"
           color="blue"

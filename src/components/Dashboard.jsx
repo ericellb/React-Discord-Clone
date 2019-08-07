@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
-import Topics from './Topics';
+import Sidebar from './Sidebar';
 import Messages from './Messages';
 import SendMessage from './SendMessage.jsx';
 import Header from './Header';
@@ -11,29 +11,31 @@ const user = 'eric' + Math.ceil(Math.random() * 100);
 export default function Dashboard() {
 
   const chatStore = useSelector(state => state.chat);
-  const topics = Object.keys(chatStore);
 
   // Local state
-  const [chatMessage, changeChatMessage] = React.useState('');
-  const [activeTopic, changeActiveTopic] = React.useState(topics[0]);
+  const [chatMessage, changeChatMessage] = useState('');
+
+  const servers = Object.keys(chatStore.servers);
+
+  const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
 
   return (
     <div>
 
-      <Header topics={topics} activeTopic={activeTopic} />
+      <Header topics={topics} servers={servers} />
 
       <div className="grid-container">
 
-        <div className="topics-grid">
-          <Topics topics={topics} changeActiveTopic={changeActiveTopic} />
+        <div className="sidebar-grid">
+          <Sidebar topics={topics} servers={servers} />
         </div>
 
         <div className="messages-grid">
-          <Messages activeTopic={activeTopic} />
+          <Messages topics={topics} />
         </div>
 
         <div className="send-messages-grid">
-          <SendMessage chatMessage={chatMessage} changeChatMessage={changeChatMessage} user={user} activeTopic={activeTopic} />
+          <SendMessage chatMessage={chatMessage} changeChatMessage={changeChatMessage} user={user} />
         </div>
 
       </div >
