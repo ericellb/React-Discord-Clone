@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
-import { Chip, Icon } from '@material-ui/core';
+import { Chip, Icon, List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@material-ui/core';
+import PersonIcon from '@material-ui/icons/Person';
 
 export default function Messages(props) {
 
@@ -19,11 +20,18 @@ export default function Messages(props) {
 
   return (
     <div className="messages-container">
-      {chatStore.servers[activeServer][activeTopic].map((message, i) => (
-        <div className="message" key={i}>
-          <Chip avatar={<Icon>person</Icon>} label={message.from + ' ' + message.msg} />
-        </div>
-      ))}
+      <List>
+        {chatStore.servers[activeServer][activeTopic].map((message, i) => (
+          <ListItem className="message" key={i}>
+            <ListItemAvatar>
+              <Avatar>
+                <PersonIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={message.from} secondary={message.msg} className="message-text" />
+          </ListItem>
+        ))}
+      </List>
       <div ref={(element) => messageContainer = element}></div>
     </div>
   )
