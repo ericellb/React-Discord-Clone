@@ -17,7 +17,6 @@ body {
 
 .sidebar-grid { 
   grid-area: Sidebar; 
-  background: #2E3136;
   box-shadow: inset -2px 0px 10px -4px rgba(0,0,0,0.75);
 }
 
@@ -43,6 +42,7 @@ body {
 }
 
 .topics-container {
+  position: relative;
   display: flex;
   height: 100%;
   padding: 1em;
@@ -50,13 +50,14 @@ body {
   color: white;
   flex-basis: 80%;
   height: 100%;
+  background: #2f3136;
 }
 
 .servers-container {
   display: flex;
   height: 100%;
-  padding: 1em;
   box-sizing: border-box;
+  padding: 0.5em;
   color: white;
   flex-basis: 20%;
   height: 100%;
@@ -68,8 +69,8 @@ body {
 }
 
 .server-icon svg {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
 }
 
 .topic {
@@ -82,6 +83,16 @@ body {
   padding-right: 8px;
   color: grey;
 }
+
+.user-options {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: #2a2c31;
+}
+
 
 /* Messages.jsx */
 .messages-container {

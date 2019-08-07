@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
-import { Chip, Icon, List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@material-ui/core';
+import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 
 export default function Messages(props) {

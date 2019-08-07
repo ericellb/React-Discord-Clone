@@ -11,6 +11,7 @@ export default function SendMessage(props) {
 
   // Get store
   const { activeServer, activeTopic } = useSelector(state => state.chat);
+  const { userName } = useSelector(state => state.user);
 
   const dispatch = useDispatch();
 
@@ -23,7 +24,7 @@ export default function SendMessage(props) {
 
   function handleKeyPress(e) {
     if (e.key === "Enter")
-      handleSubmit({ server: activeServer, topic: activeTopic, from: user, msg: chatMessage });
+      handleSubmit({ server: activeServer, topic: activeTopic, from: userName, msg: chatMessage });
   }
 
   return (

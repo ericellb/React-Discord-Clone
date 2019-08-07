@@ -6,8 +6,6 @@ import Messages from './Messages';
 import SendMessage from './SendMessage.jsx';
 import Header from './Header';
 
-const user = 'eric' + Math.ceil(Math.random() * 100);
-
 export default function Dashboard() {
 
   const chatStore = useSelector(state => state.chat);
@@ -15,8 +13,8 @@ export default function Dashboard() {
   // Local state
   const [chatMessage, changeChatMessage] = useState('');
 
+  // Get servers and topics out of store
   const servers = Object.keys(chatStore.servers);
-
   const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
 
   return (
@@ -35,7 +33,7 @@ export default function Dashboard() {
         </div>
 
         <div className="send-messages-grid">
-          <SendMessage chatMessage={chatMessage} changeChatMessage={changeChatMessage} user={user} />
+          <SendMessage chatMessage={chatMessage} changeChatMessage={changeChatMessage} />
         </div>
 
       </div >
