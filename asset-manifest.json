@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Simple-Chat/static/css/main.13cdccbd.chunk.css",
-    "main.js": "/Simple-Chat/static/js/main.c5d8f9c4.chunk.js",
-    "main.js.map": "/Simple-Chat/static/js/main.c5d8f9c4.chunk.js.map",
+    "main.css": "/Simple-Chat/static/css/main.10b4643a.chunk.css",
+    "main.js": "/Simple-Chat/static/js/main.07e64eaf.chunk.js",
+    "main.js.map": "/Simple-Chat/static/js/main.07e64eaf.chunk.js.map",
     "runtime~main.js": "/Simple-Chat/static/js/runtime~main.29395272.js",
     "runtime~main.js.map": "/Simple-Chat/static/js/runtime~main.29395272.js.map",
-    "static/js/2.538af1a1.chunk.js": "/Simple-Chat/static/js/2.538af1a1.chunk.js",
-    "static/js/2.538af1a1.chunk.js.map": "/Simple-Chat/static/js/2.538af1a1.chunk.js.map",
+    "static/js/2.87e3b3ae.chunk.js": "/Simple-Chat/static/js/2.87e3b3ae.chunk.js",
+    "static/js/2.87e3b3ae.chunk.js.map": "/Simple-Chat/static/js/2.87e3b3ae.chunk.js.map",
     "index.html": "/Simple-Chat/index.html",
-    "precache-manifest.4259d0a903c6d0168c5cabf673ecf5c5.js": "/Simple-Chat/precache-manifest.4259d0a903c6d0168c5cabf673ecf5c5.js",
+    "precache-manifest.155dbb5eb1595ea88bb4504c879efb9e.js": "/Simple-Chat/precache-manifest.155dbb5eb1595ea88bb4504c879efb9e.js",
     "service-worker.js": "/Simple-Chat/service-worker.js",
-    "static/css/main.13cdccbd.chunk.css.map": "/Simple-Chat/static/css/main.13cdccbd.chunk.css.map"
+    "static/css/main.10b4643a.chunk.css.map": "/Simple-Chat/static/css/main.10b4643a.chunk.css.map"
   }
 }
