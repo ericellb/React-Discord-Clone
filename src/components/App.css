@@ -1,41 +1,90 @@
-.app-container {
+body {
+  margin: 0;
+}
+
+
+/* Header.jsx */
+
+.app-header {
+
+  z-index: 100;
+}
+
+
+
+/* Dashboard */
+
+.main-container {
   display: flex;
   flex-wrap: wrap;
 }
 
-.topics-container {
-  flex-basis: 30%;
-  height: 600px;
-  border-right: 2px solid lightgray;
-  padding: 1em;
+
+/* Topics.jsx */
+.topics-flex-container {
+  flex-basis: 15%;
+  height: 673px;
   box-sizing: border-box;
+  background: #2f3136;
+  color: #ffffff;
+}
+
+
+/* Messages.jsx */
+.messages-flex-container {
+  flex-basis: 85%;
+  height: 673px;
+  box-sizing: border-box;
+  background: #36393f;
+  color: #ffffff;
+  position: relative;
 }
 
 .messages-container {
-  flex-basis: 70%;
-  height: 600px;
+  position: absolute;
+  bottom: 0px;
   padding: 1em;
-  box-sizing: border-box;
+  overflow-y: auto;
+  width: 96%;
+  max-height: 95%;
 }
 
-.send-message-container {
-  border-top: 2px solid lightgray;
+.message {
+  padding: 0.2em;
+}
+
+/* SendMessage.jsx */
+.send-message-flex-container {
   display: flex;
   flex-basis: 100%;
   height: 200px;
-  padding: 1em;
   box-sizing: border-box;
+  background: #36393f;
+  position: relative;
+}
+
+.send-message-container {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
   align-items: center;
+  padding: 2em;
+  box-sizing: border-box;
 }
 
 .message-box {
   flex-basis: 90%;
+  padding: 1em;
+  color: white;
+}
+
+.message-box input {
+  color: white;
 }
 
 .message-button {
   flex-basis: 10%;
+  padding: 1em;
 }
 
-.messages {
-  padding: 0.2em;
-}

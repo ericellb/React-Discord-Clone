@@ -10,7 +10,7 @@ export default function Header(props) {
   const { activeTopic } = props;
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar className="app-header">
         <IconButton edge="start" color="inherit" aria-label="menu">
           <MenuIcon />
         </IconButton>
