@@ -30,7 +30,7 @@ export default function Messages(props) {
             <ListItem className="message" key={i}>
               <ListItemAvatar>
                 <Avatar>
-                  <img src="/user.png" height="48" />
+                  <img src={process.env.PUBLIC_URL + "/user.png"} height="48" />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary={message.from} secondary={message.msg} className="message-text" />

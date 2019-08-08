@@ -31,9 +31,12 @@ export default function Header(props) {
           open={drawerVisible}
           onClose={() => changeDrawerVisible(false)}
         >
-          <Sidebar topics={topics} servers={servers} />
+          <Sidebar topics={topics} servers={servers} changeDrawerVisible={changeDrawerVisible} />
         </SwipeableDrawer>
-        <Typography variant="h5">{activeTopic}</Typography>
+        <i style={{ verticalAlign: 'text-bottom', fontWeight: 'bold' }} className="topic-hashtag">#</i>
+        <Typography variant="h5">
+          {activeTopic}
+        </Typography>
       </Toolbar>
     </AppBar>
   )

@@ -19,6 +19,7 @@ export default function SendMessage(props) {
   const [chatMessage, changeChatMessage] = useState('');
 
   function handleSubmit(message) {
+    console.log(message);
     dispatch(sendMessage(message));
     changeChatMessage("");
   }

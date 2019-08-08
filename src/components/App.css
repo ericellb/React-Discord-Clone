@@ -127,7 +127,8 @@ body {
 .message {
   padding: 1.01em !important;
   color: white;
-  border-top: 1px solid lightgrey;
+  border-top: 2px solid #42454a;
+  white-space: pre;
 }
 
 .message-text {
@@ -159,7 +160,7 @@ body {
   position: absolute;
   height: 100%;
   width: 95%;
-  border-top: 1px solid lightgrey;
+  border-top: 2px solid #42454a;
 }
 
 .message-text-area {
@@ -168,7 +169,7 @@ body {
     resize: none;
     color: white;
     border-radius: 4px;
-    padding: 1.2em;
+    padding: 1em;
     font-family: "Roboto";
     font-size: 15px;
     border: 1px solid #484b52;
@@ -185,7 +186,7 @@ body {
     height: calc(99.9vh);
     display: grid;
     grid-template-columns: 340px 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1.5fr 0.35fr;
+    grid-template-rows: 1fr 1.5fr 0.3fr;
     grid-template-areas: "Sidebar Messages Messages Messages" "Sidebar Messages Messages Messages" "Sidebar Send-Messages Send-Messages Send-Messages";
   }
 

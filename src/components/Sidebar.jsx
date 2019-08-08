@@ -22,7 +22,7 @@ export default function Topics(props) {
   const [snackBarMessage, changeSnackBarMessage] = useState('');
 
   // Get props from parent
-  const { topics, servers } = props;
+  const { topics, servers, changeDrawerVisible } = props;
 
 
   function handleKeyPress(e) {
@@ -52,7 +52,7 @@ export default function Topics(props) {
         <List className="topic-list">
           <ListItem className="title-container">{activeServer}</ListItem>
           {topics.map(topic => (
-            <ListItem onClick={(e) => dispatch(changeTopic(topic))} key={topic} button>
+            <ListItem onClick={(e) => { dispatch(changeTopic(topic)); changeDrawerVisible(false); }} key={topic} button>
               <i style={{ verticalAlign: 'text-bottom', fontWeight: 'bold' }} className="topic-hashtag">#</i>
               <Typography variant="body1">{topic}</Typography>
             </ListItem>
@@ -79,6 +79,6 @@ export default function Topics(props) {
           />
         </div>
       </div>
-    </div>
+    </div >
   )
 }
