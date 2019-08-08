@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 
 import Sidebar from './Sidebar';
@@ -8,10 +8,8 @@ import Header from './Header';
 
 export default function Dashboard() {
 
+  // Get store state
   const chatStore = useSelector(state => state.chat);
-
-  // Local state
-  const [chatMessage, changeChatMessage] = useState('');
 
   // Get servers and topics out of store
   const servers = Object.keys(chatStore.servers);
@@ -20,8 +18,6 @@ export default function Dashboard() {
   return (
     <div>
 
-      <Header topics={topics} servers={servers} />
-
       <div className="grid-container">
 
         <div className="sidebar-grid">
@@ -29,11 +25,11 @@ export default function Dashboard() {
         </div>
 
         <div className="messages-grid">
-          <Messages topics={topics} />
+          <Messages topics={topics} servers={servers} />
         </div>
 
         <div className="send-messages-grid">
-          <SendMessage chatMessage={chatMessage} changeChatMessage={changeChatMessage} />
+          <SendMessage />
         </div>
 
       </div >

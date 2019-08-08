@@ -4,26 +4,35 @@ import { useDispatch } from 'react-redux';
 
 import PersonIcon from '@material-ui/icons/Person';
 import GroupWork from '@material-ui/icons/GroupWork';
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Tooltip, IconButton, Typography, TextField } from '@material-ui/core';
+import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Tooltip, IconButton, Typography, TextField, Snackbar } from '@material-ui/core';
 
 
 import { changeServer, changeTopic, signIn, signOut } from '../actions';
 
 export default function Topics(props) {
 
-  // Get store
+  // Get store state
+  const { activeServer, activeTopic } = useSelector(state => state.chat);
   const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
+  // Local state
   const [userName, changeUserName] = useState(user.userName);
+  const [snackBarVisible, changeSnackBarVisible] = useState(false);
+  const [snackBarMessage, changeSnackBarMessage] = useState('');
 
+  // Get props from parent
   const { topics, servers } = props;
 
-  const dispatch = useDispatch();
 
   function handleKeyPress(e) {
     console.log('fired');
-    if (e.key === "Enter")
+    if (e.key === "Enter") {
       dispatch({ type: 'SIGN_IN', payload: { userId: '1', userName: userName } });
+      changeSnackBarMessage(`Name changed to : ${userName}`);
+      changeSnackBarVisible(true);
+      setTimeout(() => changeSnackBarVisible(false), 2000)
+    }
   }
 
   return (
@@ -40,7 +49,8 @@ export default function Topics(props) {
         </List>
       </div>
       <div className="topics-container">
-        <List className="topic">
+        <List className="topic-list">
+          <ListItem className="title-container">{activeServer}</ListItem>
           {topics.map(topic => (
             <ListItem onClick={(e) => dispatch(changeTopic(topic))} key={topic} button>
               <i style={{ verticalAlign: 'text-bottom', fontWeight: 'bold' }} className="topic-hashtag">#</i>
@@ -62,6 +72,11 @@ export default function Topics(props) {
               onKeyPress={(e) => handleKeyPress(e)}
             />
           </ListItem>
+          <Snackbar
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            open={snackBarVisible}
+            message={snackBarMessage}
+          />
         </div>
       </div>
     </div>

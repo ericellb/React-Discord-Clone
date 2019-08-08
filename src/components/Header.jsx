@@ -11,12 +11,13 @@ import Sidebar from './Sidebar';
 
 export default function Header(props) {
 
-  // Get store
+  // Get store state
   const { activeServer, activeTopic } = useSelector(state => state.chat);
 
   // Local state
   const [drawerVisible, changeDrawerVisible] = useState(false);
 
+  // Get props from parent
   const { topics, servers } = props;
 
   return (
@@ -32,9 +33,7 @@ export default function Header(props) {
         >
           <Sidebar topics={topics} servers={servers} />
         </SwipeableDrawer>
-        <Typography variant="h6">
-          {activeServer} - {activeTopic}
-        </Typography>
+        <Typography variant="h5">{activeTopic}</Typography>
       </Toolbar>
     </AppBar>
   )

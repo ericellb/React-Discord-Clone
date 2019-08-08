@@ -45,7 +45,6 @@ body {
   position: relative;
   display: flex;
   height: 100%;
-  padding: 1em;
   box-sizing: border-box;
   color: white;
   flex-basis: 80%;
@@ -57,7 +56,6 @@ body {
   display: flex;
   height: 100%;
   box-sizing: border-box;
-  padding: 0.5em;
   color: white;
   flex-basis: 20%;
   height: 100%;
@@ -73,8 +71,19 @@ body {
   height: 48px;
 }
 
-.topic {
+.topic-list {
   width: 100%;
+  padding-top: 0 !important;
+}
+
+.title-container {
+  box-shadow: 0 2px 0px 0px #202225;
+  height: 64px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-family: "Roboto";
 }
 
 .topic-hashtag {
@@ -117,6 +126,10 @@ body {
   color: white !important;
 }
 
+.topic-title {
+  padding-left: 16px;
+  color: white;
+}
 
 /* SendMessage.jsx */
 .send-message-container {
@@ -144,7 +157,7 @@ body {
 /* MEDIA QUERIES FOR DESKTOP */
 @media only screen and (min-width: 600px) {
   .grid-container {
-    height: calc(100vh - 65px);
+    height: calc(99.9vh);
     display: grid;
     grid-template-columns: 340px 1fr 1fr 1fr;
     grid-template-rows: 1fr 1.5fr 0.35fr;
@@ -161,7 +174,7 @@ body {
 
 @media only screen and (max-width: 599px) {
   .grid-container {
-    height: calc(100vh - 56px);
+    height: calc(99.9vh);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1.7fr 0.1fr;
@@ -170,6 +183,10 @@ body {
 
   .sidebar-grid {
     display: none;
+  }
+
+  .title-container {
+    height: 56px;
   }
 
 }

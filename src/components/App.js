@@ -11,6 +11,17 @@ const theme = createMuiTheme({
         fontSize: "16px",
         backgroundColor: 'black'
       }
+    },
+    MuiSnackbarContent: {
+      root: {
+        backgroundColor: '#202225',
+        color: 'white'
+      }
+    },
+    MuiAppBar: {
+      colorPrimary: {
+        backgroundColor: '#36393E'
+      }
     }
   },
   palette: {
@@ -26,6 +37,7 @@ const theme = createMuiTheme({
     "fontWeightRegular": 400,
     "fontWeightMedium": 500
   }
+
 });
 
 
