@@ -54,7 +54,7 @@ export default function Topics(props) {
           {topics.map(topic => (
             <ListItem onClick={(e) => { dispatch(changeTopic(topic)); changeDrawerVisible(false); }} key={topic} button>
               <i style={{ verticalAlign: 'text-bottom', fontWeight: 'bold' }} className="topic-hashtag">#</i>
-              <Typography variant="body1">{topic}</Typography>
+              <Typography variant="body1">{topic.toLowerCase()}</Typography>
             </ListItem>
           ))}
         </List>

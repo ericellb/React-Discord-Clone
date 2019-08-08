@@ -158,14 +158,13 @@ body {
 
 .send-message-border {
   position: absolute;
-  height: 100%;
   width: 95%;
   border-top: 2px solid #42454a;
 }
 
 .message-text-area {
   background: #484b52;
-    width: 90%;
+    width: 100%;
     resize: none;
     color: white;
     border-radius: 4px;
@@ -177,6 +176,30 @@ body {
 
 .message-text-area:focus {
   outline: none;
+}
+
+.send-message-emoji-button {
+  color: #707277;
+  cursor: pointer;
+  z-index: 30;
+  position: absolute;
+  right: 0;
+  padding-right: 1em;
+}
+
+.emoji-wrapper {
+  position: fixed;
+  bottom: 4em;
+  right: 3em;
+}
+
+.send-message-emoji-menu {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+  z-index: 40;
 }
 
 
@@ -215,4 +238,13 @@ body {
     height: 56px;
   }
 
+}
+
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }

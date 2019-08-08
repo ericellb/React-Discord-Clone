@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 
-import TextField from '@material-ui/core/TextField';
-
 
 import { useDispatch } from 'react-redux';
 import { sendMessage } from '../actions';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart';
+
+import SmileyFace from '@material-ui/icons/SentimentVerySatisfied';
 
 export default function SendMessage(props) {
 
@@ -17,6 +20,7 @@ export default function SendMessage(props) {
 
   // Local state
   const [chatMessage, changeChatMessage] = useState('');
+  const [emojiMenuVisible, changeEmojiMenuVisible] = useState(false);
 
   function handleSubmit(message) {
     console.log(message);
@@ -36,6 +40,16 @@ export default function SendMessage(props) {
       changeChatMessage(e.target.value)
   }
 
+  function handleEmojiClick(e) {
+    changeChatMessage(chatMessage + e.native);
+    changeEmojiMenuVisible(false);
+  }
+
+  window.onclick = ((e) => {
+    if (String(e.target.className).includes("send-message-emoji-menu"))
+      changeEmojiMenuVisible(false);
+  })
+
   return (
     <React.Fragment>
       <div className="send-message-border" />
@@ -48,6 +62,10 @@ export default function SendMessage(props) {
           onChange={(e) => handleOnChange(e)}
           onKeyPress={(e) => handleKeyPress(e)}
         />
+        <SmileyFace className="send-message-emoji-button" onClick={() => changeEmojiMenuVisible(!emojiMenuVisible)} />
+      </div>
+      <div className={(emojiMenuVisible ? "send-message-emoji-menu show" : "send-message-emoji-menu hide")}>
+        <div className="emoji-wrapper"><Picker set="emojione" onSelect={(e) => handleEmojiClick(e)} /></div>
       </div>
     </React.Fragment>
   )

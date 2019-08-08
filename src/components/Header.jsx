@@ -35,7 +35,7 @@ export default function Header(props) {
         </SwipeableDrawer>
         <i style={{ verticalAlign: 'text-bottom', fontWeight: 'bold' }} className="topic-hashtag">#</i>
         <Typography variant="h5">
-          {activeTopic}
+          {activeTopic.toLowerCase()}
         </Typography>
       </Toolbar>
     </AppBar>
