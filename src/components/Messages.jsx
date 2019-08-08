@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@material-ui/core';
-import PersonIcon from '@material-ui/icons/Person';
 import Header from './Header';
 
 export default function Messages(props) {
@@ -31,7 +30,7 @@ export default function Messages(props) {
             <ListItem className="message" key={i}>
               <ListItemAvatar>
                 <Avatar>
-                  <PersonIcon />
+                  <img src="/user.png" height="48" />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary={message.from} secondary={message.msg} className="message-text" />

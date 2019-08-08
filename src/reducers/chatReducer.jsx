@@ -10,7 +10,7 @@ const initialState = {
       php: [
       ],
       node: [
-      ],
+      ]
     },
     "game land": {
       HOTS: [
@@ -22,7 +22,7 @@ const initialState = {
       PoE: [
       ],
       CSGO: [
-      ],
+      ]
     },
   },
   activeServer: '',

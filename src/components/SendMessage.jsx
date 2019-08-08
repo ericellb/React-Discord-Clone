@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 
 import { useDispatch } from 'react-redux';
 import { sendMessage } from '../actions';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 export default function SendMessage(props) {
 
@@ -19,26 +20,31 @@ export default function SendMessage(props) {
 
   function handleSubmit(message) {
     dispatch(sendMessage(message));
-    changeChatMessage('');
+    changeChatMessage("");
   }
 
   function handleKeyPress(e) {
-    if (e.key === "Enter")
+    if (e.key === "Enter" && !e.shiftKey)
       handleSubmit({ server: activeServer, topic: activeTopic, from: userName, msg: chatMessage });
+  }
+
+  function handleOnChange(e) {
+    // Catches enters (dont render to screen)
+    // Shift enter still works
+    if (e.target.value !== "\n")
+      changeChatMessage(e.target.value)
   }
 
   return (
     <React.Fragment>
       <div className="send-message-border" />
       <div className="send-message-container">
-        <TextField
-          autoComplete="off"
-          color="blue"
-          id="filled-name"
-          className="message-input"
-          label={`Message # ${activeTopic}`}
+        <TextareaAutosize
+          aria-label="empty textarea"
+          placeholder={`Message  #${activeTopic}`}
+          className="message-text-area"
           value={chatMessage}
-          onChange={(e) => changeChatMessage(e.target.value)}
+          onChange={(e) => handleOnChange(e)}
           onKeyPress={(e) => handleKeyPress(e)}
         />
       </div>

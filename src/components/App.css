@@ -10,6 +10,13 @@ body {
 }
 
 
+/* Scrollbar */
+
+
+::-webkit-scrollbar { width: 14px; height: 18px;}
+::-webkit-scrollbar-track { background-clip: padding-box; background-color: #2f3136; border-radius: 10px;}
+::-webkit-scrollbar-thumb { border: 3px solid rgba(0,0,0,0); background-clip: padding-box; background-color: #0e0f0f; border-radius: 10px;}
+::-webkit-scrollbar-button { width: 0; height: 0; display: none;}
 
 
 
@@ -74,6 +81,7 @@ body {
 .topic-list {
   width: 100%;
   padding-top: 0 !important;
+  overflow-y: auto;
 }
 
 .title-container {
@@ -111,7 +119,7 @@ body {
   position: absolute;
   width: 100%;
   bottom: 0;
-  max-height: 100%;
+  max-height: calc(100% - 64px);
   overflow-y: auto;
   padding-bottom: 0px;
 }
@@ -140,6 +148,7 @@ body {
   align-items: center;
   flex-basis: 100%;
   justify-content: center;
+  z-index: 10;
 }
 
 .message-input {
@@ -151,6 +160,22 @@ body {
   height: 100%;
   width: 95%;
   border-top: 1px solid lightgrey;
+}
+
+.message-text-area {
+  background: #484b52;
+    width: 90%;
+    resize: none;
+    color: white;
+    border-radius: 4px;
+    padding: 1.2em;
+    font-family: "Roboto";
+    font-size: 15px;
+    border: 1px solid #484b52;
+}
+
+.message-text-area:focus {
+  outline: none;
 }
 
 
