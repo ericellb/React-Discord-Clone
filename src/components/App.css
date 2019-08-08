@@ -99,6 +99,8 @@ body {
   font-size: 24px;
   padding-right: 8px;
   color: grey;
+  vertical-align: text-bottom;
+  font-weight: 900;
 }
 
 .user-options {
@@ -142,6 +144,7 @@ body {
 
 /* SendMessage.jsx */
 .send-message-container {
+  position: relative;
   height: 100%;
   padding: 1em;
   box-sizing: border-box;
@@ -183,15 +186,19 @@ body {
   cursor: pointer;
   z-index: 30;
   position: absolute;
-  right: 0;
-  padding-right: 1em;
+  right: 1em;
 }
 
 .emoji-wrapper {
   position: fixed;
-  bottom: 4em;
-  right: 3em;
+  bottom: 84px;
+  right: 20px;
 }
+
+.emoji-mart {
+  border-radius: 0px !important;
+}
+
 
 .send-message-emoji-menu {
   position: fixed;
@@ -206,7 +213,7 @@ body {
 /* MEDIA QUERIES FOR DESKTOP */
 @media only screen and (min-width: 600px) {
   .grid-container {
-    height: calc(99.9vh);
+    height: calc(100vh);
     display: grid;
     grid-template-columns: 340px 1fr 1fr 1fr;
     grid-template-rows: 1fr 1.5fr 0.3fr;
@@ -223,7 +230,7 @@ body {
 
 @media only screen and (max-width: 599px) {
   .grid-container {
-    height: calc(99.9vh);
+    height: calc(100vh);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1.7fr 0.1fr;
@@ -236,6 +243,15 @@ body {
 
   .title-container {
     height: 56px;
+  }
+
+  .emoji-wrapper {
+    bottom:0px;
+    right:0px;
+  }
+
+  .emoji-mart {
+    width: 100vw !important;
   }
 
 }

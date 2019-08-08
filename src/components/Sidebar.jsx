@@ -4,15 +4,15 @@ import { useDispatch } from 'react-redux';
 
 import PersonIcon from '@material-ui/icons/Person';
 import GroupWork from '@material-ui/icons/GroupWork';
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Tooltip, IconButton, Typography, TextField, Snackbar } from '@material-ui/core';
+import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, TextField, Snackbar } from '@material-ui/core';
 
 
-import { changeServer, changeTopic, signIn, signOut } from '../actions';
+import { changeServer, changeTopic } from '../actions';
 
 export default function Topics(props) {
 
   // Get store state
-  const { activeServer, activeTopic } = useSelector(state => state.chat);
+  const { activeServer } = useSelector(state => state.chat);
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
@@ -24,9 +24,7 @@ export default function Topics(props) {
   // Get props from parent
   const { topics, servers, changeDrawerVisible } = props;
 
-
   function handleKeyPress(e) {
-    console.log('fired');
     if (e.key === "Enter") {
       dispatch({ type: 'SIGN_IN', payload: { userId: '1', userName: userName } });
       changeSnackBarMessage(`Name changed to : ${userName}`);
@@ -41,8 +39,8 @@ export default function Topics(props) {
         <List>
           {servers.map(server => (
             <Tooltip title={server} key={server} placement="right" className="server-tooltip">
-              <IconButton className="server-icon">
-                <GroupWork onClick={() => dispatch(changeServer(server))} />
+              <IconButton className="server-icon" onClick={() => dispatch(changeServer(server))}>
+                <GroupWork />
               </IconButton>
             </Tooltip>
           ))}
@@ -52,8 +50,8 @@ export default function Topics(props) {
         <List className="topic-list">
           <ListItem className="title-container">{activeServer}</ListItem>
           {topics.map(topic => (
-            <ListItem onClick={(e) => { dispatch(changeTopic(topic)); changeDrawerVisible(false); }} key={topic} button>
-              <i style={{ verticalAlign: 'text-bottom', fontWeight: 'bold' }} className="topic-hashtag">#</i>
+            <ListItem onClick={(e) => { dispatch(changeTopic(topic)); if (typeof changeDrawerVisible !== "undefined") changeDrawerVisible(false) }} key={topic} button>
+              <i className="topic-hashtag">#</i>
               <Typography variant="body1">{topic.toLowerCase()}</Typography>
             </ListItem>
           ))}

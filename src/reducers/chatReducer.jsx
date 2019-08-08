@@ -30,11 +30,9 @@ const initialState = {
 }
 
 export const chatReducer = (state = initialState, action) => {
-  console.log('hit reducer');
   switch (action.type) {
     case 'UPDATE_CHAT':
       const { server, topic, from, msg } = action.payload;
-      console.log(action);
       return {
         ...state,
         servers: {

@@ -23,7 +23,6 @@ export default function SendMessage(props) {
   const [emojiMenuVisible, changeEmojiMenuVisible] = useState(false);
 
   function handleSubmit(message) {
-    console.log(message);
     dispatch(sendMessage(message));
     changeChatMessage("");
   }

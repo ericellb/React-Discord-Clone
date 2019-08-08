@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux';
 
 import Sidebar from './Sidebar';
 import Messages from './Messages';
 import SendMessage from './SendMessage.jsx';
-import Header from './Header';
 
 export default function Dashboard() {
 
@@ -14,6 +13,7 @@ export default function Dashboard() {
   // Get servers and topics out of store
   const servers = Object.keys(chatStore.servers);
   const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
+
 
   return (
     <div>
