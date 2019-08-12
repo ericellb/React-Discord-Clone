@@ -13,9 +13,9 @@ export const updateChat = (message) => ({
   payload: message
 });
 
-export const changeServer = (server) => ({
+export const changeServer = (server, serverId) => ({
   type: CHANGE_SERVER,
-  payload: server
+  payload: { server, serverId }
 });
 
 export const changeTopic = (server) => ({

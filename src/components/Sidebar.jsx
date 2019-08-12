@@ -26,7 +26,7 @@ export default function Topics(props) {
         <List>
           {servers.map(server => (
             <Tooltip title={server} key={server} placement="right" className="server-tooltip">
-              <IconButton className="server-icon" onClick={() => dispatch(changeServer(server))}>
+              <IconButton className="server-icon" onClick={() => dispatch(changeServer(server, server.server_id))}>
                 <GroupWork />
               </IconButton>
             </Tooltip>
