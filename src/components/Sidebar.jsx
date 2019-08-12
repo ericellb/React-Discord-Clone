@@ -36,12 +36,15 @@ export default function Topics(props) {
       <div className="topics-container">
         <List className="topic-list">
           <ListItem className="title-container">{activeServer}</ListItem>
-          {topics.map(topic => (
-            <ListItem onClick={(e) => { dispatch(changeTopic(topic)); if (typeof changeDrawerVisible !== "undefined") changeDrawerVisible(false) }} key={topic} button>
-              <i className="topic-hashtag">#</i>
-              <Typography variant="body1">{topic.toLowerCase()}</Typography>
-            </ListItem>
-          ))}
+          {topics.map(topic => {
+            if (topic !== 'server_id')
+              return (
+                <ListItem onClick={(e) => { dispatch(changeTopic(topic)); if (typeof changeDrawerVisible !== "undefined") changeDrawerVisible(false) }} key={topic} button>
+                  <i className="topic-hashtag">#</i>
+                  <Typography variant="body1">{topic.toLowerCase()}</Typography>
+                </ListItem>
+              )
+          })}
         </List>
         <div className="user-options">
           <ListItem className="user-info">

@@ -6,24 +6,12 @@ const initialState = {
       general: [
       ],
       react: [
-      ],
-      vue: [
-      ],
-      php: [
-      ],
-      node: [
       ]
     },
     "game land": {
       HOTS: [
       ],
       Overwatch: [
-      ],
-      Diablo: [
-      ],
-      PoE: [
-      ],
-      CSGO: [
       ]
     },
   },
@@ -51,10 +39,10 @@ export const chatReducer = (state = initialState, action) => {
 
       return { ...state, servers: action.payload };
     case CHANGE_SERVER:
-      return { ...state, activeServer: action.payload, activeTopic: Object.keys(state.servers[action.payload])[0] }
+      return { ...state, activeServer: action.payload, activeTopic: Object.keys(state.servers[action.payload])[1] }
     case CHANGE_TOPIC:
       return { ...state, activeTopic: action.payload }
     default:
-      return { ...state, activeServer: Object.keys(state.servers)[0], activeTopic: Object.keys(state.servers[Object.keys(state.servers)[0]])[0] };
+      return { ...state, activeServer: Object.keys(state.servers)[0], activeTopic: Object.keys(state.servers[Object.keys(state.servers)[0]])[1] };
   }
 }
