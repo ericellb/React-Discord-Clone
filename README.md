@@ -2,7 +2,7 @@
 
 Originally started off on a test project for learning Functional Components, Hooks and Socket IO. I then decided to create a Discord Clone
 
-![layout image](https://github.com/ericellb/Simple-Chat/tree/master/public/layout.png)
+![layout image](https://github.com/ericellb/Simple-Chat/tree/master/public/layout.png?raw=true)
 
 ## Features
   Features
