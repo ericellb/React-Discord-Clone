@@ -2,6 +2,8 @@
 
 Originally started off on a test project for learning Functional Components, Hooks and Socket IO. I then decided to create a Discord Clone
 
+![layout image](https://https://github.com/ericellb/Simple-Chat/tree/master/public/layout.png)
+
 ## Features
   Features
   - [x] Real time messaging in channels using Socket IO
