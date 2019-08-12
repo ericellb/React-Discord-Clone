@@ -12,13 +12,19 @@ import GoogleOAuth from './GoogleOAuth';
 
 export default function Topics(props) {
 
-  // Get store state
-  const { activeServer } = useSelector(state => state.chat);
+
+  // Get chats from store
+  const chatStore = useSelector(state => state.chat);
+  const servers = Object.keys(chatStore.servers);
+  const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
+  const { activeServer } = chatStore;
+
+  // Get user from store
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   // Get props from parent
-  const { topics, servers, changeDrawerVisible } = props;
+  const { changeDrawerVisible } = props;
 
   return (
     <div className="sidebar-container">

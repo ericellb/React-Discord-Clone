@@ -6,12 +6,11 @@ import Header from './Header';
 
 export default function Messages(props) {
 
-  // Get store state
-  const chats = useSelector(state => state.chat);
-  const { activeServer, activeTopic } = chats;
-
-  // Get props 
-  const { topics, servers } = props;
+  // Get chats from store
+  const chatStore = useSelector(state => state.chat);
+  const servers = Object.keys(chatStore.servers);
+  const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
+  const { activeServer, activeTopic } = chatStore;
 
   // ref
   let messageContainer;
@@ -26,7 +25,7 @@ export default function Messages(props) {
       <Header topics={topics} servers={servers}></Header>
       <div className="messages-container">
         <List>
-          {chats.servers[activeServer][activeTopic].map((message, i) => (
+          {chatStore.servers[activeServer][activeTopic].map((message, i) => (
             <ListItem className="message" key={i}>
               <ListItemAvatar>
                 <Avatar>
