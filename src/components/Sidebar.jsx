@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 import PersonIcon from '@material-ui/icons/Person';
 import GroupWork from '@material-ui/icons/GroupWork';
-import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, TextField, Snackbar } from '@material-ui/core';
+import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
 
 
 import { changeServer, changeTopic } from '../actions';
+import GoogleOAuth from './GoogleOAuth';
 
 export default function Topics(props) {
 
@@ -16,22 +17,8 @@ export default function Topics(props) {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  // Local state
-  const [userName, changeUserName] = useState(user.userName);
-  const [snackBarVisible, changeSnackBarVisible] = useState(false);
-  const [snackBarMessage, changeSnackBarMessage] = useState('');
-
   // Get props from parent
   const { topics, servers, changeDrawerVisible } = props;
-
-  function handleKeyPress(e) {
-    if (e.key === "Enter") {
-      dispatch({ type: 'SIGN_IN', payload: { userId: '1', userName: userName } });
-      changeSnackBarMessage(`Name changed to : ${userName}`);
-      changeSnackBarVisible(true);
-      setTimeout(() => changeSnackBarVisible(false), 2000)
-    }
-  }
 
   return (
     <div className="sidebar-container">
@@ -63,18 +50,11 @@ export default function Topics(props) {
                 <PersonIcon />
               </Avatar>
             </ListItemAvatar>
-            <TextField
-              id="user-name"
-              value={userName}
-              onChange={(e) => changeUserName(e.target.value)}
-              onKeyPress={(e) => handleKeyPress(e)}
-            />
+            <ListItemText primary={user.userName} />
+            <ListItemSecondaryAction>
+              <GoogleOAuth />
+            </ListItemSecondaryAction>
           </ListItem>
-          <Snackbar
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-            open={snackBarVisible}
-            message={snackBarMessage}
-          />
         </div>
       </div>
     </div >

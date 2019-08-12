@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { SwipeableDrawer } from '@material-ui/core';
+
 import Sidebar from './Sidebar';
 
 export default function Header(props) {

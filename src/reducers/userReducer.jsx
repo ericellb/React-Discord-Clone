@@ -4,15 +4,17 @@ const initialState = {
   isSignedIn: false,
   isAdmin: false,
   userId: null,
-  userName: 'anonymous' + Math.floor((Math.random(0) * 100))
+  userName: 'anon' + Math.floor((Math.random(0) * 100)),
+  userEmail: null
 }
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SIGN_IN:
-      return { ...state, isSignedIn: true, userId: action.payload.userId, userName: action.payload.userName }
+      console.log(action);
+      return { ...state, isSignedIn: true, userId: action.payload.userId, userName: action.payload.userName, userEmail: action.payload.userEmail }
     case SIGN_OUT:
-      return { ...state, isSignedIn: false, userId: null, userName: 'anonymous' + (Math.random(0) * 100) }
+      return { ...state, isSignedIn: false, userId: null, userName: 'anon' + Math.floor(Math.random(0) * 100) }
     default:
       return state
   }
