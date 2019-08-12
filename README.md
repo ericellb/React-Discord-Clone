@@ -1,7 +1,13 @@
 ## Simple Chat
 
-This is my second React app, this time the goal was to learn how to use Hooks and Functional components instead of Class Components.
+Originally started off on a test project for learning Functional Components, Hooks and Socket IO. I then decided to create a Discord Clone
 
-## Goal
-
-To create a chat application with living previous state. The inital version will only have current state since it is using sockets, however the goal is to save information to a DB and broadcast it when a new user connects.
+## Features
+  Features
+  - [x] Real time messaging in channels using Socket IO
+  - [x] Authentication using Google oAuth
+  - [x] Loading of Servers / Channels / history based on per user basis
+  - [ ] Creation of Servers and Channels
+  - [ ] Persistent channel history
+  - [ ] Joining of Servers
+  - [ ] Private messaging

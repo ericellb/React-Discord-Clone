@@ -35,7 +35,7 @@ export default function Header(props) {
           <Sidebar topics={topics} servers={servers} changeDrawerVisible={changeDrawerVisible} />
         </SwipeableDrawer>
         <i className="topic-hashtag">#</i>
-        <Typography variant="h6"> {activeTopic.toLowerCase()} </Typography>
+        <Typography variant="h6"> {activeTopic.split('-')[0].toLowerCase()} </Typography>
       </Toolbar>
     </AppBar>
   )

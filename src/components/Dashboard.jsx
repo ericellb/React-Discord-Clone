@@ -13,7 +13,7 @@ export default function Dashboard() {
   // Get store state
   const chatStore = useSelector(state => state.chat);
 
-  // Get servers and topics out of store
+  // Get servers and topics from store
   const servers = Object.keys(chatStore.servers);
   const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
 

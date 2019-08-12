@@ -26,19 +26,16 @@ export default function Messages(props) {
       <Header topics={topics} servers={servers}></Header>
       <div className="messages-container">
         <List>
-          {chats.servers[activeServer][activeTopic].map((message, i) => {
-            if (typeof (message) === 'object' && message.msg !== undefined)
-              return (
-                <ListItem className="message" key={i}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <img src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary={message.from} secondary={message.msg} className="message-text" />
-                </ListItem>
-              )
-          })}
+          {chats.servers[activeServer][activeTopic].map((message, i) => (
+            <ListItem className="message" key={i}>
+              <ListItemAvatar>
+                <Avatar>
+                  <img src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={message.from} secondary={message.msg} className="message-text" />
+            </ListItem>
+          ))}
         </List>
         <div ref={(element) => messageContainer = element}></div>
       </div>
