@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles';
-import { getInitialData } from '../actions';
+import { getInitialData } from '../../actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-import Sidebar from './Sidebar/Sidebar';
-import Messages from './Messages';
-import SendMessage from './SendMessage.jsx';
+import Sidebar from '../Sidebar/Sidebar';
+import Messages from '../Messages/Messages';
+import SendMessage from '../SendMessage/SendMessage';
+import Header from '../Header/Header';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
         </div>
 
         <div className="messages-grid">
+          <Header />
           <Messages />
         </div>
 

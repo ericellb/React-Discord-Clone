@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { signIn, signOut } from '../actions';
+import { signIn, signOut } from '../../actions';
 
 export default function GoogleOAuth() {
 

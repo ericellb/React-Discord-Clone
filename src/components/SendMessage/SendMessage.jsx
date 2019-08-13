@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 
 import { useDispatch } from 'react-redux';
-import { sendMessage } from '../actions';
+import { sendMessage } from '../../actions';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import 'emoji-mart/css/emoji-mart.css'

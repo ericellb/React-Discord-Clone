@@ -8,18 +8,18 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { SwipeableDrawer } from '@material-ui/core';
 
-import Sidebar from './Sidebar/Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 
 export default function Header(props) {
 
-  // Get store state
-  const { activeTopic } = useSelector(state => state.chat);
+  // Get chats from store
+  const chatStore = useSelector(state => state.chat);
+  const servers = Object.keys(chatStore.servers);
+  const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
+  const { activeTopic } = chatStore;
 
   // Local state
   const [drawerVisible, changeDrawerVisible] = useState(false);
-
-  // Get props from parent
-  const { topics, servers } = props;
 
   return (
     <AppBar position="static">

@@ -4,7 +4,7 @@ import { Person, Add } from '@material-ui/icons';
 import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
 import { changeTopic } from '../../actions';
 
-import GoogleOAuth from '../GoogleOAuth';
+import GoogleOAuth from '../GoogleOAuth/GoogleOAuth';
 
 import { useSelector, useDispatch } from 'react-redux';
 
