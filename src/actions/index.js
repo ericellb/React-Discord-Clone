@@ -23,8 +23,8 @@ export const changeTopic = (server) => ({
   payload: server
 });
 
-export const getInitialData = (oAuthData) => async dispatch => {
-  let url = `${baseUrl}/user?`;
+export const getInitialData = (userId) => async dispatch => {
+  let url = `${baseUrl}/user?userId=${userId}`;
   const res = await axios.get(url);
   dispatch({ type: GET_INITIAL_DATA, payload: res.data });
 };

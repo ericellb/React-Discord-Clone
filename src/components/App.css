@@ -69,7 +69,7 @@ body {
   text-align: center;
   background: #202225;
 }
-.server-tooltip {
+.tooltip {
   font-size: 14px;
 }
 
@@ -92,6 +92,7 @@ body {
   align-items: center;
   font-size: 18px;
   font-family: "Roboto";
+  justify-content: space-between !important;
 }
 
 .topic-hashtag {

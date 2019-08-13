@@ -9,7 +9,8 @@ Originally started off on a test project for learning Functional Components, Hoo
   - [x] Real time messaging in channels using Socket IO
   - [x] Authentication using Google oAuth
   - [x] Loading of Servers / Channels / history based on per user basis
-  - [ ] Creation of Servers and Channels
+  - [x] Creation of Servers
+  - [x] Creation of Channels
   - [ ] Persistent channel history
   - [ ] Joining of Servers
   - [ ] Private messaging

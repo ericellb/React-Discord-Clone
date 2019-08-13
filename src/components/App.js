@@ -1,8 +1,53 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import Dashboard from './Dashboard';
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles';
+import { getInitialData } from '../actions';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
+import Sidebar from './Sidebar/Sidebar';
+import Messages from './Messages';
+import SendMessage from './SendMessage.jsx';
+
+function App() {
+
+  // Get user store
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  // Listens for changes on isSignedIn
+  // Gets initial user data upon change
+  useEffect(() => {
+    if (user.isSignedIn)
+      dispatch(getInitialData(user.userId));
+  }, [dispatch, user])
+
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div className="grid-container">
+
+        <div className="sidebar-grid">
+          <Sidebar />
+        </div>
+
+        <div className="messages-grid">
+          <Messages />
+        </div>
+
+        <div className="send-messages-grid">
+          <SendMessage />
+        </div>
+
+      </div >
+    </ThemeProvider>
+  );
+}
+
+export default App;
+
+
 
 const theme = createMuiTheme({
   overrides: {
@@ -40,14 +85,3 @@ const theme = createMuiTheme({
   }
 
 });
-
-
-function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <Dashboard></Dashboard>
-    </ThemeProvider>
-  );
-}
-
-export default App;

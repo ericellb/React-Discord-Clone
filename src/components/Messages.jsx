@@ -25,16 +25,21 @@ export default function Messages(props) {
       <Header topics={topics} servers={servers}></Header>
       <div className="messages-container">
         <List>
-          {chatStore.servers[activeServer][activeTopic].map((message, i) => (
-            <ListItem className="message" key={i}>
-              <ListItemAvatar>
-                <Avatar>
-                  <img src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={message.from} secondary={message.msg} className="message-text" />
-            </ListItem>
-          ))}
+          {chatStore.servers[activeServer][activeTopic].map((message, i) => {
+            // Filter for null messages (dummy message on backend)
+            if (message.msg !== null)
+              return (
+                <ListItem className="message" key={i}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <img src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={message.from} secondary={message.msg} className="message-text" />
+                </ListItem>
+              )
+            else return null;
+          })}
         </List>
         <div ref={(element) => messageContainer = element}></div>
       </div>
