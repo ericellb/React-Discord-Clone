@@ -29,10 +29,16 @@ export const getInitialData = (oAuthData) => async dispatch => {
   dispatch({ type: GET_INITIAL_DATA, payload: res.data });
 };
 
-export const signIn = (user) => ({
-  type: SIGN_IN,
-  payload: user
-})
+
+// On sign in, post to backend to create user if non existant
+export const signIn = (user) => async dispatch => {
+  let url = `${baseUrl}/user?userId=${user.userId}&userName=${user.userName}`;
+  const res = axios.post(url);
+  // If server responds true, user exists on backend
+  if (res) {
+    dispatch({ type: SIGN_IN, payload: user });
+  }
+}
 
 export const signOut = (user) => ({
   type: SIGN_OUT,

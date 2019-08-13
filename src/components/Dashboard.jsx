@@ -1,22 +1,25 @@
 import React, { useEffect } from 'react'
 
+import { getInitialData } from '../actions';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
 import Sidebar from './Sidebar';
 import Messages from './Messages';
 import SendMessage from './SendMessage.jsx';
 
-import { getInitialData } from '../actions';
-import { useDispatch } from 'react-redux';
-
 export default function Dashboard() {
 
-  // Dispatch
+  // Get user store
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  // When app loads, grab users initial data
-  // Includes all channels, history and settings
+  // Listens for changes on isSignedIn
+  // Gets initial user data upon change
   useEffect(() => {
-    dispatch(getInitialData());
-  }, [dispatch])
+    if (user.isSignedIn)
+      dispatch(getInitialData());
+  }, [dispatch, user.isSignedIn])
 
 
   return (
