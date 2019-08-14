@@ -211,6 +211,68 @@ body {
   z-index: 40;
 }
 
+/* ServerCreateModal.jsx */
+
+.modal-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  overflow: hidden;
+  width: 70%;
+  max-width: 600px;
+  height: 378px;
+}
+
+.modal-main {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-areas: "modal-title modal-title modal-title modal-title" 
+  "modal-create-server modal-create-server modal-join-server modal-join-server"
+  "modal-create-server modal-create-server modal-join-server modal-join-server" 
+  "modal-create-server modal-create-server modal-join-server modal-join-server";
+  height: 100%;
+  width: 100%;
+}
+.modal-title { grid-area: modal-title; }
+.modal-create-server { grid-area: modal-create-server; }
+.modal-join-server { grid-area: modal-join-server; }
+
+.modal-create {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1fr 1fr;
+  grid-template-areas: "modal-title" "modal-create-content" "modal-create-content";
+  height: 100%;
+  width: 100%;
+}
+.modal-create-content { 
+  grid-area: modal-create-content; 
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.modal-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  text-align: center;
+}
+
+.modal-card-icon {
+  font-size: 60px !important;
+  margin-bottom: 16px;
+}
+
 
 /* MEDIA QUERIES FOR DESKTOP */
 @media only screen and (min-width: 600px) {

@@ -23,6 +23,8 @@ export const changeTopic = (server) => ({
   payload: server
 });
 
+// Loads initial data for specific userId
+// Loads all servers / channels / history
 export const getInitialData = (userId) => async dispatch => {
   let url = `${baseUrl}/user?userId=${userId}`;
   const res = await axios.get(url);

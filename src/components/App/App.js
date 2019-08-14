@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import './App.css';
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles';
 import { getInitialData } from '../../actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
+import './App.css';
 import Sidebar from '../Sidebar/Sidebar';
 import Messages from '../Messages/Messages';
 import SendMessage from '../SendMessage/SendMessage';
@@ -76,14 +76,17 @@ const theme = createMuiTheme({
     type: 'dark',
     primary: {
       main: '#7289da'
+    },
+    secondary: {
+      main: '#3ca374'
     }
   },
   typography: {
     "fontFamily": "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
     "fontSize": 14,
-    "fontWeightLight": 300,
-    "fontWeightRegular": 400,
-    "fontWeightMedium": 500
+    "fontWeightLight": 400,
+    "fontWeightRegular": 500,
+    "fontWeightMedium": 600
   }
 
 });

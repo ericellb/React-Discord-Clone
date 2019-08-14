@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@material-ui/core';
-import Header from '../Header/Header';
 
 export default function Messages(props) {
 
