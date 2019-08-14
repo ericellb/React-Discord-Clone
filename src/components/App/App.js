@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles';
-import { getInitialData } from '../../actions';
+import { loadUserData } from '../../actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -13,16 +13,17 @@ import Header from '../Header/Header';
 
 function App() {
 
-  // Get user store
+  // Get State from Redux Store
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   // Listens for changes on isSignedIn
   // Gets initial user data upon change
   useEffect(() => {
-    if (user.isSignedIn)
-      dispatch(getInitialData(user.userId));
-  }, [dispatch, user])
+    if (user.isSignedIn) {
+      dispatch(loadUserData(user.userId));
+    }
+  }, [dispatch, user.isSignedIn, user.userId])
 
 
   return (

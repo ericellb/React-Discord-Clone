@@ -13,40 +13,45 @@ import SmileyFace from '@material-ui/icons/SentimentVerySatisfied';
 
 export default function SendMessage(props) {
 
-  // Get store state
+  // Get State from Redux Store
   const { activeServer, activeTopic } = useSelector(state => state.chat);
   const { userName } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   // Local state
-  const [chatMessage, changeChatMessage] = useState('');
-  const [emojiMenuVisible, changeEmojiMenuVisible] = useState(false);
+  const [chatMessage, setChatMessage] = useState('');
+  const [emojiMenuVisible, setEmojiMenuVisible] = useState(false);
 
+  // Handles submission of messages
+  // Dispatches event and sets TextField value to empty
   function handleSubmit(message) {
     dispatch(sendMessage(message));
-    changeChatMessage("");
+    setChatMessage("");
   }
 
+  // Handles enter event to submit message
   function handleKeyPress(e) {
     if (e.key === "Enter" && !e.shiftKey)
       handleSubmit({ server: activeServer, topic: activeTopic, from: userName, msg: chatMessage });
   }
 
+  // Handles changes in message box (catches enter to not send new lines. (Must send SHIFT+ENTER))
   function handleOnChange(e) {
-    // Catches enters (dont render to screen)
-    // Shift enter still works
     if (e.target.value !== "\n")
-      changeChatMessage(e.target.value)
+      setChatMessage(e.target.value)
   }
 
+
+  // When click emoji, close the menu
   function handleEmojiClick(e) {
-    changeChatMessage(chatMessage + e.native);
-    changeEmojiMenuVisible(false);
+    setChatMessage(chatMessage + e.native);
+    setEmojiMenuVisible(false);
   }
 
+  // Closes emoji menu when clicked outside the div
   window.onclick = ((e) => {
     if (String(e.target.className).includes("send-message-emoji-menu"))
-      changeEmojiMenuVisible(false);
+      setEmojiMenuVisible(false);
   })
 
   return (
@@ -61,7 +66,7 @@ export default function SendMessage(props) {
           onChange={(e) => handleOnChange(e)}
           onKeyPress={(e) => handleKeyPress(e)}
         />
-        <SmileyFace className="send-message-emoji-button" onClick={() => changeEmojiMenuVisible(!emojiMenuVisible)} />
+        <SmileyFace className="send-message-emoji-button" onClick={() => setEmojiMenuVisible(!emojiMenuVisible)} />
       </div>
       <div className={(emojiMenuVisible ? "send-message-emoji-menu show" : "send-message-emoji-menu hide")}>
         <div className="emoji-wrapper"><Picker set="emojione" onSelect={(e) => handleEmojiClick(e)} /></div>

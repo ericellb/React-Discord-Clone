@@ -8,11 +8,11 @@ import { changeServer } from '../../actions';
 import CreateJoinModal from '../Modal/CreateJoinModal';
 import SnackBarContent from '../SnackBar/SnackBarContent';
 
-import { getInitialData } from '../../actions';
+import { loadUserData } from '../../actions';
 
-export default function Servers() {
+export default function Servers(props) {
 
-  // Get from Redux Store
+  // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
   const servers = Object.keys(chatStore.servers);
   const user = useSelector(state => state.user);
@@ -23,6 +23,8 @@ export default function Servers() {
   const [snackContent, setSnackContent] = useState('');
   const [snackVisible, setSnackVisible] = useState(false);
 
+  // Get props from parent
+  const { setDrawerVisible } = props;
 
   // Handles Success of Modal Server Create / Join
   // Closes Modal and show Snackbar with Create / Join Messsage
@@ -32,8 +34,15 @@ export default function Servers() {
       setModalVisible(false);
       setSnackVisible(true);
       setSnackContent(response);
-      dispatch(getInitialData(user.userId));
+      dispatch(loadUserData(user.userId));
     }
+  }
+
+  // Handles server change, and closes drawer if on mobile view
+  const handleServerChange = (server) => {
+    dispatch(changeServer(server));
+    if (typeof setDrawerVisible !== "undefined")
+      setDrawerVisible(false)
   }
 
   return (
@@ -41,7 +50,7 @@ export default function Servers() {
       <List>
         {servers.map(server => (
           <Tooltip title={server.split('-')[0]} key={server} placement="right" className="tooltip">
-            <IconButton className="server-icon" onClick={() => dispatch(changeServer(server, server.server_id))}>
+            <IconButton className="server-icon" onClick={() => handleServerChange(server)}>
               <GroupWork />
             </IconButton>
           </Tooltip>
@@ -57,7 +66,7 @@ export default function Servers() {
         aria-labelledby="server create modal"
         aria-describedby="create a server"
         className="modal-wrapper"
-        onClose={() => false}>
+        onClose={() => setModalVisible(false)}>
         <CreateJoinModal handleModalSuccess={handleModalSuccess} />
       </Modal>
       <SnackBarContent visible={snackVisible} setVisible={setSnackVisible} content={snackContent} />

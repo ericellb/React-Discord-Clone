@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
-
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@material-ui/core';
 
-export default function Messages(props) {
+export default function Messages() {
 
-  // Get chats from store
+  // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
   const { activeServer, activeTopic } = chatStore;
 
-  // ref
+  // ref to message container
   let messageContainer;
 
   useEffect(() => {
@@ -21,7 +20,7 @@ export default function Messages(props) {
     <div className="messages-container">
       <List>
         {chatStore.servers[activeServer][activeTopic].map((message, i) => {
-          // Filter for null messages (dummy message on backend)
+          // Filter for null messages (dummy message on backend should fix...)
           if (message.msg !== null)
             return (
               <ListItem className="message" key={i}>

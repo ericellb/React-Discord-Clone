@@ -13,9 +13,9 @@ export const updateChat = (message) => ({
   payload: message
 });
 
-export const changeServer = (server, serverId) => ({
+export const changeServer = (server) => ({
   type: CHANGE_SERVER,
-  payload: { server, serverId }
+  payload: { server }
 });
 
 export const changeTopic = (server) => ({
@@ -23,9 +23,8 @@ export const changeTopic = (server) => ({
   payload: server
 });
 
-// Loads initial data for specific userId
-// Loads all servers / channels / history
-export const getInitialData = (userId) => async dispatch => {
+// Loads user Data. Gets all Servers + Channel History
+export const loadUserData = (userId) => async dispatch => {
   let url = `${baseUrl}/user?userId=${userId}`;
   const res = await axios.get(url);
   dispatch({ type: GET_INITIAL_DATA, payload: res.data });

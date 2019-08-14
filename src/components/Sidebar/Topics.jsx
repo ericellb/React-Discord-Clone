@@ -10,15 +10,22 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function Topics(props) {
 
-  // Get props from parent
-  const { changeDrawerVisible } = props;
-
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
   const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
   const { activeServer } = chatStore;
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+
+  // Get props from parent
+  const { setDrawerVisible } = props;
+
+  // Handle topic change, and closes drawer if on mobile view
+  const handleTopicChange = (topic) => {
+    dispatch(changeTopic(topic));
+    if (typeof setDrawerVisible !== "undefined")
+      setDrawerVisible(false)
+  }
 
   return (
     <div className="topics-container">
@@ -33,7 +40,7 @@ export default function Topics(props) {
           </Tooltip>
         </ListItem>
         {topics.map(topic => (
-          <ListItem onClick={(e) => { dispatch(changeTopic(topic)); if (typeof changeDrawerVisible !== "undefined") changeDrawerVisible(false) }} key={topic} button>
+          <ListItem onClick={(e) => handleTopicChange(topic)} key={topic} button>
             <i className="topic-hashtag">#</i>
             <Typography variant="body1">{topic.split('-')[0].toLowerCase()}</Typography>
           </ListItem>

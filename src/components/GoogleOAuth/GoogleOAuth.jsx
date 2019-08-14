@@ -6,7 +6,7 @@ import { signIn, signOut } from '../../actions';
 
 export default function GoogleOAuth() {
 
-  // Get store state
+  // Get State from Redux Store
   const user = useSelector(state => state.user);
 
   // Dispatch

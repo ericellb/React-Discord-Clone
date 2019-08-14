@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export default function CreateJoinModal(props) {
 
-  // Get from Redux Store
+  // Get State from Redux Store
   const { userId } = useSelector(state => state.user);
 
   // Get data from props

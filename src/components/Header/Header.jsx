@@ -12,27 +12,27 @@ import Sidebar from '../Sidebar/Sidebar';
 
 export default function Header(props) {
 
-  // Get chats from store
+  // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
   const servers = Object.keys(chatStore.servers);
   const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
   const { activeTopic } = chatStore;
 
   // Local state
-  const [drawerVisible, changeDrawerVisible] = useState(false);
+  const [drawerVisible, setDrawerVisible] = useState(false);
 
   return (
     <AppBar position="static">
       <Toolbar className="navbar">
-        <IconButton edge="start" color="inherit" aria-label="menu" className="menu-burger-button" onClick={() => changeDrawerVisible(true)}>
+        <IconButton edge="start" color="inherit" aria-label="menu" className="menu-burger-button" onClick={() => setDrawerVisible(true)}>
           <MenuIcon />
         </IconButton>
         <SwipeableDrawer
           anchor="left"
           open={drawerVisible}
-          onClose={() => changeDrawerVisible(false)}
+          onClose={() => setDrawerVisible(false)}
           onOpen={() => null}>
-          <Sidebar topics={topics} servers={servers} changeDrawerVisible={changeDrawerVisible} />
+          <Sidebar topics={topics} servers={servers} setDrawerVisible={setDrawerVisible} />
         </SwipeableDrawer>
         <i className="topic-hashtag">#</i>
         <Typography variant="h6"> {activeTopic.split('-')[0].toLowerCase()} </Typography>

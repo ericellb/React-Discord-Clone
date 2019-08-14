@@ -5,12 +5,17 @@ Originally started off on a test project for learning Functional Components, Hoo
 ![layout image](public/layout.png)
 
 ## Features
-  Features
+  Implemented Features
   - [x] Real time messaging in channels using Socket IO
   - [x] Authentication using Google oAuth
   - [x] Loading of Servers / Channels / history based on per user basis
   - [x] Creation of Servers
-  - [x] Creation of Channels
+  - [x] Joining of Servers
+
+  Todo
+  - [ ] Creation of Channels in a Server
+  - [ ] Server Settings (Change name, remove users, set icon)
+  - [ ] Channel Settings (Change name)
   - [ ] Persistent channel history
-  - [ ] Joining of Servers
+  - [ ] Broadcasting messages to Specific Channels
   - [ ] Private messaging
