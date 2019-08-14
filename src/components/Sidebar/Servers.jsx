@@ -8,11 +8,14 @@ import { changeServer } from '../../actions';
 import CreateJoinModal from '../Modal/CreateJoinModal';
 import SnackBarContent from '../SnackBar/SnackBarContent';
 
+import { getInitialData } from '../../actions';
+
 export default function Servers() {
 
-  // Get chats from store
+  // Get from Redux Store
   const chatStore = useSelector(state => state.chat);
   const servers = Object.keys(chatStore.servers);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   // Local state
@@ -21,13 +24,15 @@ export default function Servers() {
   const [snackVisible, setSnackVisible] = useState(false);
 
 
-  // Handles closure and shows snackbar with response
-  const handleModalClose = (response) => {
+  // Handles Success of Modal Server Create / Join
+  // Closes Modal and show Snackbar with Create / Join Messsage
+  const handleModalSuccess = (response) => {
     console.log(response);
     if (response !== null) {
       setModalVisible(false);
       setSnackVisible(true);
       setSnackContent(response);
+      dispatch(getInitialData(user.userId));
     }
   }
 
@@ -51,8 +56,9 @@ export default function Servers() {
         open={modalVisible}
         aria-labelledby="server create modal"
         aria-describedby="create a server"
-        className="modal-wrapper">
-        <CreateJoinModal handleModalClose={handleModalClose} />
+        className="modal-wrapper"
+        onClose={() => false}>
+        <CreateJoinModal handleModalSuccess={handleModalSuccess} />
       </Modal>
       <SnackBarContent visible={snackVisible} setVisible={setSnackVisible} content={snackContent} />
     </div>

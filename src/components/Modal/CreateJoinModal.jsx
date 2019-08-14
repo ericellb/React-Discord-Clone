@@ -1,26 +1,21 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField } from '@material-ui/core';
 import { GroupAdd, AddToQueue } from '@material-ui/icons';
 import axios from 'axios';
 
-import { getInitialData } from '../../actions';
-
 export default function CreateJoinModal(props) {
 
-  // Get user from Redux Store
+  // Get from Redux Store
   const { userId } = useSelector(state => state.user);
 
   // Get data from props
-  const { handleModalClose } = props;
-
-  // Dispatch
-  const dispatch = useDispatch();
+  const { handleModalSuccess } = props;
 
   // Base URL for http requests
   const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com/');
 
-  // Local state
+  // Local state to control Modal Windows + Data fields
   const [mainVisible, setMainVisible] = useState(true);
   const [mainDirection, setMainDirection] = useState('left')
   const [createVisible, setCreateVisible] = useState(false);
@@ -31,7 +26,7 @@ export default function CreateJoinModal(props) {
   const [serverId, setServerId] = useState('')
 
 
-  // Handles showing the Join server Fields
+  // Handles showing the Join Server window
   const showJoinServer = () => {
     setMainDirection('right');
     setCreateDirection('left');
@@ -39,7 +34,7 @@ export default function CreateJoinModal(props) {
     setMainVisible(false);
   }
 
-  // Handles showing the Create Server Field
+  // Handles showing the Create Server window
   const showCreateServer = () => {
     setMainDirection('right');
     setJoinDirection('left');
@@ -47,6 +42,26 @@ export default function CreateJoinModal(props) {
     setMainVisible(false);
   }
 
+  // Method to handle creation of servers
+  // Will call modal close event on success
+  const createServer = async (serverName, userId) => {
+    const response = await axios.post(`${baseUrl}/server/create?serverName=${serverName}&userId=${userId}`);
+    if (response) {
+      handleModalSuccess(response.data);
+    }
+  }
+
+  // Method to handle joining of servers
+  // Will call modal close event on success
+  const joinServer = async (serverId, userId) => {
+    const response = await axios.post(`${baseUrl}/server/join?serverId=${serverId}&userId=${userId}`);
+    if (response) {
+      handleModalSuccess(response.data);
+    }
+  }
+
+
+  // Renders the Main Modal Window with options to Create / Join server
   const renderMain = () => {
     return (
       <Slide direction={mainDirection} in={mainVisible} mountOnEnter unmountOnExit>
@@ -87,6 +102,7 @@ export default function CreateJoinModal(props) {
     )
   }
 
+  // Renders the Server Create Modal Window
   const renderServerCreate = () => {
     return (
       <Slide direction={createDirection} in={createVisible} mountOnEnter unmountOnExit timeout={500}>
@@ -111,6 +127,7 @@ export default function CreateJoinModal(props) {
     )
   }
 
+  // Renders the Server Join Modal Window
   const renderServerJoin = () => {
     return (
       <Slide direction={joinDirection} in={joinVisible} mountOnEnter unmountOnExit timeout={500}>
@@ -122,29 +139,19 @@ export default function CreateJoinModal(props) {
             <Typography variant="body1" paragraph> Enter a the Server Id provided by your friend and start chatting right now!  </Typography>
             <TextField
               id="join-server-field"
-              label="Server Name"
+              label="Server Id"
               value={serverId}
               onChange={(e) => setServerId(e.target.value)}
               margin="dense"
               variant="outlined"
             />
-            <Button style={{ marginLeft: '1em' }} variant="contained" color="primary">Join Server</Button>
+            <Button style={{ marginLeft: '1em' }} variant="contained" color="primary" onClick={() => joinServer(serverId, userId)}>Join Server</Button>
           </div>
         </div>
       </Slide >
     )
   }
 
-
-  // Method to handle creation of servers
-  // Will reload the inital data (Gets new servers)
-  const createServer = async (serverName, userId) => {
-    const response = await axios.post(`${baseUrl}/servers?userId=${userId}&serverName=${serverName}`);
-    if (response) {
-      dispatch(getInitialData(userId));
-      handleModalClose(response.data);
-    }
-  }
 
   return (
     <Paper className="modal-container">
