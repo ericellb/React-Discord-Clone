@@ -13,7 +13,7 @@ export default function CreateJoinModal(props) {
   const { handleModalSuccess } = props;
 
   // Base URL for http requests
-  const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com/');
+  const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com');
 
   // Local state to control Modal Windows + Data fields
   const [mainVisible, setMainVisible] = useState(true);
