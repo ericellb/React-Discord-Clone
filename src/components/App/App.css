@@ -129,7 +129,7 @@ body {
 }
 
 .message {
-  padding: 1.01em !important;
+  padding: 1em !important;
   color: white;
   border-top: 2px solid #42454a;
   white-space: pre;
@@ -163,7 +163,7 @@ body {
 
 .send-message-border {
   position: absolute;
-  width: 95%;
+  width: 98%;
   border-top: 2px solid #42454a;
 }
 

@@ -12,10 +12,10 @@ Originally started off on a test project for learning Functional Components, Hoo
   - [x] Creation of Servers
   - [x] Joining of Servers
   - [x] Creation of Channels in a Server
+  - [x] Broadcasting messages to Specific Channels
+  - [x] Server Settings (Change name)
 
   Todo
-  - [ ] Server Settings (Change name, remove users, set icon)
   - [ ] Channel Settings (Change name)
   - [ ] Persistent channel history
-  - [ ] Broadcasting messages to Specific Channels
   - [ ] Private messaging
