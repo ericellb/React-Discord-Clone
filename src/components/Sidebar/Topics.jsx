@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { Person, MoreVert } from '@material-ui/icons';
-import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, ListItemSecondaryAction, Menu, MenuItem } from '@material-ui/core';
+import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, ListItemSecondaryAction, Menu, MenuItem, Slide } from '@material-ui/core';
 import { changeTopic } from '../../actions';
 
 import GoogleOAuth from '../GoogleOAuth/GoogleOAuth';
@@ -62,17 +62,20 @@ export default function Topics(props) {
             id="settings-menu"
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
+            onClick={handleClose}
             onClose={handleClose}
           >
             <MenuItem> Server Id - {activeServer.split('-')[1]} </MenuItem>
             <MenuItem onClick={() => handleModalShow()}> Add Channel </MenuItem>
           </Menu>
         </ListItem>
-        {topics.map(topic => (
-          <ListItem onClick={(e) => handleTopicChange(topic)} key={topic} button>
-            <i className="topic-hashtag">#</i>
-            <Typography variant="body1">{topic.split('-')[0].toLowerCase()}</Typography>
-          </ListItem>
+        {topics.map((topic, i) => (
+          <Slide direction="right" in={true} timeout={150 * (i + 1)} key={topic + activeServer}>
+            <ListItem onClick={(e) => handleTopicChange(topic)} button>
+              <i className="topic-hashtag">#</i>
+              <Typography variant="body1">{topic.split('-')[0].toLowerCase()}</Typography>
+            </ListItem>
+          </Slide>
         ))}
       </List>
 

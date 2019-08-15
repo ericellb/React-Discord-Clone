@@ -8,6 +8,7 @@ export default function CreateJoinModal(props) {
 
   // Get State from Redux Store
   const { userId } = useSelector(state => state.user);
+  const { activeServer } = useSelector(state => state.chat);
 
   // Get data from props
   const { handleModalSuccess, modalType } = props;
@@ -17,13 +18,14 @@ export default function CreateJoinModal(props) {
 
   // Local state to control Modal Windows + Data fields
   const [mainVisible, setMainVisible] = useState(true);
-  const [mainDirection, setMainDirection] = useState('left')
+  const [mainDirection, setMainDirection] = useState('left');
   const [createVisible, setCreateVisible] = useState(false);
-  const [createDirection, setCreateDirection] = useState('left')
-  const [joinVisible, setJoinVisible] = useState(false)
-  const [joinDirection, setJoinDirection] = useState('left')
-  const [serverName, setServerName] = useState('')
-  const [serverId, setServerId] = useState('')
+  const [createDirection, setCreateDirection] = useState('left');
+  const [joinVisible, setJoinVisible] = useState(false);
+  const [joinDirection, setJoinDirection] = useState('left');
+  const [serverName, setServerName] = useState('');
+  const [serverId, setServerId] = useState('');
+  const [channelName, setChannelName] = useState('')
 
 
   // Handles showing the Join Server window
@@ -55,6 +57,15 @@ export default function CreateJoinModal(props) {
   // Will call modal close event on success
   const joinServer = async (serverId, userId) => {
     const response = await axios.post(`${baseUrl}/server/join?serverId=${serverId}&userId=${userId}`);
+    if (response) {
+      handleModalSuccess(response.data);
+    }
+  }
+
+  // Method to handle creation of channels
+  // Will call modal close on success
+  const createChannel = async (channelName, serverId) => {
+    const response = await axios.post(`${baseUrl}/channel/create?channelName=${channelName}&serverId=${serverId}&userId=${userId}`);
     if (response) {
       handleModalSuccess(response.data);
     }
@@ -152,6 +163,31 @@ export default function CreateJoinModal(props) {
     )
   }
 
+  // Renders the Channel Create Modal Window
+  const renderChannelCreate = () => {
+    return (
+      <Slide direction='left' in={true} mountOnEnter unmountOnExit timeout={500}>
+        <div className="modal-create">
+          <div className="modal-title modal-flex">
+            <Typography variant="h5" color="primary" align="center">Create a Channel!</Typography>
+          </div>
+          <div className="modal-create-content">
+            <Typography variant="body1" paragraph> Enter a Channel Name for your new channel and start chatting right now!  </Typography>
+            <TextField
+              id="create-channel-field"
+              label="Channel Name"
+              value={channelName}
+              onChange={(e) => setChannelName(e.target.value)}
+              margin="dense"
+              variant="outlined"
+            />
+            <Button style={{ marginLeft: '1em' }} variant="contained" color="primary" onClick={() => createChannel(channelName, activeServer.split('-')[1])}>Create Channel</Button>
+          </div>
+        </div>
+      </Slide >
+    )
+  }
+
 
 
   if (modalType === 'server')
@@ -165,7 +201,7 @@ export default function CreateJoinModal(props) {
   else if (modalType === 'channel') {
     return (
       <Paper className="modal-container">
-        hey
+        {renderChannelCreate()}
       </Paper >
     )
   }
