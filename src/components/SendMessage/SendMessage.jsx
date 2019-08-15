@@ -60,7 +60,7 @@ export default function SendMessage(props) {
       <div className="send-message-container">
         <TextareaAutosize
           aria-label="empty textarea"
-          placeholder={`Message  #${activeTopic}`}
+          placeholder={`Message  #${activeTopic.split('-')[0]}`}
           className="message-text-area"
           value={chatMessage}
           onChange={(e) => handleOnChange(e)}

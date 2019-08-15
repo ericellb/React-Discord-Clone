@@ -10,7 +10,7 @@ export default function CreateJoinModal(props) {
   const { userId } = useSelector(state => state.user);
 
   // Get data from props
-  const { handleModalSuccess } = props;
+  const { handleModalSuccess, modalType } = props;
 
   // Base URL for http requests
   const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com');
@@ -153,11 +153,20 @@ export default function CreateJoinModal(props) {
   }
 
 
-  return (
-    <Paper className="modal-container">
-      {renderMain()}
-      {renderServerCreate()}
-      {renderServerJoin()}
-    </Paper >
-  )
+
+  if (modalType === 'server')
+    return (
+      <Paper className="modal-container">
+        {renderMain()}
+        {renderServerCreate()}
+        {renderServerJoin()}
+      </Paper >
+    )
+  else if (modalType === 'channel') {
+    return (
+      <Paper className="modal-container">
+        hey
+      </Paper >
+    )
+  }
 }

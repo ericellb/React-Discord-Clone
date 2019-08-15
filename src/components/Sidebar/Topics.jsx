@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { Person, Add } from '@material-ui/icons';
-import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
+import { Person, MoreVert } from '@material-ui/icons';
+import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, ListItemSecondaryAction, Menu, MenuItem } from '@material-ui/core';
 import { changeTopic } from '../../actions';
 
 import GoogleOAuth from '../GoogleOAuth/GoogleOAuth';
@@ -18,7 +18,10 @@ export default function Topics(props) {
   const user = useSelector(state => state.user);
 
   // Get props from parent
-  const { setDrawerVisible } = props;
+  const { setDrawerVisible, setModalVisible, setModalType } = props;
+
+  // Local state
+  const [anchorEl, setAnchorEl] = useState(null);
 
   // Handle topic change, and closes drawer if on mobile view
   const handleTopicChange = (topic) => {
@@ -27,17 +30,43 @@ export default function Topics(props) {
       setDrawerVisible(false)
   }
 
+  // Handles to show modal, and its type
+  const handleModalShow = () => {
+    setModalType('channel');
+    setModalVisible(true);
+  }
+
+  // Handles showing of Settings Menu
+  const handleSettingsClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  }
+
+  // Handles closing settings menu
+  const handleClose = () => {
+    setAnchorEl(null);
+  }
+
   return (
     <div className="topics-container">
 
       <List className="topic-list">
         <ListItem className="title-container">
           {activeServer.split('-')[0]}
-          <Tooltip title="Add channel" key="add-channel" placement="right" className="tooltip">
-            <IconButton className="topic-icon" >
-              <Add />
-            </IconButton>
-          </Tooltip>
+          {user.isSignedIn ?
+            <Tooltip title="Server Settings" key="server-settings" placement="right" className="tooltip">
+              <IconButton onClick={(e) => handleSettingsClick(e)}> <MoreVert /> </IconButton>
+            </Tooltip>
+            : null
+          }
+          <Menu
+            id="settings-menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem> Server Id - {activeServer.split('-')[1]} </MenuItem>
+            <MenuItem onClick={() => handleModalShow()}> Add Channel </MenuItem>
+          </Menu>
         </ListItem>
         {topics.map(topic => (
           <ListItem onClick={(e) => handleTopicChange(topic)} key={topic} button>
