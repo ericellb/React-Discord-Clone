@@ -70,7 +70,7 @@ export default function Topics(props) {
           </Menu>
         </ListItem>
         {topics.map((topic, i) => (
-          <Slide direction="right" in={true} timeout={150 * (i + 1)} key={topic + activeServer}>
+          <Slide direction="right" in={true} timeout={200 * (i + 1)} key={topic + activeServer}>
             <ListItem onClick={(e) => handleTopicChange(topic)} button>
               <i className="topic-hashtag">#</i>
               <Typography variant="body1">{topic.split('-')[0].toLowerCase()}</Typography>

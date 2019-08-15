@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@material-ui/core';
+import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Fade } from '@material-ui/core';
 
 export default function Messages() {
 
@@ -23,14 +23,16 @@ export default function Messages() {
           // Filter for null messages (dummy message on backend should fix...)
           if (message.msg !== null)
             return (
-              <ListItem className="message" key={i}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <img src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={message.from} secondary={message.msg} className="message-text" />
-              </ListItem>
+              <Fade in={true} timeout={500}>
+                <ListItem className="message" key={i}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <img src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={message.from} secondary={message.msg} className="message-text" />
+                </ListItem>
+              </Fade>
             )
           else return null;
         })}

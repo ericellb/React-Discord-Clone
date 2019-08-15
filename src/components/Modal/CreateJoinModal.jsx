@@ -75,7 +75,7 @@ export default function CreateJoinModal(props) {
   // Renders the Main Modal Window with options to Create / Join server
   const renderMain = () => {
     return (
-      <Slide direction={mainDirection} in={mainVisible} mountOnEnter unmountOnExit>
+      <Slide direction={mainDirection} in={mainVisible} timeout={500} mountOnEnter unmountOnExit>
         <div className="modal-main">
           <div className="modal-title modal-flex">
             <Typography variant="h5" color="primary" align="center">Another server? Wow you're popular!</Typography>
