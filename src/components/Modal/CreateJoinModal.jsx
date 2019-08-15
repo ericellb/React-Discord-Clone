@@ -45,32 +45,55 @@ export default function CreateJoinModal(props) {
   }
 
   // Method to handle creation of servers
-  // Will call modal close event on success
   const createServer = async (serverName, userId) => {
-    const response = await axios.post(`${baseUrl}/server/create?serverName=${serverName}&userId=${userId}`);
-    if (response) {
+    try {
+      const response = await axios.post(`${baseUrl}/server/create?serverName=${serverName}&userId=${userId}`);
       handleModalSuccess(response.data);
+    }
+    catch (err) {
+      handleModalSuccess(err.response.data);
     }
   }
 
   // Method to handle joining of servers
-  // Will call modal close event on success
   const joinServer = async (serverId, userId) => {
-    const response = await axios.post(`${baseUrl}/server/join?serverId=${serverId}&userId=${userId}`);
-    if (response) {
+    try {
+      const response = await axios.post(`${baseUrl}/server/join?serverId=${serverId}&userId=${userId}`);
       handleModalSuccess(response.data);
+    }
+    catch (err) {
+      handleModalSuccess(err.response.data);
     }
   }
 
   // Method to handle creation of channels
-  // Will call modal close on success
   const createChannel = async (channelName, serverId) => {
-    const response = await axios.post(`${baseUrl}/channel/create?channelName=${channelName}&serverId=${serverId}&userId=${userId}`);
-    if (response) {
+    try {
+      const response = await axios.post(`${baseUrl}/channel/create?channelName=${channelName}&serverId=${serverId}&userId=${userId}`);
       handleModalSuccess(response.data);
+    }
+    catch (err) {
+      handleModalSuccess(err.response.data);
     }
   }
 
+  // Method to handle renaming of servers
+  const renameServer = async (serverName, serverId) => {
+    try {
+      const response = await axios.post(`${baseUrl}/server/rename?serverName=${serverName}&serverId=${serverId}&userId=${userId}`);
+      handleModalSuccess(response.data);
+    }
+    catch (err) {
+      handleModalSuccess(err.response.data);
+    }
+  }
+
+  // Handles keypress and calls the callback method
+  const handleKeyPress = (e, callbackMethod) => {
+    if (e.key === "Enter") {
+      callbackMethod();
+    }
+  }
 
   // Renders the Main Modal Window with options to Create / Join server
   const renderMain = () => {
@@ -128,6 +151,7 @@ export default function CreateJoinModal(props) {
               label="Server Name"
               value={serverName}
               onChange={(e) => setServerName(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, () => createServer(serverName, userId))}
               margin="dense"
               variant="outlined"
             />
@@ -153,6 +177,7 @@ export default function CreateJoinModal(props) {
               label="Server Id"
               value={serverId}
               onChange={(e) => setServerId(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, () => joinServer(serverId, userId))}
               margin="dense"
               variant="outlined"
             />
@@ -178,6 +203,7 @@ export default function CreateJoinModal(props) {
               label="Channel Name"
               value={channelName}
               onChange={(e) => setChannelName(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, () => createChannel(channelName, activeServer.split('-')[1]))}
               margin="dense"
               variant="outlined"
             />
@@ -189,8 +215,36 @@ export default function CreateJoinModal(props) {
   }
 
 
+  // Renders a modal with an input
+  const renderServerRename = () => {
+    return (
+      <Slide direction='left' in={true} mountOnEnter unmountOnExit timeout={500}>
+        <div className="modal-create">
+          <div className="modal-title modal-flex">
+            <Typography variant="h5" color="primary" align="center">Rename Server</Typography>
+          </div>
+          <div className="modal-create-content">
+            <Typography variant="body1" paragraph> Enter a new Server Name for Server - {activeServer.split('-')[0]} </Typography>
+            <TextField
+              id="create-channel-field"
+              label="Channel Name"
+              value={serverName}
+              onChange={(e) => setServerName(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, () => renameServer(serverName, activeServer.split('-')[1]))}
+              margin="dense"
+              variant="outlined"
+            />
+            <Button style={{ marginLeft: '1em' }} variant="contained" color="primary" onClick={() => renameServer(serverName, activeServer.split('-')[1])}>Rename Server</Button>
+          </div>
+        </div>
+      </Slide >
+    )
+  }
 
-  if (modalType === 'server')
+
+
+
+  if (modalType === 'server-create-join')
     return (
       <Paper className="modal-container">
         {renderMain()}
@@ -198,11 +252,18 @@ export default function CreateJoinModal(props) {
         {renderServerJoin()}
       </Paper >
     )
-  else if (modalType === 'channel') {
+  else if (modalType === 'channel-create') {
     return (
       <Paper className="modal-container">
         {renderChannelCreate()}
       </Paper >
+    )
+  }
+  else if (modalType === 'server-rename') {
+    return (
+      <Paper className="modal-container">
+        {renderServerRename()}
+      </Paper>
     )
   }
 }

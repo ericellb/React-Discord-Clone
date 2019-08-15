@@ -31,8 +31,8 @@ export default function Topics(props) {
   }
 
   // Handles to show modal, and its type
-  const handleModalShow = () => {
-    setModalType('channel');
+  const handleModalShow = (modalType) => {
+    setModalType(modalType);
     setModalVisible(true);
   }
 
@@ -66,7 +66,8 @@ export default function Topics(props) {
             onClose={handleClose}
           >
             <MenuItem> Server Id - {activeServer.split('-')[1]} </MenuItem>
-            <MenuItem onClick={() => handleModalShow()}> Add Channel </MenuItem>
+            <MenuItem onClick={() => handleModalShow('server-rename')}> Change Server Name </MenuItem>
+            <MenuItem onClick={() => handleModalShow('channel-create')}> Add Channel </MenuItem>
           </Menu>
         </ListItem>
         {topics.map((topic, i) => (

@@ -26,7 +26,7 @@ export default function Servers(props) {
 
   // Handles to show modal, and its type
   const handleModalShow = () => {
-    setModalType('server');
+    setModalType('server-create-join');
     setModalVisible(true);
   }
 
