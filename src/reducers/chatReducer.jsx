@@ -2,17 +2,23 @@ import { UPDATE_CHAT, CHANGE_SERVER, CHANGE_TOPIC, GET_INITIAL_DATA } from '../a
 
 const initialState = {
   servers: {
-    "programming haven": {
-      general: [
+    "Default-FANfDprXmt": {
+      "general-0m5vBsRnfd": [
+      ],
+      "gaming-p9DnvvrfWo": [
+      ],
+      "programming-aRoD4umYpb": [
+      ],
+      "cooking-v88UngJkiD": [
+      ],
+      "misc-uSje5DwUH0": [
+      ],
+      "/b/-Ry06VYrX3x": [
       ]
-    },
-    "game land": {
-      HOTS: [
-      ]
-    },
+    }
   },
-  activeServer: 'programming haven',
-  activeTopic: 'general',
+  activeServer: 'Default-FANfDprXmt',
+  activeTopic: 'general-0m5vBsRnfd',
 }
 
 export const chatReducer = (state = initialState, action) => {

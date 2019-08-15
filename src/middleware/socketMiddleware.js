@@ -1,22 +1,24 @@
 import io from 'socket.io-client';
 
-import { SEND_MESSAGE, UPDATE_CHAT, GET_INITIAL_DATA } from '../actions/types';
+import { SEND_MESSAGE, UPDATE_CHAT, SIGN_IN } from '../actions/types';
 
 export const socketMiddleware = (baseUrl) => {
   return storeAPI => {
     let socket = io(baseUrl);
-    let servers = [];
+
+    // Setup default listener
+    let listener = setupSocketListener('default', socket, storeAPI);
 
     // Emit when SEND_MESSAGE action
     return next => action => {
       if (action.type === SEND_MESSAGE) {
-        let server = action.payload.server.split('-')[0];
-        socket.emit(server, action.payload);
+        socket.emit('simple-chat-message', action.payload);
         return;
       }
-      else if (action.type === GET_INITIAL_DATA) {
-        let servers = (Object.keys(action.payload));
-        setSocketListener(socket, storeAPI, servers);
+      else if (action.type === SIGN_IN) {
+        socket.emit('simple-chat-userId', action.payload.userId);
+        listener.off();
+        listener = setupSocketListener(action.payload.userId, socket, storeAPI);
       }
 
       return next(action);
@@ -24,17 +26,12 @@ export const socketMiddleware = (baseUrl) => {
   }
 }
 
-function setSocketListener(socket, storeAPI, servers) {
-  // Create listener for each server
-  servers.forEach((server) => {
-    // Dispatch chat to reducers when we receive data
-    server = server.split('-')[0];
-    console.log(server);
-    socket.on(server, (message) => {
-      storeAPI.dispatch({
-        type: UPDATE_CHAT,
-        payload: message
-      });
+function setupSocketListener(userId, socket, storeAPI) {
+  return socket.on(userId, (message) => {
+    console.log(userId);
+    storeAPI.dispatch({
+      type: UPDATE_CHAT,
+      payload: message
     });
-  })
+  });
 }
