@@ -11,9 +11,9 @@ Originally started off on a test project for learning Functional Components, Hoo
   - [x] Loading of Servers / Channels / history based on per user basis
   - [x] Creation of Servers
   - [x] Joining of Servers
+  - [x] Creation of Channels in a Server
 
   Todo
-  - [ ] Creation of Channels in a Server
   - [ ] Server Settings (Change name, remove users, set icon)
   - [ ] Channel Settings (Change name)
   - [ ] Persistent channel history
