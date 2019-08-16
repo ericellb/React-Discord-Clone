@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Simple-Chat/precache-manifest.f2dee8805411d0819ef59666f3a20399.js"
+  "/Simple-Chat/precache-manifest.cb561a5bacfc58fd6c2c9e800819ec6d.js"
 );
 
 self.addEventListener('message', (event) => {
