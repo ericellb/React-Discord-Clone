@@ -9,7 +9,7 @@ Demo (Work in progress) http://ericellb.github.io/Simple-Chat
 ## Features
   Implemented Features
   - [x] Real time messaging in channels using Socket IO
-  - [x] Authentication using Google oAuth
+  - [x] Local authentication
   - [x] Loading of Servers / Channels / history based on per user basis
   - [x] Creation of Servers
   - [x] Joining of Servers
@@ -18,7 +18,6 @@ Demo (Work in progress) http://ericellb.github.io/Simple-Chat
   - [x] Server Settings (Change name)
 
   Todo
-  - [ ] Change Google oAuth to local Auth system
   - [ ] Channel Settings (Change name)
   - [ ] Persistent channel history
   - [ ] Private messaging

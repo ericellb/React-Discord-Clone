@@ -48,10 +48,10 @@ export default function CreateJoinModal(props) {
   const createServer = async (serverName, userId) => {
     try {
       const response = await axios.post(`${baseUrl}/server/create?serverName=${serverName}&userId=${userId}`);
-      handleModalSuccess(response.data);
+      handleModalSuccess(response.data, true);
     }
     catch (err) {
-      handleModalSuccess(err.response.data);
+      handleModalSuccess(err.response.data, false);
     }
   }
 
@@ -59,10 +59,10 @@ export default function CreateJoinModal(props) {
   const joinServer = async (serverId, userId) => {
     try {
       const response = await axios.post(`${baseUrl}/server/join?serverId=${serverId}&userId=${userId}`);
-      handleModalSuccess(response.data);
+      handleModalSuccess(response.data, true);
     }
     catch (err) {
-      handleModalSuccess(err.response.data);
+      handleModalSuccess(err.response.data, false);
     }
   }
 
@@ -70,10 +70,10 @@ export default function CreateJoinModal(props) {
   const createChannel = async (channelName, serverId) => {
     try {
       const response = await axios.post(`${baseUrl}/channel/create?channelName=${channelName}&serverId=${serverId}&userId=${userId}`);
-      handleModalSuccess(response.data);
+      handleModalSuccess(response.data, true);
     }
     catch (err) {
-      handleModalSuccess(err.response.data);
+      handleModalSuccess(err.response.data, false);
     }
   }
 
@@ -81,10 +81,11 @@ export default function CreateJoinModal(props) {
   const renameServer = async (serverName, serverId) => {
     try {
       const response = await axios.post(`${baseUrl}/server/rename?serverName=${serverName}&serverId=${serverId}&userId=${userId}`);
-      handleModalSuccess(response.data);
+      handleModalSuccess(response.data, true);
     }
     catch (err) {
-      handleModalSuccess(err.response.data);
+      console.log(err.response.data);
+      handleModalSuccess(err.response.data, false);
     }
   }
 

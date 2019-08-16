@@ -27,13 +27,13 @@ export default function Sidebar(props) {
 
   // Handles Success of Modal Server Create / Join
   // Closes Modal and show Snackbar with Create / Join Messsage
-  const handleModalSuccess = (response) => {
-    console.log(response);
+  const handleModalSuccess = (response, pass) => {
     if (response !== null) {
       setModalVisible(false);
       setSnackVisible(true);
       setSnackContent(response);
-      dispatch(loadUserData(user.userId));
+      if (pass)
+        dispatch(loadUserData(user.userId));
     }
   }
 

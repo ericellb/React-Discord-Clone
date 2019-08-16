@@ -80,12 +80,11 @@ export default function Auth() {
 
     }
     catch (err) {
-      err.response.data.forEach((error) => {
-        if (error.user) {
-          setUserNameError(true);
-          setUserNameErrorMsg(error.user);
-        }
-      })
+      const errorData = err.response.data;
+      if (errorData) {
+        setUserNameError(true);
+        setUserNameErrorMsg(errorData);
+      }
     }
   }
 
@@ -98,15 +97,13 @@ export default function Auth() {
 
     }
     catch (err) {
-      console.log(err.response.data);
-      err.response.data.forEach((error) => {
-        if (error.pass) {
-          setUserNameError(true);
-          setUserNameErrorMsg(error.pass);
-          setUserPassError(true);
-          setUserPassErrorMsg(error.pass)
-        }
-      })
+      const errorData = err.response.data;
+      if (errorData) {
+        setUserNameError(true);
+        setUserNameErrorMsg(errorData);
+        setUserPassError(true);
+        setUserPassErrorMsg(errorData)
+      }
     }
   }
 

@@ -132,7 +132,6 @@ body {
   padding: 1em !important;
   color: white;
   border-top: 2px solid #42454a;
-  white-space: pre;
 }
 
 .message-text {
@@ -273,7 +272,7 @@ body {
 }
 
 .modal-card-icon {
-  font-size: 60px !important;
+  font-size: 50px !important;
   margin-bottom: 16px;
 }
 
@@ -322,6 +321,10 @@ body {
     width: 100vw !important;
   }
 
+  .modal-card p {
+    font-size: 15px !important;
+  }
+
 }
 
 
@@ -358,4 +361,6 @@ body {
   width: 70%;
   max-width: 600px;
   max-height: 410px;
+  min-width: 320px;
 }
+
