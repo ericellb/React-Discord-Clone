@@ -4,8 +4,6 @@ import { Person, MoreVert } from '@material-ui/icons';
 import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, ListItemSecondaryAction, Menu, MenuItem, Slide } from '@material-ui/core';
 import { changeTopic } from '../../actions';
 
-import GoogleOAuth from '../GoogleOAuth/GoogleOAuth';
-
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Topics(props) {
@@ -88,9 +86,6 @@ export default function Topics(props) {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary={user.userName} />
-          <ListItemSecondaryAction>
-            <GoogleOAuth />
-          </ListItemSecondaryAction>
         </ListItem>
       </div>
 

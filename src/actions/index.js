@@ -25,21 +25,17 @@ export const changeTopic = (server) => ({
 
 // Loads user Data. Gets all Servers + Channel History
 export const loadUserData = (userId) => async dispatch => {
-  let url = `${baseUrl}/user?userId=${userId}`;
+  let url = `${baseUrl}/user/data?userId=${userId}`;
   const res = await axios.get(url);
   dispatch({ type: GET_INITIAL_DATA, payload: res.data });
 };
 
 
 // On sign in, post to backend to create user if non existant
-export const signIn = (user) => async dispatch => {
-  let url = `${baseUrl}/user?userId=${user.userId}&userName=${user.userName}`;
-  const res = axios.post(url);
-  // If server responds true, user exists on backend
-  if (res) {
-    dispatch({ type: SIGN_IN, payload: user });
-  }
-}
+export const signIn = (user) => ({
+  type: SIGN_IN,
+  payload: user
+})
 
 export const signOut = (user) => ({
   type: SIGN_OUT,

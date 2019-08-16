@@ -1,49 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { HashRouter, Route } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles';
-import { loadUserData } from '../../actions';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 
 import './App.css';
-import Sidebar from '../Sidebar/Sidebar';
-import Messages from '../Messages/Messages';
-import SendMessage from '../SendMessage/SendMessage';
-import Header from '../Header/Header';
+import Dashboard from '../Dashboard/Dashboard';
+import Auth from '../Auth/Auth';
 
 function App() {
 
-  // Get State from Redux Store
-  const user = useSelector(state => state.user);
-  const dispatch = useDispatch();
-
-  // Listens for changes on isSignedIn
-  // Gets initial user data upon change
-  useEffect(() => {
-    if (user.isSignedIn) {
-      dispatch(loadUserData(user.userId));
-    }
-  }, [dispatch, user.isSignedIn, user.userId])
-
-
   return (
     <ThemeProvider theme={theme}>
-      <div className="grid-container">
-
-        <div className="sidebar-grid">
-          <Sidebar />
-        </div>
-
-        <div className="messages-grid">
-          <Header />
-          <Messages />
-        </div>
-
-        <div className="send-messages-grid">
-          <SendMessage />
-        </div>
-
-      </div >
+      <HashRouter>
+        <Route path="/" exact component={Auth} />
+        <Route path="/dashboard" exact component={Dashboard} />
+      </HashRouter>
     </ThemeProvider>
   );
 }

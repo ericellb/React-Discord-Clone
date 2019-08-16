@@ -223,7 +223,6 @@ body {
   overflow: hidden;
   width: 70%;
   max-width: 600px;
-  height: 378px;
 }
 
 .modal-main {
@@ -253,11 +252,12 @@ body {
   grid-area: modal-create-content; 
   text-align: center;
   height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   padding: 1em;
+}
+
+.modal-button {
+  margin-top: 10px !important;
+  margin-left: 8px !important;
 }
 
 .modal-flex {
@@ -327,4 +327,30 @@ body {
 
 .hide {
   display: none;
+}
+
+/* Auth.jsx */
+.auth-wrapper {
+  height: calc(100vh);
+  background: #202225;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal-login-button {
+  margin-top: 1.5em !important;
+}
+
+.container-login {
+  overflow: hidden;
+  width: 70%;
+  max-width: 600px;
 }

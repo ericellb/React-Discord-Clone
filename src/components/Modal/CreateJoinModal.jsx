@@ -25,7 +25,7 @@ export default function CreateJoinModal(props) {
   const [joinDirection, setJoinDirection] = useState('left');
   const [serverName, setServerName] = useState('');
   const [serverId, setServerId] = useState('');
-  const [channelName, setChannelName] = useState('')
+  const [channelName, setChannelName] = useState('');
 
 
   // Handles showing the Join Server window
@@ -96,7 +96,7 @@ export default function CreateJoinModal(props) {
   }
 
   // Renders the Main Modal Window with options to Create / Join server
-  const renderMain = () => {
+  const renderMainServer = () => {
     return (
       <Slide direction={mainDirection} in={mainVisible} timeout={500} mountOnEnter unmountOnExit>
         <div className="modal-main">
@@ -112,7 +112,7 @@ export default function CreateJoinModal(props) {
                   <CardMedia>
                     <AddToQueue className="modal-card-icon" />
                   </CardMedia>
-                  <Button variant="contained" color="primary">Join a server</Button>
+                  <Button variant="contained" color="primary" className="modal-button">Join a server</Button>
                 </CardContent>
               </CardActionArea>
             </Card>
@@ -126,7 +126,7 @@ export default function CreateJoinModal(props) {
                   <CardMedia>
                     <GroupAdd className="modal-card-icon" />
                   </CardMedia>
-                  <Button variant="contained" color="secondary">Join a server</Button>
+                  <Button variant="contained" color="secondary" className="modal-button">Join a server</Button>
                 </CardContent>
               </CardActionArea>
             </Card>
@@ -155,7 +155,7 @@ export default function CreateJoinModal(props) {
               margin="dense"
               variant="outlined"
             />
-            <Button style={{ marginLeft: '1em' }} variant="contained" color="primary" onClick={() => createServer(serverName, userId)}>Create Server</Button>
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => createServer(serverName, userId)}>Create Server</Button>
           </div>
         </div>
       </Slide >
@@ -181,7 +181,7 @@ export default function CreateJoinModal(props) {
               margin="dense"
               variant="outlined"
             />
-            <Button style={{ marginLeft: '1em' }} variant="contained" color="primary" onClick={() => joinServer(serverId, userId)}>Join Server</Button>
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => joinServer(serverId, userId)}>Join Server</Button>
           </div>
         </div>
       </Slide >
@@ -207,7 +207,7 @@ export default function CreateJoinModal(props) {
               margin="dense"
               variant="outlined"
             />
-            <Button style={{ marginLeft: '1em' }} variant="contained" color="primary" onClick={() => createChannel(channelName, activeServer.split('-')[1])}>Create Channel</Button>
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => createChannel(channelName, activeServer.split('-')[1])}>Create Channel</Button>
           </div>
         </div>
       </Slide >
@@ -234,7 +234,7 @@ export default function CreateJoinModal(props) {
               margin="dense"
               variant="outlined"
             />
-            <Button style={{ marginLeft: '1em' }} variant="contained" color="primary" onClick={() => renameServer(serverName, activeServer.split('-')[1])}>Rename Server</Button>
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => renameServer(serverName, activeServer.split('-')[1])}>Rename Server</Button>
           </div>
         </div>
       </Slide >
@@ -244,10 +244,11 @@ export default function CreateJoinModal(props) {
 
 
 
+
   if (modalType === 'server-create-join')
     return (
       <Paper className="modal-container">
-        {renderMain()}
+        {renderMainServer()}
         {renderServerCreate()}
         {renderServerJoin()}
       </Paper >
