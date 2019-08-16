@@ -1,6 +1,7 @@
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const ADD_CHANNEL = 'ADD_CHANNEL';
-export const SEND_MESSAGE = 'SEND_MESSAGE';
+export const NEW_MESSAGE = 'NEW_MESSAGE';
+export const NEW_CHANNEL = "NEW_CHANNEL";
 export const CHANGE_SERVER = 'CHANGE_SERVER';
 export const CHANGE_CHANNEL = 'CHANGE_channel';
 export const SIGN_IN = 'SIGN_IN';

@@ -32,8 +32,8 @@ export default function Sidebar(props) {
       setModalVisible(false);
       setSnackVisible(true);
       setSnackContent(response);
-      if (pass)
-        dispatch(loadUserData(user.userId));
+      // if (pass)
+      //dispatch(loadUserData(user.userId));
     }
   }
 

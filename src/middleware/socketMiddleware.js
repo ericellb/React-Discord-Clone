@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-import { SEND_MESSAGE, ADD_MESSAGE, SIGN_IN, ADD_CHANNEL } from '../actions/types';
+import { NEW_MESSAGE, ADD_MESSAGE, SIGN_IN } from '../actions/types';
 
 export const socketMiddleware = (baseUrl) => {
   return storeAPI => {
@@ -11,8 +11,8 @@ export const socketMiddleware = (baseUrl) => {
 
     // Check actions and emit from socket if needed
     return next => action => {
-      if (action.type === SEND_MESSAGE) {
-        socket.emit('simple-chat-message', action.payload);
+      if (action.type === NEW_MESSAGE) {
+        socket.emit('simple-chat-new-message', action.payload);
         return;
       }
       else if (action.type === SIGN_IN) {
@@ -38,12 +38,6 @@ function setupSocketListener(userId, socket, storeAPI) {
         type: ADD_MESSAGE,
         payload: action.payload
       });
-    }
-    else if (action.type === "channel") {
-      storeAPI.dispatch({
-        type: ADD_CHANNEL,
-        payload: action.payload
-      })
     }
   });
 }

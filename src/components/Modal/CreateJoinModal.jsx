@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Grid } from '@material-ui/core';
 import { GroupAdd, AddToQueue } from '@material-ui/icons';
 import axios from 'axios';
+
+import { addChannel } from '../../actions';
 
 export default function CreateJoinModal(props) {
 
   // Get State from Redux Store
   const { userId } = useSelector(state => state.user);
   const { activeServer } = useSelector(state => state.chat);
+
+  const dispatch = useDispatch();
 
   // Get data from props
   const { handleModalSuccess, modalType } = props;
@@ -67,10 +71,12 @@ export default function CreateJoinModal(props) {
   }
 
   // Method to handle creation of channels
-  const createChannel = async (channelName, serverId) => {
+  const createChannel = async (channelName, server) => {
     try {
-      const response = await axios.post(`${baseUrl}/channel/create?channelName=${channelName}&serverId=${serverId}&userId=${userId}`);
-      handleModalSuccess(response.data, true);
+      const response = await axios.post(`${baseUrl}/channel/create?channelName=${channelName}&server=${server}&userId=${userId}`);
+      console.log(response.data);
+      dispatch(addChannel(response.data));
+      handleModalSuccess(response.data.channel, true);
     }
     catch (err) {
       handleModalSuccess(err.response.data, false);
@@ -213,14 +219,14 @@ export default function CreateJoinModal(props) {
               label="Channel Name"
               value={channelName}
               onChange={(e) => setChannelName(e.target.value)}
-              onKeyPress={(e) => handleKeyPress(e, () => createChannel(channelName, activeServer.split('-')[1]))}
+              onKeyPress={(e) => handleKeyPress(e, () => createChannel(channelName, activeServer))}
               margin="dense"
               variant="outlined"
               autoComplete="off"
             />
           </Grid>
           <Grid item xs={12} className="grid-button">
-            <Button className="modal-button" variant="contained" color="primary" onClick={() => createChannel(channelName, activeServer.split('-')[1])}>Create Channel</Button>
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => createChannel(channelName, activeServer)}>Create Channel</Button>
           </Grid>
         </Grid>
       </Slide >

@@ -1,12 +1,16 @@
-import { SEND_MESSAGE, ADD_MESSAGE, ADD_CHANNEL, CHANGE_SERVER, CHANGE_CHANNEL, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA } from './types';
+import { NEW_MESSAGE, NEW_CHANNEL, ADD_MESSAGE, ADD_CHANNEL, CHANGE_SERVER, CHANGE_CHANNEL, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA } from './types';
 import axios from 'axios';
 
 const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com');
 
-export const sendMessage = (message) => ({
-  type: SEND_MESSAGE,
+
+// Action that socket middleware listens for
+// Emits via socket new message event
+export const newMessage = (message) => ({
+  type: NEW_MESSAGE,
   payload: message
 });
+
 
 // Action to add message to a channel
 export const addMessage = (message) => ({
@@ -15,9 +19,9 @@ export const addMessage = (message) => ({
 });
 
 // Action to add channel to a server
-export const addChannel = (channel) => ({
+export const addChannel = (data) => ({
   type: ADD_CHANNEL,
-  payload: channel
+  payload: data
 })
 
 // Action to change the current Active Server

@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA } from '../actions/types';
+import { ADD_MESSAGE, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA, ADD_CHANNEL } from '../actions/types';
 
 const initialState = {
   servers: {
@@ -22,9 +22,10 @@ const initialState = {
 }
 
 export const chatReducer = (state = initialState, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case ADD_MESSAGE:
-      const { server, channel, from, msg } = action.payload;
+      let { server, channel, from, msg } = action.payload;
       return {
         ...state,
         servers: {
@@ -37,10 +38,23 @@ export const chatReducer = (state = initialState, action) => {
           }
         }
       }
+    case ADD_CHANNEL:
+      return {
+        ...state,
+        servers: {
+          ...state.servers,
+          [action.payload.server]: {
+            ...state.servers[action.payload.server],
+            [action.payload.channel]: [
+
+            ]
+          }
+        }
+      }
     case GET_INITIAL_DATA:
       return { ...state, servers: action.payload };
     case CHANGE_SERVER:
-      return { ...state, activeServer: action.payload.server, activeChannel: Object.keys(state.servers[action.payload.server])[0] }
+      return { ...state, activeServer: action.payload, activeChannel: Object.keys(state.servers[action.payload])[0] }
     case CHANGE_CHANNEL:
       return { ...state, activeChannel: action.payload }
     default:
