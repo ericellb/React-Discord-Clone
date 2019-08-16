@@ -26,7 +26,6 @@ export default function Channels(props) {
   const [serverAnchorEl, setServerAnchorEl] = useState(null);
   const [channelAchorEl, setChannelAchorEl] = useState(null)
   const [isAdmin, setIsAdmin] = useState(false);
-  const [channelSettingsVisible, setchannelSettingsVisible] = useState(false);
 
   // Check if admin of active server
   // Will render admin options for server

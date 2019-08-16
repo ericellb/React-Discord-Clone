@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA, ADD_CHANNEL } from '../actions/types';
+import { ADD_MESSAGE, ADD_CHANNEL, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA, ADD_SERVER } from '../actions/types';
 
 const initialState = {
   servers: {
@@ -45,6 +45,18 @@ export const chatReducer = (state = initialState, action) => {
           ...state.servers,
           [action.payload.server]: {
             ...state.servers[action.payload.server],
+            [action.payload.channel]: [
+
+            ]
+          }
+        }
+      }
+    case ADD_SERVER:
+      return {
+        ...state,
+        servers: {
+          ...state.servers,
+          [action.payload.server]: {
             [action.payload.channel]: [
 
             ]

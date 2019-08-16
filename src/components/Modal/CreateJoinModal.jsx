@@ -4,7 +4,7 @@ import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia
 import { GroupAdd, AddToQueue } from '@material-ui/icons';
 import axios from 'axios';
 
-import { addChannel } from '../../actions';
+import { addChannel, addServer } from '../../actions';
 
 export default function CreateJoinModal(props) {
 
@@ -52,7 +52,8 @@ export default function CreateJoinModal(props) {
   const createServer = async (serverName, userId) => {
     try {
       const response = await axios.post(`${baseUrl}/server/create?serverName=${serverName}&userId=${userId}`);
-      handleModalSuccess(response.data, true);
+      dispatch(addServer(response.data));
+      handleModalSuccess(response.data.server, true);
     }
     catch (err) {
       handleModalSuccess(err.response.data, false);
@@ -74,7 +75,6 @@ export default function CreateJoinModal(props) {
   const createChannel = async (channelName, server) => {
     try {
       const response = await axios.post(`${baseUrl}/channel/create?channelName=${channelName}&server=${server}&userId=${userId}`);
-      console.log(response.data);
       dispatch(addChannel(response.data));
       handleModalSuccess(response.data.channel, true);
     }

@@ -1,4 +1,4 @@
-import { NEW_MESSAGE, NEW_CHANNEL, ADD_MESSAGE, ADD_CHANNEL, CHANGE_SERVER, CHANGE_CHANNEL, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA } from './types';
+import { NEW_MESSAGE, ADD_MESSAGE, ADD_CHANNEL, ADD_SERVER, CHANGE_SERVER, CHANGE_CHANNEL, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA } from './types';
 import axios from 'axios';
 
 const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com');
@@ -21,6 +21,12 @@ export const addMessage = (message) => ({
 // Action to add channel to a server
 export const addChannel = (data) => ({
   type: ADD_CHANNEL,
+  payload: data
+})
+
+// Action to add server to server list
+export const addServer = (data) => ({
+  type: ADD_SERVER,
   payload: data
 })
 
