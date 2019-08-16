@@ -21,9 +21,11 @@ export default function Auth() {
   const [createVisible, setCreateVisible] = useState(false);
   const [loginVisible, setLoginVisible] = useState(false);
   const [userName, setUserName] = useState('');
-  const [userNameError, setUserNameError] = useState(null);
+  const [userNameError, setUserNameError] = useState(false);
+  const [userNameErrorMsg, setUserNameErrorMsg] = useState(false);
   const [userPass, setUserPass] = useState('');
-  const [userPassError, setUserPassError] = useState(null);
+  const [userPassError, setUserPassError] = useState(false);
+  const [userPassErrorMsg, setUserPassErrorMsg] = useState(false)
 
 
   // Handles showing the Join Server window
@@ -40,17 +42,26 @@ export default function Auth() {
     setMainVisible(false);
   }
 
+  // Handles keypress and calls the callback method
+  const handleKeyPress = (e, callbackMethod) => {
+    if (e.key === "Enter") {
+      callbackMethod();
+    }
+  }
+
 
   // Validates input and calls callback function
   const handleOnSubmit = (userName, userPass, callBack) => {
     let error = false;
     if (userName === '') {
       setUserNameError(true);
+      setUserNameErrorMsg('Name cannot be empty');
       error = true;
     }
     else setUserNameError(false);
     if (userPass.length < 6) {
       setUserPassError(true);
+      setUserPassErrorMsg('Passwords must be 6 characters');
       error = true;
     }
     else setUserPassError(false);
@@ -69,7 +80,12 @@ export default function Auth() {
 
     }
     catch (err) {
-      console.log(err.response.data);
+      err.response.data.forEach((error) => {
+        if (error.user) {
+          setUserNameError(true);
+          setUserNameErrorMsg(error.user);
+        }
+      })
     }
   }
 
@@ -83,6 +99,14 @@ export default function Auth() {
     }
     catch (err) {
       console.log(err.response.data);
+      err.response.data.forEach((error) => {
+        if (error.pass) {
+          setUserNameError(true);
+          setUserNameErrorMsg(error.pass);
+          setUserPassError(true);
+          setUserPassErrorMsg(error.pass)
+        }
+      })
     }
   }
 
@@ -143,20 +167,22 @@ export default function Auth() {
                 label="Username"
                 values={userName}
                 error={userNameError}
-                helperText={userNameError ? 'Invalid Username' : null}
+                helperText={userNameErrorMsg}
                 onChange={(e) => setUserName(e.target.value)}
                 margin="normal"
                 autoComplete="off"
+                onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass)))}
               />
               <TextField
                 id="password"
                 label="Password"
                 values={userPass}
                 error={userPassError}
-                helperText={userPassError ? 'Inalid Password (min length 6)' : null}
+                helperText={userPassErrorMsg}
                 onChange={(e) => setUserPass(e.target.value)}
                 margin="normal"
                 autoComplete="off"
+                onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass)))}
               />
               <Button className="modal-login-button" variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass))}>Create</Button>
             </form>
@@ -181,20 +207,22 @@ export default function Auth() {
                 label="Username"
                 values={userName}
                 error={userNameError}
-                helperText={userNameError ? 'Invalid Username' : null}
+                helperText={userNameErrorMsg}
                 onChange={(e) => setUserName(e.target.value)}
                 margin="normal"
                 autoComplete="off"
+                onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass)))}
               />
               <TextField
                 id="password"
                 label="Password"
                 values={userPass}
                 error={userPassError}
-                helperText={userPassError ? 'Inalid Password (min length 6)' : null}
+                helperText={userPassErrorMsg}
                 onChange={(e) => setUserPass(e.target.value)}
                 margin="normal"
                 autoComplete="off"
+                onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass)))}
               />
               <Button className="modal-login-button" variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass))}>Login</Button>
             </form>
