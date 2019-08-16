@@ -268,6 +268,10 @@ body {
   text-align: center;
 }
 
+.modal-card {
+  height: 100% !important;
+}
+
 .modal-card-icon {
   font-size: 60px !important;
   margin-bottom: 16px;
@@ -353,4 +357,5 @@ body {
   overflow: hidden;
   width: 70%;
   max-width: 600px;
+  max-height: 410px;
 }

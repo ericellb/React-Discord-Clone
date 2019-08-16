@@ -95,8 +95,8 @@ export default function Auth() {
             <Typography variant="h5" color="primary" align="center">Sign in, or create an account!</Typography>
           </div>
           <div className="modal-create-server modal-flex">
-            <Card>
-              <CardActionArea onClick={() => showCreateAccount()}>
+            <Card className="modal-card">
+              <CardActionArea onClick={() => showCreateAccount()} className="modal-card">
                 <CardContent>
                   <Typography variant="h5" color="primary" gutterBottom>Register</Typography>
                   <Typography variant="body1" paragraph>Create a new account and start chatting!</Typography>
@@ -109,8 +109,8 @@ export default function Auth() {
             </Card>
           </div>
           <div className="modal-join-server modal-flex">
-            <Card>
-              <CardActionArea onClick={() => showLoginAccount()}>
+            <Card className="modal-card">
+              <CardActionArea onClick={() => showLoginAccount()} className="modal-card">
                 <CardContent>
                   <Typography variant="h5" color="secondary" gutterBottom>Login</Typography>
                   <Typography variant="body1" paragraph>Sign in to an existing account.</Typography>
@@ -146,6 +146,7 @@ export default function Auth() {
                 helperText={userNameError ? 'Invalid Username' : null}
                 onChange={(e) => setUserName(e.target.value)}
                 margin="normal"
+                autoComplete="off"
               />
               <TextField
                 id="password"
@@ -155,6 +156,7 @@ export default function Auth() {
                 helperText={userPassError ? 'Inalid Password (min length 6)' : null}
                 onChange={(e) => setUserPass(e.target.value)}
                 margin="normal"
+                autoComplete="off"
               />
               <Button className="modal-login-button" variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass))}>Create</Button>
             </form>
@@ -182,6 +184,7 @@ export default function Auth() {
                 helperText={userNameError ? 'Invalid Username' : null}
                 onChange={(e) => setUserName(e.target.value)}
                 margin="normal"
+                autoComplete="off"
               />
               <TextField
                 id="password"
@@ -191,6 +194,7 @@ export default function Auth() {
                 helperText={userPassError ? 'Inalid Password (min length 6)' : null}
                 onChange={(e) => setUserPass(e.target.value)}
                 margin="normal"
+                autoComplete="off"
               />
               <Button className="modal-login-button" variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass))}>Login</Button>
             </form>

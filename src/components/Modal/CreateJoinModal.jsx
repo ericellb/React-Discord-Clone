@@ -154,6 +154,7 @@ export default function CreateJoinModal(props) {
               onKeyPress={(e) => handleKeyPress(e, () => createServer(serverName, userId))}
               margin="dense"
               variant="outlined"
+              autoComplete="off"
             />
             <Button className="modal-button" variant="contained" color="primary" onClick={() => createServer(serverName, userId)}>Create Server</Button>
           </div>
@@ -180,6 +181,7 @@ export default function CreateJoinModal(props) {
               onKeyPress={(e) => handleKeyPress(e, () => joinServer(serverId, userId))}
               margin="dense"
               variant="outlined"
+              autoComplete="off"
             />
             <Button className="modal-button" variant="contained" color="primary" onClick={() => joinServer(serverId, userId)}>Join Server</Button>
           </div>
@@ -206,6 +208,7 @@ export default function CreateJoinModal(props) {
               onKeyPress={(e) => handleKeyPress(e, () => createChannel(channelName, activeServer.split('-')[1]))}
               margin="dense"
               variant="outlined"
+              autoComplete="off"
             />
             <Button className="modal-button" variant="contained" color="primary" onClick={() => createChannel(channelName, activeServer.split('-')[1])}>Create Channel</Button>
           </div>
@@ -233,6 +236,7 @@ export default function CreateJoinModal(props) {
               onKeyPress={(e) => handleKeyPress(e, () => renameServer(serverName, activeServer.split('-')[1]))}
               margin="dense"
               variant="outlined"
+              autoComplete="off"
             />
             <Button className="modal-button" variant="contained" color="primary" onClick={() => renameServer(serverName, activeServer.split('-')[1])}>Rename Server</Button>
           </div>
