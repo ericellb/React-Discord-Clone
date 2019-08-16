@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 
 import { useDispatch } from 'react-redux';
-import { addMessage } from '../../actions';
+import { addMessage, newMessage } from '../../actions';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import 'emoji-mart/css/emoji-mart.css'
@@ -25,7 +25,7 @@ export default function SendMessage(props) {
   // Handles submission of messages
   // Dispatches event and sets TextField value to empty
   function handleSubmit(message) {
-    dispatch(addMessage(message));
+    dispatch(newMessage(message));
     setChatMessage("");
   }
 
