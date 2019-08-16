@@ -39,7 +39,7 @@ export default function Sidebar(props) {
 
   return (
     <div className="sidebar-container">
-      <Servers setDrawerVisible={setDrawerVisible} setModalVisible={setModalVisible} setModalType={setModalType} />
+      <Servers setModalVisible={setModalVisible} setModalType={setModalType} />
       <Topics setDrawerVisible={setDrawerVisible} setModalVisible={setModalVisible} setModalType={setModalType} />
       <Modal
         open={modalVisible}

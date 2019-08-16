@@ -132,6 +132,8 @@ body {
   padding: 1em !important;
   color: white;
   border-top: 2px solid #42454a;
+  white-space: pre-line;
+  overflow-wrap: break-word;
 }
 
 .message-text {
@@ -218,10 +220,12 @@ body {
   align-items: center;
 }
 
-.modal-container {
+.container-prompt {
   overflow: hidden;
-  width: 70%;
+  width: 80%;
   max-width: 600px;
+  padding: 1em;
+  box-sizing: border-box;
 }
 
 .modal-main {
@@ -322,7 +326,7 @@ body {
   }
 
   .modal-card p {
-    font-size: 15px !important;
+    font-size: 14px !important;
   }
 
 }
@@ -344,23 +348,26 @@ body {
   justify-content: center;
   align-items: center;
 }
-
-.login-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.modal-login-button {
-  margin-top: 1.5em !important;
-}
-
 .container-login {
   overflow: hidden;
-  width: 70%;
+  width: 80%;
   max-width: 600px;
-  max-height: 410px;
-  min-width: 320px;
+  padding: 1em;
+  box-sizing: border-box;
 }
 
+
+
+/* Material UI Grid Fixes */
+.grid-card {
+  text-align: center;
+  height: 100%;
+}
+
+.grid-textfield {
+  text-align: center;
+}
+.grid-button {
+  text-align: center;
+  padding-top: 1em !important;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField } from '@material-ui/core';
-import { GroupAdd, AddToQueue } from '@material-ui/icons';
+import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Container, Grid } from '@material-ui/core';
+import { GroupAdd, Person } from '@material-ui/icons';
 import axios from 'axios';
 
 import createHashHistory from '../../history';
@@ -111,39 +111,39 @@ export default function Auth() {
   const renderMain = () => {
     return (
       <Slide direction={mainDirection} in={mainVisible} timeout={500} mountOnEnter unmountOnExit>
-        <div className="modal-main">
-          <div className="modal-title modal-flex">
-            <Typography variant="h5" color="primary" align="center">Sign in, or create an account!</Typography>
-          </div>
-          <div className="modal-create-server modal-flex">
-            <Card className="modal-card">
-              <CardActionArea onClick={() => showCreateAccount()} className="modal-card">
+        <Grid container spacing={3} justify="center" alignItems="center">
+          <Grid item sm={12} xs={12}>
+            <Typography variant="h5" color="primary" align="center">Create an account, or sign in!</Typography>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Card className="grid-card">
+              <CardActionArea onClick={() => showCreateAccount()}>
                 <CardContent>
-                  <Typography variant="h5" color="primary" gutterBottom>Register</Typography>
-                  <Typography variant="body1" paragraph>Create a new account and start chatting!</Typography>
+                  <Typography variant="h5" color="primary" gutterBottom>Create</Typography>
+                  <Typography variant="body1" paragraph>Create a new account.</Typography>
                   <CardMedia>
-                    <AddToQueue className="modal-card-icon" />
+                    <GroupAdd className="modal-card-icon" />
                   </CardMedia>
                   <Button variant="contained" color="primary">Create</Button>
                 </CardContent>
               </CardActionArea>
             </Card>
-          </div>
-          <div className="modal-join-server modal-flex">
-            <Card className="modal-card">
-              <CardActionArea onClick={() => showLoginAccount()} className="modal-card">
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Card className="grid-card">
+              <CardActionArea onClick={() => showLoginAccount()}>
                 <CardContent>
                   <Typography variant="h5" color="secondary" gutterBottom>Login</Typography>
                   <Typography variant="body1" paragraph>Sign in to an existing account.</Typography>
                   <CardMedia>
-                    <GroupAdd className="modal-card-icon" />
+                    <Person className="modal-card-icon" />
                   </CardMedia>
-                  <Button variant="contained" color="secondary">Sign In </Button>
+                  <Button variant="contained" color="secondary">Login </Button>
                 </CardContent>
               </CardActionArea>
             </Card>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </Slide>
     )
   }
@@ -152,86 +152,94 @@ export default function Auth() {
   const renderCreateAccount = () => {
     return (
       <Slide direction="left" in={createVisible} timeout={500} mountOnEnter unmountOnExit>
-        <div className="modal-create">
-          <div className="modal-title modal-flex">
+        <Grid container spacing={1} justify="center" alignItems="center">
+          <Grid item xs={12}>
             <Typography variant="h5" color="primary" align="center">Create Account</Typography>
-          </div>
-          <div className="modal-create-content">
-            <Typography variant="body1" paragraph> Enter a Username and Password for your account </Typography>
-            <form className="login-form">
-              <TextField
-                id="username"
-                label="Username"
-                values={userName}
-                error={userNameError}
-                helperText={userNameErrorMsg}
-                onChange={(e) => setUserName(e.target.value)}
-                margin="normal"
-                autoComplete="off"
-                onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass)))}
-              />
-              <TextField
-                id="password"
-                label="Password"
-                values={userPass}
-                error={userPassError}
-                helperText={userPassErrorMsg}
-                onChange={(e) => setUserPass(e.target.value)}
-                margin="normal"
-                autoComplete="off"
-                onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass)))}
-              />
-              <Button className="modal-login-button" variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass))}>Create</Button>
-            </form>
-          </div>
-        </div>
-      </Slide>
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
+            <TextField
+              id="username"
+              label="Username"
+              values={userName}
+              error={userNameError}
+              helperText={userNameErrorMsg}
+              onChange={(e) => setUserName(e.target.value)}
+              margin="dense"
+              autoComplete="off"
+              variant="outlined"
+              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass)))}
+            />
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
+            <TextField
+              id="password"
+              label="Password"
+              type="password"
+              values={userPass}
+              error={userPassError}
+              helperText={userPassErrorMsg}
+              onChange={(e) => setUserPass(e.target.value)}
+              margin="dense"
+              autoComplete="off"
+              variant="outlined"
+              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass)))}
+            />
+          </Grid>
+          <Grid item xs={12} className="grid-button">
+            <Button variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass))}>Create</Button>
+          </Grid>
+        </Grid>
+      </Slide >
     )
   }
 
   const renderLoginAccount = () => {
     return (
       <Slide direction="left" in={loginVisible} timeout={500} mountOnEnter unmountOnExit>
-        <div className="modal-create">
-          <div className="modal-title modal-flex">
+        <Grid container spacing={2} justify="center" alignItems="center">
+          <Grid item xs={12}>
             <Typography variant="h5" color="primary" align="center">Login Account</Typography>
-          </div>
-          <div className="modal-create-content">
-            <Typography variant="body1" paragraph> Enter your username and password </Typography>
-            <form className="login-form">
-              <TextField
-                id="username"
-                label="Username"
-                values={userName}
-                error={userNameError}
-                helperText={userNameErrorMsg}
-                onChange={(e) => setUserName(e.target.value)}
-                margin="normal"
-                autoComplete="off"
-                onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass)))}
-              />
-              <TextField
-                id="password"
-                label="Password"
-                values={userPass}
-                error={userPassError}
-                helperText={userPassErrorMsg}
-                onChange={(e) => setUserPass(e.target.value)}
-                margin="normal"
-                autoComplete="off"
-                onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass)))}
-              />
-              <Button className="modal-login-button" variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass))}>Login</Button>
-            </form>
-          </div>
-        </div>
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
+            <TextField
+              id="username"
+              label="Username"
+              values={userName}
+              error={userNameError}
+              helperText={userNameErrorMsg}
+              onChange={(e) => setUserName(e.target.value)}
+              margin="dense"
+              autoComplete="off"
+              variant="outlined"
+              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass)))}
+            />
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
+            <TextField
+              id="password"
+              label="Password"
+              type="password"
+              values={userPass}
+              error={userPassError}
+              helperText={userPassErrorMsg}
+              onChange={(e) => setUserPass(e.target.value)}
+              margin="dense"
+              autoComplete="off"
+              variant="outlined"
+              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass)))}
+            />
+          </Grid>
+          <Grid item xs={12} className="grid-button">
+            <Button className="modal-login-button" variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass))}>Login</Button>
+          </Grid>
+        </Grid>
       </Slide >
     )
   }
 
   return (
     <div className="auth-wrapper">
-      <Paper className="container-login">
+      <Paper className="container-prompt">
         {renderMain()}
         {renderCreateAccount()}
         {renderLoginAccount()}

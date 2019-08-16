@@ -15,13 +15,11 @@ export default function Servers(props) {
   const dispatch = useDispatch();
 
   // Get props from parent
-  const { setDrawerVisible, setModalVisible, setModalType } = props;
+  const { setModalVisible, setModalType } = props;
 
   // Handles server change, and closes drawer if on mobile view
   const handleServerChange = (server) => {
     dispatch(changeServer(server));
-    if (typeof setDrawerVisible !== "undefined")
-      setDrawerVisible(false)
   }
 
   // Handles to show modal, and its type
@@ -40,14 +38,12 @@ export default function Servers(props) {
             </IconButton>
           </Tooltip>
         ))}
-        {user.isSignedIn ?
-          <Tooltip title='Create Server' key='create-server' placement="right" className="tooltip">
-            <IconButton className="server-icon" onClick={() => handleModalShow()}>
-              <AddCircleOutline />
-            </IconButton>
-          </Tooltip>
-          : null
-        }
+
+        <Tooltip title='Create Server' key='create-server' placement="right" className="tooltip">
+          <IconButton className="server-icon" onClick={() => handleModalShow()}>
+            <AddCircleOutline />
+          </IconButton>
+        </Tooltip>
       </List>
     </div>
   )

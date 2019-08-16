@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField } from '@material-ui/core';
+import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Grid } from '@material-ui/core';
 import { GroupAdd, AddToQueue } from '@material-ui/icons';
 import axios from 'axios';
 
@@ -96,16 +96,19 @@ export default function CreateJoinModal(props) {
     }
   }
 
+
+
+
   // Renders the Main Modal Window with options to Create / Join server
   const renderMainServer = () => {
     return (
       <Slide direction={mainDirection} in={mainVisible} timeout={500} mountOnEnter unmountOnExit>
-        <div className="modal-main">
-          <div className="modal-title modal-flex">
+        <Grid container spacing={3} justify="center" alignItems="center">
+          <Grid item xs={12}>
             <Typography variant="h5" color="primary" align="center">Another server? Wow you're popular!</Typography>
-          </div>
-          <div className="modal-create-server modal-flex">
-            <Card>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Card className="grid-card">
               <CardActionArea onClick={() => showCreateServer()}>
                 <CardContent>
                   <Typography variant="h5" color="primary" gutterBottom>Create</Typography>
@@ -117,9 +120,9 @@ export default function CreateJoinModal(props) {
                 </CardContent>
               </CardActionArea>
             </Card>
-          </div>
-          <div className="modal-join-server modal-flex">
-            <Card>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Card className="grid-card">
               <CardActionArea onClick={() => showJoinServer()}>
                 <CardContent>
                   <Typography variant="h5" color="secondary" gutterBottom>Join</Typography>
@@ -131,8 +134,8 @@ export default function CreateJoinModal(props) {
                 </CardContent>
               </CardActionArea>
             </Card>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </Slide >
     )
   }
@@ -141,11 +144,11 @@ export default function CreateJoinModal(props) {
   const renderServerCreate = () => {
     return (
       <Slide direction={createDirection} in={createVisible} mountOnEnter unmountOnExit timeout={500}>
-        <div className="modal-create">
-          <div className="modal-title modal-flex">
+        <Grid container spacing={3} justify="center" alignItems="center">
+          <Grid item xs={12}>
             <Typography variant="h5" color="primary" align="center">Create a Server!</Typography>
-          </div>
-          <div className="modal-create-content">
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
             <Typography variant="body1" paragraph> Enter a Server Name to create a server and get access to unlimited chat channels! </Typography>
             <TextField
               id="create-server-field"
@@ -157,9 +160,11 @@ export default function CreateJoinModal(props) {
               variant="outlined"
               autoComplete="off"
             />
+          </Grid>
+          <Grid item xs={12} className="grid-button">
             <Button className="modal-button" variant="contained" color="primary" onClick={() => createServer(serverName, userId)}>Create Server</Button>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </Slide >
     )
   }
@@ -168,11 +173,11 @@ export default function CreateJoinModal(props) {
   const renderServerJoin = () => {
     return (
       <Slide direction={joinDirection} in={joinVisible} mountOnEnter unmountOnExit timeout={500}>
-        <div className="modal-create">
-          <div className="modal-title modal-flex">
+        <Grid container spacing={3} justify="center" alignItems="center">
+          <Grid item xs={12}>
             <Typography variant="h5" color="primary" align="center">Join a Server!</Typography>
-          </div>
-          <div className="modal-create-content">
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
             <Typography variant="body1" paragraph> Enter a the Server Id provided by your friend and start chatting right now!  </Typography>
             <TextField
               id="join-server-field"
@@ -184,9 +189,11 @@ export default function CreateJoinModal(props) {
               variant="outlined"
               autoComplete="off"
             />
+          </Grid>
+          <Grid item xs={12} className="grid-button">
             <Button className="modal-button" variant="contained" color="primary" onClick={() => joinServer(serverId, userId)}>Join Server</Button>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </Slide >
     )
   }
@@ -195,11 +202,11 @@ export default function CreateJoinModal(props) {
   const renderChannelCreate = () => {
     return (
       <Slide direction='left' in={true} mountOnEnter unmountOnExit timeout={500}>
-        <div className="modal-create">
-          <div className="modal-title modal-flex">
+        <Grid container spacing={3} justify="center" alignItems="center">
+          <Grid item xs={12}>
             <Typography variant="h5" color="primary" align="center">Create a Channel!</Typography>
-          </div>
-          <div className="modal-create-content">
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
             <Typography variant="body1" paragraph> Enter a Channel Name for your new channel and start chatting right now!  </Typography>
             <TextField
               id="create-channel-field"
@@ -211,9 +218,11 @@ export default function CreateJoinModal(props) {
               variant="outlined"
               autoComplete="off"
             />
+          </Grid>
+          <Grid item xs={12} className="grid-button">
             <Button className="modal-button" variant="contained" color="primary" onClick={() => createChannel(channelName, activeServer.split('-')[1])}>Create Channel</Button>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </Slide >
     )
   }
@@ -223,11 +232,11 @@ export default function CreateJoinModal(props) {
   const renderServerRename = () => {
     return (
       <Slide direction='left' in={true} mountOnEnter unmountOnExit timeout={500}>
-        <div className="modal-create">
-          <div className="modal-title modal-flex">
+        <Grid container spacing={3} justify="center" alignItems="center">
+          <Grid item xs={12}>
             <Typography variant="h5" color="primary" align="center">Rename Server</Typography>
-          </div>
-          <div className="modal-create-content">
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
             <Typography variant="body1" paragraph> Enter a new Server Name for Server - {activeServer.split('-')[0]} </Typography>
             <TextField
               id="create-channel-field"
@@ -239,9 +248,11 @@ export default function CreateJoinModal(props) {
               variant="outlined"
               autoComplete="off"
             />
+          </Grid>
+          <Grid item xs={12} className="grid-button">
             <Button className="modal-button" variant="contained" color="primary" onClick={() => renameServer(serverName, activeServer.split('-')[1])}>Rename Server</Button>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </Slide >
     )
   }
@@ -252,7 +263,7 @@ export default function CreateJoinModal(props) {
 
   if (modalType === 'server-create-join')
     return (
-      <Paper className="modal-container">
+      <Paper className="container-prompt">
         {renderMainServer()}
         {renderServerCreate()}
         {renderServerJoin()}
@@ -260,14 +271,14 @@ export default function CreateJoinModal(props) {
     )
   else if (modalType === 'channel-create') {
     return (
-      <Paper className="modal-container">
+      <Paper className="container-prompt">
         {renderChannelCreate()}
       </Paper >
     )
   }
   else if (modalType === 'server-rename') {
     return (
-      <Paper className="modal-container">
+      <Paper className="container-prompt">
         {renderServerRename()}
       </Paper>
     )
