@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from '@material-ui/core';
 
 import Servers from './Servers';
-import Topics from './Topics'
+import Channels from './Channels'
 import CreateJoinModal from '../Modal/CreateJoinModal';
 import SnackBarContent from '../SnackBar/SnackBarContent';
 import { loadUserData } from '../../actions';
@@ -40,7 +40,7 @@ export default function Sidebar(props) {
   return (
     <div className="sidebar-container">
       <Servers setModalVisible={setModalVisible} setModalType={setModalType} />
-      <Topics setDrawerVisible={setDrawerVisible} setModalVisible={setModalVisible} setModalType={setModalType} />
+      <Channels setDrawerVisible={setDrawerVisible} setModalVisible={setModalVisible} setModalType={setModalType} />
       <Modal
         open={modalVisible}
         aria-labelledby="server create modal"

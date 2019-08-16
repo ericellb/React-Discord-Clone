@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react'
 
 import { Person, MoreVert, Settings } from '@material-ui/icons';
 import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, Menu, MenuItem, Slide } from '@material-ui/core';
-import { changeTopic } from '../../actions';
+import { changeChannel } from '../../actions';
 
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com');
 
-export default function Topics(props) {
+export default function Channels(props) {
 
 
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
-  const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
+  const channels = Object.keys(chatStore.servers[chatStore.activeServer]);
   const { activeServer } = chatStore;
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
@@ -26,7 +26,7 @@ export default function Topics(props) {
   const [serverAnchorEl, setServerAnchorEl] = useState(null);
   const [channelAchorEl, setChannelAchorEl] = useState(null)
   const [isAdmin, setIsAdmin] = useState(false);
-  const [topicSettingsVisible, setTopicSettingsVisible] = useState(false);
+  const [channelSettingsVisible, setchannelSettingsVisible] = useState(false);
 
   // Check if admin of active server
   // Will render admin options for server
@@ -40,9 +40,9 @@ export default function Topics(props) {
   }, [activeServer])
 
 
-  // Handle topic change, and closes drawer if on mobile view
-  const handleTopicChange = (topic) => {
-    dispatch(changeTopic(topic));
+  // Handle channel change, and closes drawer if on mobile view
+  const handleChannelChange = (channel) => {
+    dispatch(changeChannel(channel));
     if (typeof setDrawerVisible !== "undefined")
       setDrawerVisible(false)
   }
@@ -68,8 +68,8 @@ export default function Topics(props) {
   }
 
   return (
-    <div className="topics-container">
-      <List className="topic-list">
+    <div className="channels-container">
+      <List className="channel-list">
         <ListItem className="title-container">
           {activeServer.split('-')[0]}
           {isAdmin ?
@@ -82,13 +82,13 @@ export default function Topics(props) {
             </React.Fragment>
             : null}
         </ListItem>
-        {topics.map((topic, i) => (
-          <Slide direction="right" in={true} timeout={200 * (i + 1)} key={topic + activeServer}>
-            <ListItem onClick={(e) => handleTopicChange(topic)} button className="topic-item">
-              <Typography variant="body1"><i className="topic-hashtag">#</i>{topic.split('-')[0].toLowerCase()}</Typography>
+        {channels.map((channel, i) => (
+          <Slide direction="right" in={true} timeout={200 * (i + 1)} key={channel + activeServer}>
+            <ListItem onClick={(e) => handleChannelChange(channel)} button className="channel-item">
+              <Typography variant="body1"><i className="channel-hashtag">#</i>{channel.split('-')[0].toLowerCase()}</Typography>
               {isAdmin ?
                 <Tooltip title="Server Settings" key="server-settings" placement="right" className="tooltip">
-                  <IconButton onClick={(e) => handleSettingsClick(e, 'channel')}> <Settings className="topic-settings" /> </IconButton>
+                  <IconButton onClick={(e) => handleSettingsClick(e, 'channel')}> <Settings className="channel-settings" /> </IconButton>
                 </Tooltip>
                 : null}
             </ListItem>

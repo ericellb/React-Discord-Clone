@@ -1,4 +1,4 @@
-import { UPDATE_CHAT, CHANGE_SERVER, CHANGE_TOPIC, GET_INITIAL_DATA } from '../actions/types';
+import { ADD_MESSAGE, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA } from '../actions/types';
 
 const initialState = {
   servers: {
@@ -18,21 +18,21 @@ const initialState = {
     }
   },
   activeServer: 'Default-FANfDprXmt',
-  activeTopic: 'general-0m5vBsRnfd',
+  activeChannel: 'general-0m5vBsRnfd',
 }
 
 export const chatReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_CHAT:
-      const { server, topic, from, msg } = action.payload;
+    case ADD_MESSAGE:
+      const { server, channel, from, msg } = action.payload;
       return {
         ...state,
         servers: {
           ...state.servers,
           [server]: {
             ...state.servers[server],
-            [topic]: [
-              ...state.servers[server][topic], { from: from, msg: msg }
+            [channel]: [
+              ...state.servers[server][channel], { from: from, msg: msg }
             ]
           }
         }
@@ -40,9 +40,9 @@ export const chatReducer = (state = initialState, action) => {
     case GET_INITIAL_DATA:
       return { ...state, servers: action.payload };
     case CHANGE_SERVER:
-      return { ...state, activeServer: action.payload.server, activeTopic: Object.keys(state.servers[action.payload.server])[0] }
-    case CHANGE_TOPIC:
-      return { ...state, activeTopic: action.payload }
+      return { ...state, activeServer: action.payload.server, activeChannel: Object.keys(state.servers[action.payload.server])[0] }
+    case CHANGE_CHANNEL:
+      return { ...state, activeChannel: action.payload }
     default:
       return { ...state };
   }

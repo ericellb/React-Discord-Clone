@@ -48,7 +48,7 @@ body {
   height: 100%;
 }
 
-.topics-container {
+.channels-container {
   position: relative;
   display: flex;
   height: 100%;
@@ -78,7 +78,7 @@ body {
   height: 48px;
 }
 
-.topic-list {
+.channel-list {
   width: 100%;
   padding-top: 0 !important;
   overflow-y: auto;
@@ -95,16 +95,16 @@ body {
   justify-content: space-between !important;
 }
 
-.topic-item {
+.channel-item {
   display: flex;
   justify-content: space-between !important;
 }
 
-.topic-item:hover .topic-settings {
+.channel-item:hover .channel-settings {
   display: inline-block !important;
 }
 
-.topic-hashtag {
+.channel-hashtag {
   font-style: unset;
   font-size: 24px;
   padding-right: 8px;
@@ -113,7 +113,7 @@ body {
   font-weight: 900;
 }
 
-.topic-settings {
+.channel-settings {
   font-size: 16px !important;
   display: none !important;
 }
@@ -154,7 +154,7 @@ body {
   color: white !important;
 }
 
-.topic-title {
+.channel-title {
   padding-left: 16px;
   color: white;
 }

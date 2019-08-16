@@ -15,8 +15,8 @@ export default function Header(props) {
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
   const servers = Object.keys(chatStore.servers);
-  const topics = Object.keys(chatStore.servers[chatStore.activeServer]);
-  const { activeTopic } = chatStore;
+  const channels = Object.keys(chatStore.servers[chatStore.activeServer]);
+  const { activeChannel } = chatStore;
 
   // Local state
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -32,10 +32,10 @@ export default function Header(props) {
           open={drawerVisible}
           onClose={() => setDrawerVisible(false)}
           onOpen={() => null}>
-          <Sidebar topics={topics} servers={servers} setDrawerVisible={setDrawerVisible} />
+          <Sidebar channels={channels} servers={servers} setDrawerVisible={setDrawerVisible} />
         </SwipeableDrawer>
-        <i className="topic-hashtag">#</i>
-        <Typography variant="h6"> {activeTopic.split('-')[0].toLowerCase()} </Typography>
+        <i className="channel-hashtag">#</i>
+        <Typography variant="h6"> {activeChannel.split('-')[0].toLowerCase()} </Typography>
       </Toolbar>
     </AppBar>
   )

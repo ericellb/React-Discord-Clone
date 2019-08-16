@@ -14,7 +14,7 @@ import SmileyFace from '@material-ui/icons/SentimentVerySatisfied';
 export default function SendMessage(props) {
 
   // Get State from Redux Store
-  const { activeServer, activeTopic } = useSelector(state => state.chat);
+  const { activeServer, activeChannel } = useSelector(state => state.chat);
   const { userName } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ export default function SendMessage(props) {
   // Handles enter event to submit message
   function handleKeyPress(e) {
     if (e.key === "Enter" && !e.shiftKey)
-      handleSubmit({ server: activeServer, topic: activeTopic, from: userName, msg: chatMessage });
+      handleSubmit({ server: activeServer, channel: activeChannel, from: userName, msg: chatMessage });
   }
 
   // Handles changes in message box (catches enter to not send new lines. (Must send SHIFT+ENTER))
@@ -60,7 +60,7 @@ export default function SendMessage(props) {
       <div className="send-message-container">
         <TextareaAutosize
           aria-label="empty textarea"
-          placeholder={`Message  #${activeTopic.split('-')[0]}`}
+          placeholder={`Message  #${activeChannel.split('-')[0]}`}
           className="message-text-area"
           value={chatMessage}
           onChange={(e) => handleOnChange(e)}

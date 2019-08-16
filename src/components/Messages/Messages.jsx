@@ -6,7 +6,7 @@ export default function Messages() {
 
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
-  const { activeServer, activeTopic } = chatStore;
+  const { activeServer, activeChannel } = chatStore;
 
   // ref to message container
   let messageContainer;
@@ -19,7 +19,7 @@ export default function Messages() {
   return (
     <div className="messages-container">
       <List>
-        {chatStore.servers[activeServer][activeTopic].map((message, i) => {
+        {chatStore.servers[activeServer][activeChannel].map((message, i) => {
           // Filter for null messages (dummy message on backend should fix...)
           if (message.msg !== null)
             return (
