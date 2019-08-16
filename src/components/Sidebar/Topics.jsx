@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { Person, MoreVert } from '@material-ui/icons';
-import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, ListItemSecondaryAction, Menu, MenuItem, Slide } from '@material-ui/core';
+import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, Menu, MenuItem, Slide } from '@material-ui/core';
 import { changeTopic } from '../../actions';
 
 import { useSelector, useDispatch } from 'react-redux';

@@ -11,7 +11,6 @@ export default function Servers(props) {
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
   const servers = Object.keys(chatStore.servers);
-  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   // Get props from parent

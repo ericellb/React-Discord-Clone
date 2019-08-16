@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Container, Grid } from '@material-ui/core';
+import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Grid } from '@material-ui/core';
 import { GroupAdd, Person } from '@material-ui/icons';
 import axios from 'axios';
 
@@ -26,7 +26,6 @@ export default function Auth() {
   const [userPass, setUserPass] = useState('');
   const [userPassError, setUserPassError] = useState(false);
   const [userPassErrorMsg, setUserPassErrorMsg] = useState(false)
-
 
   // Handles showing the Join Server window
   const showCreateAccount = () => {
@@ -75,9 +74,9 @@ export default function Auth() {
   const createAccount = async (userName, userPass) => {
     try {
       const response = await axios.post(`${baseUrl}/user/create?userName=${userName}&userPass=${userPass}`);
+      localStorage.setItem('user', JSON.stringify(response.data));
       dispatch(signIn(response.data));
       createHashHistory.push('/dashboard');
-
     }
     catch (err) {
       const errorData = err.response.data;
@@ -92,9 +91,9 @@ export default function Auth() {
   const loginAccount = async (userName, userPass) => {
     try {
       const response = await axios.get(`${baseUrl}/user/login?userName=${userName}&userPass=${userPass}`);
+      localStorage.setItem('user', JSON.stringify(response.data));
       dispatch(signIn(response.data));
       createHashHistory.push('/dashboard');
-
     }
     catch (err) {
       const errorData = err.response.data;

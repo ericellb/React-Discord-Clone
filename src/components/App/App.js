@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { HashRouter, Route } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles';
@@ -6,14 +7,29 @@ import { ThemeProvider } from '@material-ui/styles';
 import './App.css';
 import Dashboard from '../Dashboard/Dashboard';
 import Auth from '../Auth/Auth';
+import { signIn } from '../../actions';
+import createHashHistory from '../../history';
 
 function App() {
+
+  // Dispatch 
+  const dispatch = useDispatch();
+
+  const checkLocalStorageAuth = () => {
+    // Check local storage if we logged in and force login
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      dispatch(signIn(user));
+      createHashHistory.push('/dashboard');
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <HashRouter>
-        <Route path="/" exact component={Auth} />
+        {checkLocalStorageAuth()}
         <Route path="/dashboard" exact component={Dashboard} />
+        <Route path="/" exact component={Auth} />
       </HashRouter>
     </ThemeProvider>
   );
