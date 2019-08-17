@@ -17,7 +17,7 @@ Demo (Work in progress) http://ericellb.github.io/Simple-Chat
   - [x] Broadcasting messages to Specific Channels
   - [x] Server Settings (Change name)
   - [x] Persistent channel history
+  - [x] Channel Settings (Change name and delete)
 
   Todo
-  - [ ] Channel Settings (Change name)
   - [ ] Private messaging
