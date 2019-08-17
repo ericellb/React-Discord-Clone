@@ -64,7 +64,7 @@ export const chatReducer = (state = initialState, action) => {
         }
       }
     case GET_INITIAL_DATA:
-      return { ...state, servers: action.payload };
+      return { ...state, servers: action.payload, activeServer: Object.keys(action.payload)[0], activeChannel: Object.keys(action.payload[Object.keys(action.payload)[0]])[0] };
     case CHANGE_SERVER:
       return { ...state, activeServer: action.payload, activeChannel: Object.keys(state.servers[action.payload])[0] }
     case CHANGE_CHANNEL:

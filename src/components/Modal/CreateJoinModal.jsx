@@ -53,7 +53,8 @@ export default function CreateJoinModal(props) {
     try {
       const response = await axios.post(`${baseUrl}/server/create?serverName=${serverName}&userId=${userId}`);
       dispatch(addServer(response.data));
-      handleModalSuccess(response.data.server, false);
+      const message = `Server ${response.data.server.split('-')[0]} with ID ${response.data.server.split('-')[1]} created`;
+      handleModalSuccess(message, false);
     }
     catch (err) {
       handleModalSuccess(err.response.data, false);
@@ -76,7 +77,8 @@ export default function CreateJoinModal(props) {
     try {
       const response = await axios.post(`${baseUrl}/channel/create?channelName=${channelName}&server=${server}&userId=${userId}`);
       dispatch(addChannel(response.data));
-      handleModalSuccess(response.data.channel, false);
+      const message = `Server ${response.data.channel.split('-')[0]} with ID ${response.data.channel.split('-'[1])} created`;
+      handleModalSuccess(message, false);
     }
     catch (err) {
       handleModalSuccess(err.response.data, false);
@@ -90,7 +92,6 @@ export default function CreateJoinModal(props) {
       handleModalSuccess(response.data, true);
     }
     catch (err) {
-      console.log(err.response.data);
       handleModalSuccess(err.response.data, false);
     }
   }
