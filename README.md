@@ -18,7 +18,7 @@ Demo (Work in progress) http://ericellb.github.io/Simple-Chat
   - [x] Server Settings (Change name)
   - [x] Persistent channel history
   - [x] Channel Settings (Change name and delete)
-  - [x] Pretty Prints Code enclodes in ``` yourCode ```
+  - [x] Pretty Prints Code encloded in ``` 
 
   Todo
   - [ ] Private messaging
