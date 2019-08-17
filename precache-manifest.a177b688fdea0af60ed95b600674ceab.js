@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8dcac7c3ec67414b8664d503f6e81da0",
+    "revision": "39e4bb64d86ff75c50c0ac3c3f758f6f",
     "url": "/Simple-Chat/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Simple-Chat/static/css/2.b0f64131.chunk.css"
   },
   {
-    "revision": "ce90c8823376b6dbf343",
+    "revision": "79a8b9fba39ef657f008",
     "url": "/Simple-Chat/static/css/main.3f6c3b6c.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Simple-Chat/static/js/2.d38fa5d2.chunk.js"
   },
   {
-    "revision": "ce90c8823376b6dbf343",
-    "url": "/Simple-Chat/static/js/main.0295b3f9.chunk.js"
+    "revision": "79a8b9fba39ef657f008",
+    "url": "/Simple-Chat/static/js/main.c3660fee.chunk.js"
   },
   {
     "revision": "de1605a253086a736309",
