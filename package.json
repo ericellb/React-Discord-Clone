@@ -2,7 +2,7 @@
   "name": "simple-chat-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://ericellb.github.io/Simple-Chat",
+  "homepage": "http://ericellb.github.io/React-Discord-Clone",
   "dependencies": {
     "@material-ui/core": "^4.3.1",
     "@material-ui/icons": "^4.2.1",
