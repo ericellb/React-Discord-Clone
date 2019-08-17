@@ -158,6 +158,16 @@ body {
   color: white;
 }
 
+.user {
+  display: inline;
+}
+
+.user:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
 /* SendMessage.jsx */
 .send-message-container {
   position: relative;
