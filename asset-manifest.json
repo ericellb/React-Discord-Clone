@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Simple-Chat/static/css/main.91ff3e21.chunk.css",
-    "main.js": "/Simple-Chat/static/js/main.80b995b2.chunk.js",
-    "main.js.map": "/Simple-Chat/static/js/main.80b995b2.chunk.js.map",
-    "runtime~main.js": "/Simple-Chat/static/js/runtime~main.29395272.js",
-    "runtime~main.js.map": "/Simple-Chat/static/js/runtime~main.29395272.js.map",
-    "static/css/2.b0f64131.chunk.css": "/Simple-Chat/static/css/2.b0f64131.chunk.css",
-    "static/js/2.638a6f85.chunk.js": "/Simple-Chat/static/js/2.638a6f85.chunk.js",
-    "static/js/2.638a6f85.chunk.js.map": "/Simple-Chat/static/js/2.638a6f85.chunk.js.map",
-    "index.html": "/Simple-Chat/index.html",
-    "precache-manifest.3e9a9fbafb88e754ac3c94e4338b015b.js": "/Simple-Chat/precache-manifest.3e9a9fbafb88e754ac3c94e4338b015b.js",
-    "service-worker.js": "/Simple-Chat/service-worker.js",
-    "static/css/2.b0f64131.chunk.css.map": "/Simple-Chat/static/css/2.b0f64131.chunk.css.map",
-    "static/css/main.91ff3e21.chunk.css.map": "/Simple-Chat/static/css/main.91ff3e21.chunk.css.map"
+    "main.css": "/React-Discord-Clone/static/css/main.91ff3e21.chunk.css",
+    "main.js": "/React-Discord-Clone/static/js/main.f0bb9949.chunk.js",
+    "main.js.map": "/React-Discord-Clone/static/js/main.f0bb9949.chunk.js.map",
+    "runtime~main.js": "/React-Discord-Clone/static/js/runtime~main.3fa648ab.js",
+    "runtime~main.js.map": "/React-Discord-Clone/static/js/runtime~main.3fa648ab.js.map",
+    "static/css/2.b0f64131.chunk.css": "/React-Discord-Clone/static/css/2.b0f64131.chunk.css",
+    "static/js/2.b729d25e.chunk.js": "/React-Discord-Clone/static/js/2.b729d25e.chunk.js",
+    "static/js/2.b729d25e.chunk.js.map": "/React-Discord-Clone/static/js/2.b729d25e.chunk.js.map",
+    "index.html": "/React-Discord-Clone/index.html",
+    "precache-manifest.cf772c52906945a510c59fee4e7aa1b5.js": "/React-Discord-Clone/precache-manifest.cf772c52906945a510c59fee4e7aa1b5.js",
+    "service-worker.js": "/React-Discord-Clone/service-worker.js",
+    "static/css/2.b0f64131.chunk.css.map": "/React-Discord-Clone/static/css/2.b0f64131.chunk.css.map",
+    "static/css/main.91ff3e21.chunk.css.map": "/React-Discord-Clone/static/css/main.91ff3e21.chunk.css.map"
   }
 }
