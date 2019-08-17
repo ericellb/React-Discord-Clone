@@ -242,7 +242,10 @@ body {
   max-width: 600px;
   padding: 1em;
   box-sizing: border-box;
+  position: relative;
+  height: 260px;
 }
+
 
 
 /* MEDIA QUERIES FOR DESKTOP */
@@ -304,14 +307,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-.container-login {
-  overflow: hidden;
-  width: 80%;
-  max-width: 600px;
-  padding: 1em;
-  box-sizing: border-box;
-}
-
 
 
 /* Material UI Grid Fixes */

@@ -109,7 +109,7 @@ export default function Auth() {
   // Renders main screen to create or login
   const renderMain = () => {
     return (
-      <Slide direction={mainDirection} in={mainVisible} timeout={500} mountOnEnter unmountOnExit>
+      <Slide direction={mainDirection} in={mainVisible} timeout={350} mountOnEnter unmountOnExit>
         <Grid container spacing={3} justify="center" alignItems="center">
           <Grid item sm={12} xs={12}>
             <Typography variant="h5" color="primary" align="center">Create an account, or sign in!</Typography>
@@ -150,7 +150,7 @@ export default function Auth() {
   // Renders create account form
   const renderCreateAccount = () => {
     return (
-      <Slide direction="left" in={createVisible} timeout={500} mountOnEnter unmountOnExit>
+      <Slide direction="left" in={createVisible} timeout={350} mountOnEnter unmountOnExit >
         <Grid container spacing={1} justify="center" alignItems="center">
           <Grid item xs={12}>
             <Typography variant="h5" color="primary" align="center">Create Account</Typography>
@@ -194,7 +194,7 @@ export default function Auth() {
 
   const renderLoginAccount = () => {
     return (
-      <Slide direction="left" in={loginVisible} timeout={500} mountOnEnter unmountOnExit>
+      <Slide direction="left" in={loginVisible} timeout={350} mountOnEnter unmountOnExit>
         <Grid container spacing={2} justify="center" alignItems="center">
           <Grid item xs={12}>
             <Typography variant="h5" color="primary" align="center">Login Account</Typography>
