@@ -10,7 +10,7 @@ export default function CreateJoinModal(props) {
 
   // Get State from Redux Store
   const { userId } = useSelector(state => state.user);
-  const { activeServer } = useSelector(state => state.chat);
+  const { activeServer, activeChannel } = useSelector(state => state.chat);
 
   const dispatch = useDispatch();
 
@@ -89,6 +89,28 @@ export default function CreateJoinModal(props) {
   const renameServer = async (serverName, serverId) => {
     try {
       const response = await axios.post(`${baseUrl}/server/rename?serverName=${serverName}&serverId=${serverId}&userId=${userId}`);
+      handleModalSuccess(response.data, true);
+    }
+    catch (err) {
+      handleModalSuccess(err.response.data, false);
+    }
+  }
+
+  // Method to handle renaming of channels
+  const renameChannel = async (channelName, channelId) => {
+    try {
+      const response = await axios.post(`${baseUrl}/channel/rename?channelName=${channelName}&channelId=${channelId}&serverId=${activeServer.split('-')[1]}&userId=${userId}`);
+      handleModalSuccess(response.data, true);
+    }
+    catch (err) {
+      handleModalSuccess(err.response.data, false);
+    }
+  }
+
+  // Method to handle deleting of channels
+  const deleteChannel = async (channelName, channelId) => {
+    try {
+      const response = await axios.delete(`${baseUrl}/channel/delete?channelId=${channelId}&serverId=${activeServer.split('-')[1]}&userId=${userId}`);
       handleModalSuccess(response.data, true);
     }
     catch (err) {
@@ -265,7 +287,54 @@ export default function CreateJoinModal(props) {
   }
 
 
+  // Renders a modal to rename a channel
+  const renderChannelRename = () => {
+    return (
+      <Slide direction='left' in={true} mountOnEnter unmountOnExit timeout={500}>
+        <Grid container spacing={3} justify="center" alignItems="center">
+          <Grid item xs={12}>
+            <Typography variant="h5" color="primary" align="center">Rename Chanel</Typography>
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
+            <Typography variant="body1" paragraph> Enter a new Channel Name for Channel - {activeChannel.split('-')[0]} </Typography>
+            <TextField
+              id="create-channel-field"
+              label="Channel Name"
+              value={channelName}
+              onChange={(e) => setChannelName(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, () => renameChannel(channelName, activeChannel.split('-')[1]))}
+              margin="dense"
+              variant="outlined"
+              autoComplete="off"
+            />
+          </Grid>
+          <Grid item xs={12} className="grid-button">
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => renameChannel(channelName, activeChannel.split('-')[1])}>Rename Channel</Button>
+          </Grid>
+        </Grid>
+      </Slide >
+    )
+  }
 
+  // Renders a modal to delete a channel
+  const renderChannelDelete = () => {
+    return (
+      <Slide direction='left' in={true} mountOnEnter unmountOnExit timeout={500}>
+        <Grid container spacing={3} justify="center" alignItems="center">
+          <Grid item xs={12}>
+            <Typography variant="h5" color="primary" align="center">Rename Server</Typography>
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
+            <Typography variant="body1" paragraph> Are you sure you want to delete - {activeChannel.split('-')[0]} </Typography>
+          </Grid>
+          <Grid item xs={12} className="grid-button">
+            <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'green', marginRight: "8px" }} onClick={() => deleteChannel(channelName, activeChannel.split('-')[1])}>Yes</Button>
+            <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'red', marginLeft: "8px" }} onClick={() => handleModalSuccess('Not deleting channel', false)}>No</Button>
+          </Grid>
+        </Grid>
+      </Slide >
+    )
+  }
 
 
   if (modalType === 'server-create-join')
@@ -287,6 +356,20 @@ export default function CreateJoinModal(props) {
     return (
       <Paper className="container-prompt">
         {renderServerRename()}
+      </Paper>
+    )
+  }
+  else if (modalType === "channel-rename") {
+    return (
+      <Paper className="container-prompt">
+        {renderChannelRename()}
+      </Paper>
+    )
+  }
+  else if (modalType === "channel-delete") {
+    return (
+      <Paper className="container-prompt">
+        {renderChannelDelete()}
       </Paper>
     )
   }
