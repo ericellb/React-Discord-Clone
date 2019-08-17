@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Fade } from '@material-ui/core';
+import Code from 'react-code-prettify';
 
 export default function Messages() {
 
@@ -16,6 +17,16 @@ export default function Messages() {
     messageContainer.scrollIntoView()
   })
 
+  const isTextCodeBlock = (message) => {
+    if (message.startsWith("```") && message.endsWith("```"))
+      return true;
+    else return false;
+  }
+
+  const formatCode = (message) => {
+    return message.split('```')[1];
+  }
+
   return (
     <div className="messages-container">
       <List>
@@ -30,9 +41,13 @@ export default function Messages() {
                       <img src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={message.from} secondary={message.msg} className="message-text" />
+                  {isTextCodeBlock(message.msg)
+                    ? <ListItemText primary={message.from} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
+                    : <ListItemText primary={message.from} secondary={message.msg} className="message-text" />
+                  }
                 </ListItem>
               </Fade>
+
             )
           else return null;
         })}
