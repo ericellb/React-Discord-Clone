@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Simple-Chat/static/css/main.bed039f7.chunk.css",
+    "main.css": "/Simple-Chat/static/css/main.1c064a01.chunk.css",
     "main.js": "/Simple-Chat/static/js/main.d4f378b8.chunk.js",
     "main.js.map": "/Simple-Chat/static/js/main.d4f378b8.chunk.js.map",
     "runtime~main.js": "/Simple-Chat/static/js/runtime~main.29395272.js",
@@ -9,9 +9,9 @@
     "static/js/2.d38fa5d2.chunk.js": "/Simple-Chat/static/js/2.d38fa5d2.chunk.js",
     "static/js/2.d38fa5d2.chunk.js.map": "/Simple-Chat/static/js/2.d38fa5d2.chunk.js.map",
     "index.html": "/Simple-Chat/index.html",
-    "precache-manifest.24ff86ef23400a0a2accedca79833c10.js": "/Simple-Chat/precache-manifest.24ff86ef23400a0a2accedca79833c10.js",
+    "precache-manifest.55461dce73a6e0956f500c7aa3622f28.js": "/Simple-Chat/precache-manifest.55461dce73a6e0956f500c7aa3622f28.js",
     "service-worker.js": "/Simple-Chat/service-worker.js",
     "static/css/2.b0f64131.chunk.css.map": "/Simple-Chat/static/css/2.b0f64131.chunk.css.map",
-    "static/css/main.bed039f7.chunk.css.map": "/Simple-Chat/static/css/main.bed039f7.chunk.css.map"
+    "static/css/main.1c064a01.chunk.css.map": "/Simple-Chat/static/css/main.1c064a01.chunk.css.map"
   }
 }
