@@ -1,6 +1,7 @@
 ## React Discord Clone
 
-Originally started off on a test project for learning Functional Components, Hooks and Socket IO. I then decided to create a Discord Clone
+Originally started off on a test project for learning Functional Components, Hooks and Socket IO, ended up being a Discord Clone.
+
 
 Demo (Work in progress) http://ericellb.github.io/React-Discord-Clone
 
