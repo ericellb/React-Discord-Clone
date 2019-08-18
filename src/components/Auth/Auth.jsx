@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Grid } from '@material-ui/core';
-import { GroupAdd, Person } from '@material-ui/icons';
+import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Grid, IconButton } from '@material-ui/core';
+import { GroupAdd, Person, ArrowBack } from '@material-ui/icons';
 import axios from '../Api/api';
 
 import createHashHistory from '../../history';
@@ -23,6 +23,14 @@ export default function Auth() {
   const [userPass, setUserPass] = useState('');
   const [userPassError, setUserPassError] = useState(false);
   const [userPassErrorMsg, setUserPassErrorMsg] = useState(false)
+
+
+  const showMain = () => {
+    setMainDirection('left');
+    setMainVisible(true);
+    setCreateVisible(false);
+    setLoginVisible(false);
+  }
 
   // Handles showing the Join Server window
   const showCreateAccount = () => {
@@ -109,6 +117,7 @@ export default function Auth() {
       <Slide direction={mainDirection} in={mainVisible} timeout={350} mountOnEnter unmountOnExit>
         <Grid container spacing={3} justify="center" alignItems="center">
           <Grid item sm={12} xs={12}>
+
             <Typography variant="h5" color="primary" align="center">Create an account, or sign in!</Typography>
           </Grid>
           <Grid item sm={6} xs={12}>
@@ -150,6 +159,7 @@ export default function Auth() {
       <Slide direction="left" in={createVisible} timeout={350} mountOnEnter unmountOnExit >
         <Grid container spacing={1} justify="center" alignItems="center">
           <Grid item xs={12}>
+            <IconButton onClick={showMain}><ArrowBack /></IconButton>
             <Typography variant="h5" color="primary" align="center">Create Account</Typography>
           </Grid>
           <Grid item xs={12} className="grid-textfield">
@@ -194,6 +204,7 @@ export default function Auth() {
       <Slide direction="left" in={loginVisible} timeout={350} mountOnEnter unmountOnExit>
         <Grid container spacing={2} justify="center" alignItems="center">
           <Grid item xs={12}>
+            <IconButton onClick={showMain}><ArrowBack /></IconButton>
             <Typography variant="h5" color="primary" align="center">Login Account</Typography>
           </Grid>
           <Grid item xs={12} className="grid-textfield">
