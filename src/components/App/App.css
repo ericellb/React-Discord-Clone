@@ -250,6 +250,8 @@ body {
   padding: 1em;
   box-sizing: border-box;
   position: relative;
+  display: flex;
+    flex-wrap: nowrap;
 }
 
 

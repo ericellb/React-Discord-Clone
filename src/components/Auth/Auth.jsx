@@ -16,7 +16,9 @@ export default function Auth() {
   const [mainVisible, setMainVisible] = useState(true);
   const [mainDirection, setMainDirection] = useState('left');
   const [createVisible, setCreateVisible] = useState(false);
+  const [createDirection, setCreateDirection] = useState('left')
   const [loginVisible, setLoginVisible] = useState(false);
+  const [loginDirection, setLoginDirection] = useState('left')
   const [userName, setUserName] = useState('');
   const [userNameError, setUserNameError] = useState(false);
   const [userNameErrorMsg, setUserNameErrorMsg] = useState(false);
@@ -29,11 +31,14 @@ export default function Auth() {
     setMainDirection('left');
     setMainVisible(true);
     setCreateVisible(false);
+    setCreateDirection('right');
     setLoginVisible(false);
+    setLoginDirection('right');
   }
 
   // Handles showing the Join Server window
   const showCreateAccount = () => {
+    setCreateDirection('left');
     setMainDirection('right');
     setCreateVisible(true);
     setMainVisible(false);
@@ -41,6 +46,7 @@ export default function Auth() {
 
   // Handles showing the Create Server window
   const showLoginAccount = () => {
+    setLoginDirection('left');
     setMainDirection('right');
     setLoginVisible(true);
     setMainVisible(false);
@@ -156,7 +162,7 @@ export default function Auth() {
   // Renders create account form
   const renderCreateAccount = () => {
     return (
-      <Slide direction="left" in={createVisible} timeout={350} mountOnEnter unmountOnExit >
+      <Slide direction={createDirection} in={createVisible} timeout={350} mountOnEnter unmountOnExit >
         <Grid container spacing={1} justify="center" alignItems="center">
           <Grid item xs={12}>
             <IconButton onClick={showMain}><ArrowBack /></IconButton>
@@ -201,7 +207,7 @@ export default function Auth() {
 
   const renderLoginAccount = () => {
     return (
-      <Slide direction="left" in={loginVisible} timeout={350} mountOnEnter unmountOnExit>
+      <Slide direction={loginDirection} in={loginVisible} timeout={350} mountOnEnter unmountOnExit>
         <Grid container spacing={2} justify="center" alignItems="center">
           <Grid item xs={12}>
             <IconButton onClick={showMain}><ArrowBack /></IconButton>
