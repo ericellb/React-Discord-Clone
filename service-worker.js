@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/React-Discord-Clone/precache-manifest.2b112e6adaaa4a653742d03e27580891.js"
+  "/React-Discord-Clone/precache-manifest.52adf31d23330260ad82d86cc1ea50ab.js"
 );
 
 self.addEventListener('message', (event) => {
