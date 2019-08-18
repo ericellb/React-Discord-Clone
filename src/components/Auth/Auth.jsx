@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Grid, IconButton } from '@material-ui/core';
+import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Grid, IconButton, Checkbox } from '@material-ui/core';
 import { GroupAdd, Person, ArrowBack } from '@material-ui/icons';
 import axios from '../Api/api';
 
@@ -25,6 +25,7 @@ export default function Auth() {
   const [userPass, setUserPass] = useState('');
   const [userPassError, setUserPassError] = useState(false);
   const [userPassErrorMsg, setUserPassErrorMsg] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false);
 
 
   const showMain = () => {
@@ -85,7 +86,9 @@ export default function Auth() {
   const createAccount = async (userName, userPass) => {
     try {
       const response = await axios.post(`/user/create?userName=${userName}&userPass=${userPass}`);
-      localStorage.setItem('user', JSON.stringify(response.data));
+      if (rememberMe) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+      }
       dispatch(signIn(response.data));
       createHashHistory.push('/dashboard');
     }
@@ -102,7 +105,9 @@ export default function Auth() {
   const loginAccount = async (userName, userPass) => {
     try {
       const response = await axios.get(`/user/login?userName=${userName}&userPass=${userPass}`);
-      localStorage.setItem('user', JSON.stringify(response.data));
+      if (rememberMe) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+      }
       dispatch(signIn(response.data));
       createHashHistory.push('/dashboard');
     }
@@ -198,6 +203,9 @@ export default function Auth() {
             />
           </Grid>
           <Grid item xs={12} className="grid-button">
+            <div>
+              Remember Me <Checkbox value={rememberMe} onChange={((e) => setRememberMe(e.target.checked))} />
+            </div>
             <Button variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass))}>Create</Button>
           </Grid>
         </Grid>
@@ -243,6 +251,9 @@ export default function Auth() {
             />
           </Grid>
           <Grid item xs={12} className="grid-button">
+            <div>
+              Remember Me <Checkbox vale={rememberMe} onChange={((e) => setRememberMe(e.target.checked))} />
+            </div>
             <Button className="modal-login-button" variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass))}>Login</Button>
           </Grid>
         </Grid>
