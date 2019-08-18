@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Fade, Popover } from '@material-ui/core';
+import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Fade, Popover, CircularProgress } from '@material-ui/core';
 import Code from 'react-code-prettify';
 import UserInfo from '../UserInfo/UserInfo';
 
@@ -12,15 +12,22 @@ export default function Messages() {
 
   // Local state for user popover
   const [userInfoVisible, setUserInfoVisible] = useState(false);
+  const [messageIndex, setMessageIndex] = useState(12);
+  const [loadMessages, setLoadMessages] = useState(false);
   const [userName, setUserName] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null);
 
   // ref to message container
-  let messageContainer;
+  let messageContainerBottomRef;
+  let messageContainerRef;
 
   useEffect(() => {
     // Keep scroll on bottom
-    messageContainer.scrollIntoView()
+    if (!loadMessages)
+      messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' })
+    else {
+      messageContainerRef.scroll(0, 56);
+    }
   })
 
   // Checks is message is a code block
@@ -48,11 +55,39 @@ export default function Messages() {
   }
 
 
+  // Handles to load more messages when scroll at top
+  const handleScrollTop = (e) => {
+    const element = e.target;
+    if (element.scrollTop > 100) {
+      setLoadMessages(false);
+    }
+    if (element.scrollTop === 0) {
+      if (messagesLength > messageIndex) {
+        setTimeout(() => {
+          setLoadMessages(true);
+          if (messageIndex + 12 > messagesLength) {
+            setMessageIndex(messagesLength);
+          }
+          else {
+            setMessageIndex(messageIndex + 12);
+          }
+        }, 400)
+      }
+    }
+  }
+
+  const messagesLength = chatStore.servers[activeServer][activeChannel].length;
+  console.log(chatStore.servers[activeServer][activeChannel].slice(0, messagesLength - messageIndex));
 
   return (
-    <div className="messages-container">
+    <div className="messages-container" onScroll={(e) => handleScrollTop(e)} ref={(element) => messageContainerRef = element}>
+      {messagesLength !== messageIndex ?
+        <div className="progress-container">
+          <CircularProgress color="primary" />
+        </div>
+        : null}
       <List>
-        {chatStore.servers[activeServer][activeChannel].map((message, i) => {
+        {chatStore.servers[activeServer][activeChannel].slice(messagesLength - messageIndex, messagesLength).map((message, i) => {
           // Filter for null messages (dummy message on backend should fix...)
           if (message.msg !== null)
             return (
@@ -69,12 +104,11 @@ export default function Messages() {
                   }
                 </ListItem>
               </Fade>
-
             )
           else return null;
         })}
       </List>
-      <div ref={(element) => messageContainer = element}></div>
+      <div ref={(element) => messageContainerBottomRef = element}></div>
       <Popover
         id="user-info"
         open={userInfoVisible}

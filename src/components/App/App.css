@@ -153,6 +153,13 @@ body {
   color: white !important;
 }
 
+.progress-container {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
 .channel-title {
   padding-left: 16px;
   color: white;
