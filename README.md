@@ -5,7 +5,7 @@ Originally started off on a test project for learning Functional Components, Hoo
 
 Demo (Work in progress) http://ericellb.github.io/React-Discord-Clone
 
-![layout image](public/layout.png)
+![layout image](public/readmepic.png)
 
 ## Features
   Implemented Features
