@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
 import { Person, MoreVert, Settings } from '@material-ui/icons';
-import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, Menu, MenuItem, Slide } from '@material-ui/core';
-import { changeChannel } from '../../actions';
+import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography, ListItemText, Menu, MenuItem, Slide, Button } from '@material-ui/core';
+import { changeChannel, signOut } from '../../actions';
 
 import { useSelector, useDispatch } from 'react-redux';
 import axios from '../Api/api';
@@ -65,6 +65,11 @@ export default function Channels(props) {
     setChannelAchorEl(null)
   }
 
+  const handleSignout = () => {
+    localStorage.clear("user");
+    dispatch(signOut(user.userId));
+  }
+
   return (
     <div className="channels-container">
       <List className="channel-list">
@@ -102,6 +107,7 @@ export default function Channels(props) {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary={user.userName} />
+          <Button onClick={handleSignout}>Sign out</Button>
         </ListItem>
       </div>
 
