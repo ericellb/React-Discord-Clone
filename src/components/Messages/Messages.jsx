@@ -81,7 +81,7 @@ export default function Messages() {
 
   return (
     <div className="messages-container" onScroll={(e) => handleScrollTop(e)} ref={(element) => messageContainerRef = element}>
-      {messagesLength !== messageIndex ?
+      {messagesLength >= messageIndex ?
         <div className="progress-container">
           <CircularProgress color="primary" />
         </div>
