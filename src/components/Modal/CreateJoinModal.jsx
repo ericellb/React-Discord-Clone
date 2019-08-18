@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Grid } from '@material-ui/core';
 import { GroupAdd, AddToQueue } from '@material-ui/icons';
-import axios from 'axios';
+import axios from '../Api/api';
 
 import { addChannel, addServer } from '../../actions';
 
@@ -16,9 +16,6 @@ export default function CreateJoinModal(props) {
 
   // Get data from props
   const { handleModalSuccess, modalType } = props;
-
-  // Base URL for http requests
-  const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com');
 
   // Local state to control Modal Windows + Data fields
   const [mainVisible, setMainVisible] = useState(true);
@@ -51,7 +48,7 @@ export default function CreateJoinModal(props) {
   // Method to handle creation of servers
   const createServer = async (serverName, userId) => {
     try {
-      const response = await axios.post(`${baseUrl}/server/create?serverName=${serverName}&userId=${userId}`);
+      const response = await axios.post(`/server/create?serverName=${serverName}&userId=${userId}`);
       dispatch(addServer(response.data));
       const message = `Server ${response.data.server.split('-')[0]} with ID ${response.data.server.split('-')[1]} created`;
       handleModalSuccess(message, false);
@@ -64,7 +61,7 @@ export default function CreateJoinModal(props) {
   // Method to handle joining of servers
   const joinServer = async (serverId, userId) => {
     try {
-      const response = await axios.post(`${baseUrl}/server/join?serverId=${serverId}&userId=${userId}`);
+      const response = await axios.post(`/server/join?serverId=${serverId}&userId=${userId}`);
       handleModalSuccess(response.data, true);
     }
     catch (err) {
@@ -75,7 +72,7 @@ export default function CreateJoinModal(props) {
   // Method to handle creation of channels
   const createChannel = async (channelName, server) => {
     try {
-      const response = await axios.post(`${baseUrl}/channel/create?channelName=${channelName}&server=${server}&userId=${userId}`);
+      const response = await axios.post(`/channel/create?channelName=${channelName}&server=${server}&userId=${userId}`);
       dispatch(addChannel(response.data));
       const message = `Server ${response.data.channel.split('-')[0]} with ID ${response.data.channel.split('-'[1])} created`;
       handleModalSuccess(message, false);
@@ -88,7 +85,7 @@ export default function CreateJoinModal(props) {
   // Method to handle renaming of servers
   const renameServer = async (serverName, serverId) => {
     try {
-      const response = await axios.post(`${baseUrl}/server/rename?serverName=${serverName}&serverId=${serverId}&userId=${userId}`);
+      const response = await axios.post(`/server/rename?serverName=${serverName}&serverId=${serverId}&userId=${userId}`);
       handleModalSuccess(response.data, true);
     }
     catch (err) {
@@ -99,7 +96,7 @@ export default function CreateJoinModal(props) {
   // Method to handle renaming of channels
   const renameChannel = async (channelName, channelId) => {
     try {
-      const response = await axios.post(`${baseUrl}/channel/rename?channelName=${channelName}&channelId=${channelId}&serverId=${activeServer.split('-')[1]}&userId=${userId}`);
+      const response = await axios.post(`/channel/rename?channelName=${channelName}&channelId=${channelId}&serverId=${activeServer.split('-')[1]}&userId=${userId}`);
       handleModalSuccess(response.data, true);
     }
     catch (err) {
@@ -110,7 +107,7 @@ export default function CreateJoinModal(props) {
   // Method to handle deleting of channels
   const deleteChannel = async (channelName, channelId) => {
     try {
-      const response = await axios.delete(`${baseUrl}/channel/delete?channelId=${channelId}&serverId=${activeServer.split('-')[1]}&userId=${userId}`);
+      const response = await axios.delete(`/channel/delete?channelId=${channelId}&serverId=${activeServer.split('-')[1]}&userId=${userId}`);
       handleModalSuccess(response.data, true);
     }
     catch (err) {

@@ -5,9 +5,8 @@ import { List, ListItem, ListItemAvatar, Avatar, Tooltip, IconButton, Typography
 import { changeChannel } from '../../actions';
 
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import axios from '../Api/api';
 
-const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com');
 
 export default function Channels(props) {
 
@@ -32,7 +31,7 @@ export default function Channels(props) {
   useEffect(() => {
     async function getAdmin() {
       let serverId = activeServer.split('-')[1];
-      const response = await axios.get(`${baseUrl}/server/admin?serverId=${serverId}&userId=${user.userId}`);
+      const response = await axios.get(`/server/admin?serverId=${serverId}&userId=${user.userId}`);
       setIsAdmin(response.data);
     }
     getAdmin();

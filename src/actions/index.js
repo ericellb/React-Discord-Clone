@@ -1,7 +1,5 @@
 import { NEW_MESSAGE, ADD_MESSAGE, ADD_CHANNEL, ADD_SERVER, CHANGE_SERVER, CHANGE_CHANNEL, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA } from './types';
-import axios from 'axios';
-
-const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com');
+import axios from '../components/Api/api'
 
 
 // Action that socket middleware listens for
@@ -44,7 +42,7 @@ export const changeChannel = (server) => ({
 
 // Loads user Data. Gets all Servers + Channel History
 export const loadUserData = (userId) => async dispatch => {
-  let url = `${baseUrl}/user/data?userId=${userId}`;
+  let url = `/user/data?userId=${userId}`;
   const res = await axios.get(url);
   dispatch({ type: GET_INITIAL_DATA, payload: res.data });
 };

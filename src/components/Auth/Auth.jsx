@@ -2,15 +2,12 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Grid } from '@material-ui/core';
 import { GroupAdd, Person } from '@material-ui/icons';
-import axios from 'axios';
+import axios from '../Api/api';
 
 import createHashHistory from '../../history';
 import { signIn } from '../../actions';
 
 export default function Auth() {
-
-  // Base URL for http requests
-  const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com');
 
   // Dispatch 
   const dispatch = useDispatch();
@@ -73,7 +70,7 @@ export default function Auth() {
   // Handles creation of account and calls sign in action
   const createAccount = async (userName, userPass) => {
     try {
-      const response = await axios.post(`${baseUrl}/user/create?userName=${userName}&userPass=${userPass}`);
+      const response = await axios.post(`/user/create?userName=${userName}&userPass=${userPass}`);
       localStorage.setItem('user', JSON.stringify(response.data));
       dispatch(signIn(response.data));
       createHashHistory.push('/dashboard');
@@ -90,7 +87,7 @@ export default function Auth() {
   // Handles login of account and calls sign in action
   const loginAccount = async (userName, userPass) => {
     try {
-      const response = await axios.get(`${baseUrl}/user/login?userName=${userName}&userPass=${userPass}`);
+      const response = await axios.get(`/user/login?userName=${userName}&userPass=${userPass}`);
       localStorage.setItem('user', JSON.stringify(response.data));
       dispatch(signIn(response.data));
       createHashHistory.push('/dashboard');
