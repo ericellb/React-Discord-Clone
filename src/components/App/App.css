@@ -265,8 +265,15 @@ body {
 
 /* MEDIA QUERIES FOR DESKTOP */
 @media only screen and (min-width: 600px) {
+
+  .html {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+  }
+
   .grid-container {
-    height: calc(100vh);
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: grid;
     grid-template-columns: 340px 1fr 1fr 1fr;
     grid-template-rows: 1fr 1.5fr 0.3fr;
@@ -283,7 +290,8 @@ body {
 
 @media only screen and (max-width: 599px) {
   .grid-container {
-    height: calc(100vh);
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1.7fr 0.1fr;
