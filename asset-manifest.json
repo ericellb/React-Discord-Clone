@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/React-Discord-Clone/static/css/main.7d548e00.chunk.css",
-    "main.js": "/React-Discord-Clone/static/js/main.2fcf54bb.chunk.js",
-    "main.js.map": "/React-Discord-Clone/static/js/main.2fcf54bb.chunk.js.map",
+    "main.css": "/React-Discord-Clone/static/css/main.c8d95e63.chunk.css",
+    "main.js": "/React-Discord-Clone/static/js/main.eba65329.chunk.js",
+    "main.js.map": "/React-Discord-Clone/static/js/main.eba65329.chunk.js.map",
     "runtime~main.js": "/React-Discord-Clone/static/js/runtime~main.3fa648ab.js",
     "runtime~main.js.map": "/React-Discord-Clone/static/js/runtime~main.3fa648ab.js.map",
     "static/css/2.b0f64131.chunk.css": "/React-Discord-Clone/static/css/2.b0f64131.chunk.css",
     "static/js/2.8b714628.chunk.js": "/React-Discord-Clone/static/js/2.8b714628.chunk.js",
     "static/js/2.8b714628.chunk.js.map": "/React-Discord-Clone/static/js/2.8b714628.chunk.js.map",
     "index.html": "/React-Discord-Clone/index.html",
-    "precache-manifest.29c15775f9d393d3fd0a877ea9b96aac.js": "/React-Discord-Clone/precache-manifest.29c15775f9d393d3fd0a877ea9b96aac.js",
+    "precache-manifest.6afffb4242452a4331dff09b3b4c60e1.js": "/React-Discord-Clone/precache-manifest.6afffb4242452a4331dff09b3b4c60e1.js",
     "service-worker.js": "/React-Discord-Clone/service-worker.js",
     "static/css/2.b0f64131.chunk.css.map": "/React-Discord-Clone/static/css/2.b0f64131.chunk.css.map",
-    "static/css/main.7d548e00.chunk.css.map": "/React-Discord-Clone/static/css/main.7d548e00.chunk.css.map"
+    "static/css/main.c8d95e63.chunk.css.map": "/React-Discord-Clone/static/css/main.c8d95e63.chunk.css.map"
   }
 }
