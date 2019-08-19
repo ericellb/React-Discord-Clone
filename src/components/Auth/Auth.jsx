@@ -84,6 +84,11 @@ export default function Auth() {
   // Handles creation of account and calls sign in action
   const createAccount = async (userName, userPass) => {
     try {
+      // encode username and userpass - it may have # $ & + ,  / : ; = ? @ [ ]
+
+      userName = encodeURIComponent(userName);
+      userPass = encodeURIComponent(userPass);
+
       const response = await axios.post(`/user/create?userName=${userName}&userPass=${userPass}`);
       if (rememberMe) {
         localStorage.setItem('user', JSON.stringify(response.data));
