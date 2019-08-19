@@ -48,6 +48,7 @@ body {
 .sidebar-container {
   display: flex;
   height: 100%;
+  width: 300px;
 }
 
 .channels-container {

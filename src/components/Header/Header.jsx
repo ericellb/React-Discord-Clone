@@ -31,7 +31,7 @@ export default function Header(props) {
           anchor="left"
           open={drawerVisible}
           onClose={() => setDrawerVisible(false)}
-          onOpen={() => null}>
+          onOpen={() => setDrawerVisible(true)}>
           <Sidebar channels={channels} servers={servers} setDrawerVisible={setDrawerVisible} />
         </SwipeableDrawer>
         <Typography variant="h6"> <i className="channel-hashtag">#</i>{activeChannel.split('-')[0].toLowerCase()} </Typography>
