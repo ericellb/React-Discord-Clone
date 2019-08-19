@@ -15,7 +15,7 @@ export default function CreateJoinModal(props) {
   const dispatch = useDispatch();
 
   // Get data from props
-  const { handleModalSuccess, modalType } = props;
+  const { handleSnackMessage, modalType } = props;
 
   // Local state to control Modal Windows + Data fields
   const [mainVisible, setMainVisible] = useState(true);
@@ -51,10 +51,10 @@ export default function CreateJoinModal(props) {
       const response = await axios.post(`/server/create?serverName=${serverName}&userId=${userId}`);
       dispatch(addServer(response.data));
       const message = `Server ${response.data.server.split('-')[0]} with ID ${response.data.server.split('-')[1]} created`;
-      handleModalSuccess(message, false);
+      handleSnackMessage(message, false);
     }
     catch (err) {
-      handleModalSuccess(err.response.data, false);
+      handleSnackMessage(err.response.data, false);
     }
   }
 
@@ -62,10 +62,10 @@ export default function CreateJoinModal(props) {
   const joinServer = async (serverId, userId) => {
     try {
       const response = await axios.post(`/server/join?serverId=${serverId}&userId=${userId}`);
-      handleModalSuccess(response.data, true);
+      handleSnackMessage(response.data, true);
     }
     catch (err) {
-      handleModalSuccess(err.response.data, false);
+      handleSnackMessage(err.response.data, false);
     }
   }
 
@@ -75,10 +75,10 @@ export default function CreateJoinModal(props) {
       const response = await axios.post(`/channel/create?channelName=${channelName}&server=${server}&userId=${userId}`);
       dispatch(addChannel(response.data));
       const message = `Server ${response.data.channel.split('-')[0]} with ID ${response.data.channel.split('-'[1])} created`;
-      handleModalSuccess(message, false);
+      handleSnackMessage(message, false);
     }
     catch (err) {
-      handleModalSuccess(err.response.data, false);
+      handleSnackMessage(err.response.data, false);
     }
   }
 
@@ -86,10 +86,10 @@ export default function CreateJoinModal(props) {
   const renameServer = async (serverName, serverId) => {
     try {
       const response = await axios.post(`/server/rename?serverName=${serverName}&serverId=${serverId}&userId=${userId}`);
-      handleModalSuccess(response.data, true);
+      handleSnackMessage(response.data, true);
     }
     catch (err) {
-      handleModalSuccess(err.response.data, false);
+      handleSnackMessage(err.response.data, false);
     }
   }
 
@@ -97,10 +97,10 @@ export default function CreateJoinModal(props) {
   const renameChannel = async (channelName, channelId) => {
     try {
       const response = await axios.post(`/channel/rename?channelName=${channelName}&channelId=${channelId}&serverId=${activeServer.split('-')[1]}&userId=${userId}`);
-      handleModalSuccess(response.data, true);
+      handleSnackMessage(response.data, true);
     }
     catch (err) {
-      handleModalSuccess(err.response.data, false);
+      handleSnackMessage(err.response.data, false);
     }
   }
 
@@ -108,10 +108,10 @@ export default function CreateJoinModal(props) {
   const deleteChannel = async (channelName, channelId) => {
     try {
       const response = await axios.delete(`/channel/delete?channelId=${channelId}&serverId=${activeServer.split('-')[1]}&userId=${userId}`);
-      handleModalSuccess(response.data, true);
+      handleSnackMessage(response.data, true);
     }
     catch (err) {
-      handleModalSuccess(err.response.data, false);
+      handleSnackMessage(err.response.data, false);
     }
   }
 
@@ -326,7 +326,7 @@ export default function CreateJoinModal(props) {
           </Grid>
           <Grid item xs={12} className="grid-button">
             <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'green', marginRight: "8px" }} onClick={() => deleteChannel(channelName, activeChannel.split('-')[1])}>Yes</Button>
-            <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'red', marginLeft: "8px" }} onClick={() => handleModalSuccess('Not deleting channel', false)}>No</Button>
+            <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'red', marginLeft: "8px" }} onClick={() => handleSnackMessage('Not deleting channel', false)}>No</Button>
           </Grid>
         </Grid>
       </Slide >

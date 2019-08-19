@@ -27,7 +27,7 @@ export default function Sidebar(props) {
 
   // Handles Success of Modal Server Create / Join
   // Closes Modal and show Snackbar with Create / Join Messsage
-  const handleModalSuccess = (response, pass) => {
+  const handleSnackMessage = (response, pass) => {
     if (response !== null) {
       setModalVisible(false);
       setSnackVisible(true);
@@ -39,15 +39,15 @@ export default function Sidebar(props) {
 
   return (
     <div className="sidebar-container">
-      <Servers setModalVisible={setModalVisible} setModalType={setModalType} />
-      <Channels setDrawerVisible={setDrawerVisible} setModalVisible={setModalVisible} setModalType={setModalType} />
+      <Servers setModalVisible={setModalVisible} setModalType={setModalType} handleSnackMessage={handleSnackMessage} />
+      <Channels setDrawerVisible={setDrawerVisible} setModalVisible={setModalVisible} setModalType={setModalType} handleSnackMessage={handleSnackMessage} />
       <Modal
         open={modalVisible}
         aria-labelledby="server create modal"
         aria-describedby="create a server"
         className="modal-wrapper"
         onClose={() => setModalVisible(false)}>
-        <CreateJoinModal handleModalSuccess={handleModalSuccess} modalType={modalType} />
+        <CreateJoinModal handleSnackMessage={handleSnackMessage} modalType={modalType} />
       </Modal>
       <SnackBarContent visible={snackVisible} setVisible={setSnackVisible} content={snackContent} />
     </div >

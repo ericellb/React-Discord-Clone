@@ -19,7 +19,7 @@ export default function Channels(props) {
   const user = useSelector(state => state.user);
 
   // Get props from parent
-  const { setDrawerVisible, setModalVisible, setModalType } = props;
+  const { setDrawerVisible, setModalVisible, setModalType, handleSnackMessage } = props;
 
   // Local state
   const [serverAnchorEl, setServerAnchorEl] = useState(null);
@@ -45,6 +45,15 @@ export default function Channels(props) {
       setDrawerVisible(false)
   }
 
+  const handleChannelDelete = (callBack) => {
+    if (channels.length === 1) {
+      handleSnackMessage("Please delete the server if only 1 channel");
+    }
+    else {
+      callBack();
+    }
+  }
+
   // Handles to show modal, and its type
   const handleModalShow = (modalType) => {
     setModalType(modalType);
@@ -65,6 +74,7 @@ export default function Channels(props) {
     setChannelAchorEl(null)
   }
 
+  // Signs the user out
   const handleSignout = () => {
     localStorage.clear("user");
     dispatch(signOut(user.userId));
@@ -119,7 +129,7 @@ export default function Channels(props) {
 
       <Menu id="channel-settings-menu" anchorEl={channelAchorEl} open={Boolean(channelAchorEl)} onClick={handleClose} onClose={handleClose}>
         <MenuItem onClick={() => handleModalShow('channel-rename')}> Change Channel Name </MenuItem>
-        <MenuItem onClick={() => handleModalShow('channel-delete')}> Delete Channel </MenuItem>
+        <MenuItem onClick={() => handleChannelDelete(() => handleModalShow('channel-delete'))}> Delete Channel </MenuItem>
       </Menu>
 
     </div>

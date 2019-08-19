@@ -21,6 +21,7 @@ export default function Messages() {
   let messageContainerBottomRef;
   let messageContainerRef;
 
+  // Scroll bottom of page 
   useEffect(() => {
     // Keep scroll on bottom
     if (!loadMessages)
@@ -29,6 +30,11 @@ export default function Messages() {
       messageContainerRef.scroll(0, 56);
     }
   })
+
+  // On mount scroll to bottom
+  useEffect(() => {
+    messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' })
+  }, []);
 
   // Checks is message is a code block
   const isTextCodeBlock = (message) => {
