@@ -85,7 +85,6 @@ export default function Auth() {
   const createAccount = async (userName, userPass) => {
     try {
       // encode username and userpass - it may have # $ & + ,  / : ; = ? @ [ ]
-
       userName = encodeURIComponent(userName);
       userPass = encodeURIComponent(userPass);
 
@@ -107,6 +106,10 @@ export default function Auth() {
 
   // Handles login of account and calls sign in action
   const loginAccount = async (userName, userPass) => {
+    // encode username and userpass - it may have # $ & + ,  / : ; = ? @ [ ]
+    userName = encodeURIComponent(userName);
+    userPass = encodeURIComponent(userPass);
+
     try {
       const response = await axios.get(`/user/login?userName=${userName}&userPass=${userPass}`);
       if (rememberMe) {
