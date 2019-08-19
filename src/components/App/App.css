@@ -48,7 +48,6 @@ body {
 .sidebar-container {
   display: flex;
   height: 100%;
-  width: 300px;
 }
 
 .channels-container {
@@ -291,6 +290,9 @@ body {
     grid-template-areas: "Messages" "Send-Messages";
   }
 
+  .sidebar-container {
+    width: 300px;
+  }
   .sidebar-grid {
     display: none;
   }

@@ -25,8 +25,10 @@ export default function SendMessage(props) {
   // Handles submission of messages
   // Dispatches event and sets TextField value to empty
   function handleSubmit(message) {
-    dispatch(newMessage(message));
-    setChatMessage("");
+    if (message.msg !== "") {
+      dispatch(newMessage(message));
+      setChatMessage("");
+    }
   }
 
   // Handles enter event to submit message

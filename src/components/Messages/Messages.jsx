@@ -77,7 +77,6 @@ export default function Messages() {
   }
 
   const messagesLength = chatStore.servers[activeServer][activeChannel].length;
-  console.log(chatStore.servers[activeServer][activeChannel].slice(0, messagesLength - messageIndex));
 
   return (
     <div className="messages-container" onScroll={(e) => handleScrollTop(e)} ref={(element) => messageContainerRef = element}>
@@ -109,7 +108,7 @@ export default function Messages() {
         })}
       </List>
       <div ref={(element) => messageContainerBottomRef = element}></div>
-      <Popover
+      {/*<Popover
         id="user-info"
         open={userInfoVisible}
         anchorEl={anchorEl}
@@ -120,7 +119,7 @@ export default function Messages() {
         }}
       >
         <UserInfo userName={userName} />
-      </Popover>
+      </Popover>*/}
     </div>
   )
 }
