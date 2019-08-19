@@ -23,7 +23,9 @@ export default function Dashboard() {
     }
     else
       dispatch(loadUserData(user.userId));
+
   }, [dispatch, user.isSignedIn, user.userId])
+
 
   return (
     <div className="grid-container">

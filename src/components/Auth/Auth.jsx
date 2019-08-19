@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { Paper, Button, Card, CardContent, Typography, CardActionArea, CardMedia, Slide, TextField, Grid, IconButton, Checkbox } from '@material-ui/core';
 import { GroupAdd, Person, ArrowBack } from '@material-ui/icons';
@@ -27,6 +27,16 @@ export default function Auth() {
   const [userPassErrorMsg, setUserPassErrorMsg] = useState(false)
   const [rememberMe, setRememberMe] = useState(false);
 
+  useEffect(() => {
+    requestFullScreenMobile();
+  });
+
+  const requestFullScreenMobile = () => {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      if (navigator.userAgent !== "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Mobile Safari/537.36")
+        document.documentElement.requestFullscreen();
+    }
+  }
 
   const showMain = () => {
     setMainDirection('left');

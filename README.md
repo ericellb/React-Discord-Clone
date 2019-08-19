@@ -9,17 +9,15 @@ Demo (Work in progress) http://ericellb.github.io/React-Discord-Clone
 
 ## Features
   Implemented Features
-  - [x] Real time messaging in channels using Socket IO
-  - [x] Local authentication
+  - [x] Real time messaging in using Socket IO
+  - [x] Local Authentication
   - [x] Loading of Servers / Channels / history based on per user basis
-  - [x] Creation of Servers
-  - [x] Joining of Servers
+  - [x] Creation and Joining Servers
   - [x] Creation of Channels in a Server
-  - [x] Broadcasting messages to Specific Channels
   - [x] Server Settings (Change name)
-  - [x] Persistent channel history
   - [x] Channel Settings (Change name and delete)
-  - [x] Pretty Prints Code encloded in ``` 
+  - [x] Persistent channel history
+  - [x] Pretty Print Code Blocks enclodes in three `
 
   Todo
   - [ ] Private messaging
