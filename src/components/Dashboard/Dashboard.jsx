@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { loadUserData } from '../../actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import Div100vh from 'react-div-100vh';
 
 import createHashHistory from '../../history';
 import Sidebar from '../Sidebar/Sidebar';
@@ -27,28 +28,24 @@ export default function Dashboard() {
   }, [dispatch, user.isSignedIn, user.userId])
 
 
-  // Listen for changes in height
-  window.addEventListener('resize', () => {
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  })
-
   return (
-    <div className="grid-container">
+    <Div100vh>
+      <div className="grid-container">
 
-      <div className="sidebar-grid">
-        <Sidebar />
-      </div>
+        <div className="sidebar-grid">
+          <Sidebar />
+        </div>
 
-      <div className="messages-grid">
-        <Header />
-        <Messages />
-      </div>
+        <div className="messages-grid">
+          <Header />
+          <Messages />
+        </div>
 
-      <div className="send-messages-grid">
-        <SendMessage />
-      </div>
+        <div className="send-messages-grid">
+          <SendMessage />
+        </div>
 
-    </div >
+      </div >
+    </Div100vh>
   )
 }
