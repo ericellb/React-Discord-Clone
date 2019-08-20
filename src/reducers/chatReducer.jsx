@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, ADD_CHANNEL, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA, ADD_SERVER } from '../actions/types';
+import { ADD_MESSAGE, ADD_CHANNEL, ADD_PRIVATE_MESSAGE, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA, ADD_SERVER } from '../actions/types';
 
 const initialState = {
   servers: {
@@ -16,6 +16,8 @@ const initialState = {
       "/b/-Ry06VYrX3x": [
       ]
     }
+  },
+  messages: {
   },
   activeServer: 'Default-FANfDprXmt',
   activeChannel: 'general-0m5vBsRnfd',
@@ -65,6 +67,16 @@ export const chatReducer = (state = initialState, action) => {
       }
     case GET_INITIAL_DATA:
       return { ...state, servers: action.payload, activeServer: Object.keys(action.payload)[0], activeChannel: Object.keys(action.payload[Object.keys(action.payload)[0]])[0] };
+    case ADD_PRIVATE_MESSAGE:
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          [action.payload.from]: [
+            { from: action.payload.from, to: action.payload.to, msg: action.payload.text }
+          ]
+        }
+      }
     case CHANGE_SERVER:
       return { ...state, activeServer: action.payload, activeChannel: Object.keys(state.servers[action.payload])[0] }
     case CHANGE_CHANNEL:

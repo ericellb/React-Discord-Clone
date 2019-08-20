@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Card, CardHeader, Typography, CardMedia, CardContent, makeStyles, TextField } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { Card, Typography, makeStyles, TextField } from '@material-ui/core';
+import { NEW_PRIVATE_MESSAGE } from '../../actions/types';
 
 const useStyle = makeStyles(theme => ({
   card: {
@@ -29,9 +31,13 @@ const useStyle = makeStyles(theme => ({
 
 export default function UserInfo(props) {
 
+  // Get state from redux store
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
   const { userName } = props;
   const classes = useStyle();
-  const [message, setMessage] = useState('');
+  const [messageText, setMessageText] = useState('');
 
   // Handles keypress and calls the callback method
   const handleKeyPress = (e, callbackMethod) => {
@@ -41,8 +47,9 @@ export default function UserInfo(props) {
   }
 
   // Calls API to send a Private message
-  const sendPrivateMessage = (message) => {
-
+  const sendPrivateMessage = (messageText, userName) => {
+    const msg = { "from": user.userName, "text": messageText, "to": userName };
+    dispatch({ type: NEW_PRIVATE_MESSAGE, payload: msg })
   }
 
   return (
@@ -56,9 +63,9 @@ export default function UserInfo(props) {
           id="user-private-message"
           label={`Private message`}
           placeholder={`Message @ ${userName}`}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyPress={(e) => handleKeyPress(e, () => sendPrivateMessage(message))}
+          value={messageText}
+          onChange={(e) => setMessageText(e.target.value)}
+          onKeyPress={(e) => handleKeyPress(e, () => sendPrivateMessage(messageText, userName))}
           variant="outlined"
           InputProps={{
             className: classes.input

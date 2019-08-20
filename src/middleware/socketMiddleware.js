@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-import { NEW_MESSAGE, ADD_MESSAGE, SIGN_IN } from '../actions/types';
+import { NEW_MESSAGE, ADD_MESSAGE, NEW_PRIVATE_MESSAGE, ADD_PRIVATE_MESSAGE, SIGN_IN } from '../actions/types';
 
 export const socketMiddleware = (baseUrl) => {
   return storeAPI => {
@@ -20,6 +20,10 @@ export const socketMiddleware = (baseUrl) => {
         listener.off();
         listener = setupSocketListener(action.payload.userId, socket, storeAPI);
       }
+      else if (action.type === NEW_PRIVATE_MESSAGE) {
+        socket.emit('simple-chat-new-private-message', action.payload);
+        return;
+      }
 
 
       return next(action);
@@ -38,6 +42,12 @@ function setupSocketListener(userId, socket, storeAPI) {
         type: ADD_MESSAGE,
         payload: action.payload
       });
+    }
+    else if (action.type === "private-message") {
+      storeAPI.dispatch({
+        type: ADD_PRIVATE_MESSAGE,
+        payload: action.payload
+      })
     }
   });
 }

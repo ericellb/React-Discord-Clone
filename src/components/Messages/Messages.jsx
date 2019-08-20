@@ -55,11 +55,11 @@ export default function Messages() {
     setAnchorEl(e.currentTarget);
   }
 
+  // Closes popup
   const handlePopoverClose = () => {
     setUserInfoVisible(false);
     setAnchorEl(null);
   }
-
 
   // Handles to load more messages when scroll at top
   const handleScrollTop = (e) => {
@@ -114,7 +114,7 @@ export default function Messages() {
         })}
       </List>
       <div ref={(element) => messageContainerBottomRef = element}></div>
-      {/*<Popover
+      <Popover
         id="user-info"
         open={userInfoVisible}
         anchorEl={anchorEl}
@@ -125,7 +125,7 @@ export default function Messages() {
         }}
       >
         <UserInfo userName={userName} />
-      </Popover>*/}
+      </Popover>
     </div>
   )
 }
