@@ -13,7 +13,7 @@ export default function Channels(props) {
 
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
-  const channels = Object.keys(chatStore.servers[chatStore.activeServer]);
+  const channels = Object.keys(chatStore.servers[chatStore.activeServer]["channels"]);
   const { activeServer } = chatStore;
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);

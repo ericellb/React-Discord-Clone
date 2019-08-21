@@ -82,7 +82,7 @@ export default function Messages() {
     }
   }
 
-  const messagesLength = chatStore.servers[activeServer][activeChannel].length;
+  const messagesLength = chatStore.servers[activeServer]["channels"][activeChannel].length;
 
   return (
     <div className="messages-container" onScroll={(e) => handleScrollTop(e)} ref={(element) => messageContainerRef = element}>
@@ -92,7 +92,7 @@ export default function Messages() {
         </div>
         : null}
       <List>
-        {chatStore.servers[activeServer][activeChannel].slice(messagesLength - messageIndex, messagesLength).map((message, i) => {
+        {chatStore.servers[activeServer]["channels"][activeChannel].slice(messagesLength - messageIndex, messagesLength).map((message, i) => {
           // Filter for null messages (dummy message on backend should fix...)
           if (message.msg !== null)
             return (

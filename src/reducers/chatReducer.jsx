@@ -3,17 +3,22 @@ import { ADD_MESSAGE, ADD_CHANNEL, ADD_PRIVATE_MESSAGE, CHANGE_SERVER, CHANGE_CH
 const initialState = {
   servers: {
     "Default-FANfDprXmt": {
-      "general-0m5vBsRnfd": [
-      ],
-      "gaming-p9DnvvrfWo": [
-      ],
-      "programming-aRoD4umYpb": [
-      ],
-      "cooking-v88UngJkiD": [
-      ],
-      "misc-uSje5DwUH0": [
-      ],
-      "/b/-Ry06VYrX3x": [
+      "channels": {
+        "general-0m5vBsRnfd": [
+        ],
+        "gaming-p9DnvvrfWo": [
+        ],
+        "programming-aRoD4umYpb": [
+        ],
+        "cooking-v88UngJkiD": [
+        ],
+        "misc-uSje5DwUH0": [
+        ],
+        "/b/-Ry06VYrX3x": [
+        ]
+      },
+      "activeUsers": [
+
       ]
     }
   },
@@ -24,7 +29,6 @@ const initialState = {
 }
 
 export const chatReducer = (state = initialState, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case ADD_MESSAGE:
       let { server, channel, from, msg } = action.payload;
@@ -34,9 +38,12 @@ export const chatReducer = (state = initialState, action) => {
           ...state.servers,
           [server]: {
             ...state.servers[server],
-            [channel]: [
-              ...state.servers[server][channel], { from: from, msg: msg }
-            ]
+            "channels": {
+              ...state.servers[server].channels,
+              [channel]: [
+                ...state.servers[server]["channels"][channel], { from: from, msg: msg }
+              ]
+            }
           }
         }
       }
@@ -47,9 +54,12 @@ export const chatReducer = (state = initialState, action) => {
           ...state.servers,
           [action.payload.server]: {
             ...state.servers[action.payload.server],
-            [action.payload.channel]: [
+            "channels": {
+              ...state.servers[action.payload.server].channels,
+              [action.payload.channel]: [
 
-            ]
+              ]
+            }
           }
         }
       }
@@ -59,14 +69,15 @@ export const chatReducer = (state = initialState, action) => {
         servers: {
           ...state.servers,
           [action.payload.server]: {
-            [action.payload.channel]: [
-
-            ]
+            "channels": {
+              [action.payload.channel]: [
+              ]
+            }
           }
         }
       }
     case GET_INITIAL_DATA:
-      return { ...state, servers: action.payload, activeServer: Object.keys(action.payload)[0], activeChannel: Object.keys(action.payload[Object.keys(action.payload)[0]])[0] };
+      return { ...state, servers: action.payload, activeServer: Object.keys(action.payload)[0], activeChannel: Object.keys(action.payload[Object.keys(action.payload)[0]]["channels"])[0] };
     case ADD_PRIVATE_MESSAGE:
       return {
         ...state,
@@ -78,7 +89,7 @@ export const chatReducer = (state = initialState, action) => {
         }
       }
     case CHANGE_SERVER:
-      return { ...state, activeServer: action.payload, activeChannel: Object.keys(state.servers[action.payload])[0] }
+      return { ...state, activeServer: action.payload, activeChannel: Object.keys(state.servers[action.payload]["channels"])[0] }
     case CHANGE_CHANNEL:
       return { ...state, activeChannel: action.payload }
     default:
