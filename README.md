@@ -3,7 +3,8 @@
 Originally started off on a test project for learning Functional Components, Hooks and Socket IO, ended up being a Discord Clone.
 
 
-Demo (Work in progress) http://ericellb.github.io/React-Discord-Clone
+Live Version http://ericellb.github.io/React-Discord-Clone
+API https://github.com/ericellb/React-Discord-API
 
 ![layout image](public/readmepic.png)
 
