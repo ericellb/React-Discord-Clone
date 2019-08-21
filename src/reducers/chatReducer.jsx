@@ -22,7 +22,7 @@ const initialState = {
       ]
     }
   },
-  messages: {
+  privateMessages: {
   },
   activeServer: 'Default-FANfDprXmt',
   activeChannel: 'general-0m5vBsRnfd',
@@ -79,11 +79,22 @@ export const chatReducer = (state = initialState, action) => {
     case GET_INITIAL_DATA:
       return { ...state, servers: action.payload, activeServer: Object.keys(action.payload)[0], activeChannel: Object.keys(action.payload[Object.keys(action.payload)[0]]["channels"])[0] };
     case ADD_PRIVATE_MESSAGE:
-      return {
+      if (state.privateMessages[action.payload.user]) {
+        return {
+          ...state,
+          privateMessages: {
+            ...state.privateMessages,
+            [action.payload.user]: [
+              ...state.privateMessages[action.payload.user], { from: action.payload.from, to: action.payload.to, msg: action.payload.text }
+            ]
+          }
+        }
+      }
+      else return {
         ...state,
-        messages: {
-          ...state.messages,
-          [action.payload.from]: [
+        privateMessages: {
+          ...state.privateMessages,
+          [action.payload.user]: [
             { from: action.payload.from, to: action.payload.to, msg: action.payload.text }
           ]
         }
