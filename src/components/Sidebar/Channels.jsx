@@ -124,6 +124,7 @@ export default function Channels(props) {
       <Menu id="server-settings-menu" anchorEl={serverAnchorEl} open={Boolean(serverAnchorEl)} onClick={handleClose} onClose={handleClose}>
         <MenuItem> Server Id - {activeServer.split('-')[1]} </MenuItem>
         <MenuItem onClick={() => handleModalShow('server-rename')}> Change Server Name </MenuItem>
+        <MenuItem onClick={() => handleModalShow('server-delete')}> Delete Server </MenuItem>
         <MenuItem onClick={() => handleModalShow('channel-create')}> Add Channel </MenuItem>
       </Menu>
 

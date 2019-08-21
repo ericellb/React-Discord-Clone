@@ -69,6 +69,28 @@ export default function CreateJoinModal(props) {
     }
   }
 
+  // Method to handle renaming of servers
+  const renameServer = async (serverName, serverId) => {
+    try {
+      const response = await axios.post(`/server/rename?serverName=${serverName}&serverId=${serverId}&userId=${userId}`);
+      handleSnackMessage(response.data, true);
+    }
+    catch (err) {
+      handleSnackMessage(err.response.data, false);
+    }
+  }
+
+  // Method to handle deleting servers
+  const deleteServer = async (serverId, userId) => {
+    try {
+      const response = await axios.delete(`/server/delete?serverId=${serverId}&userId=${userId}`);
+      handleSnackMessage(response.data, true);
+    }
+    catch (err) {
+      handleSnackMessage(err.response.data, false);
+    }
+  }
+
   // Method to handle creation of channels
   const createChannel = async (channelName, server) => {
     try {
@@ -76,17 +98,6 @@ export default function CreateJoinModal(props) {
       dispatch(addChannel(response.data));
       const message = `Server ${response.data.channel.split('-')[0]} with ID ${response.data.channel.split('-'[1])} created`;
       handleSnackMessage(message, false);
-    }
-    catch (err) {
-      handleSnackMessage(err.response.data, false);
-    }
-  }
-
-  // Method to handle renaming of servers
-  const renameServer = async (serverName, serverId) => {
-    try {
-      const response = await axios.post(`/server/rename?serverName=${serverName}&serverId=${serverId}&userId=${userId}`);
-      handleSnackMessage(response.data, true);
     }
     catch (err) {
       handleSnackMessage(err.response.data, false);
@@ -195,6 +206,56 @@ export default function CreateJoinModal(props) {
     )
   }
 
+  // Renders a modal with an input
+  const renderServerRename = () => {
+    return (
+      <Slide direction='left' in={true} mountOnEnter unmountOnExit timeout={500}>
+        <Grid container spacing={3} justify="center" alignItems="center">
+          <Grid item xs={12}>
+            <Typography variant="h5" color="primary" align="center">Rename Server</Typography>
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
+            <Typography variant="body1" paragraph> Enter a new Server Name for Server - {activeServer.split('-')[0]} </Typography>
+            <TextField
+              id="create-channel-field"
+              label="Channel Name"
+              value={serverName}
+              onChange={(e) => setServerName(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, () => renameServer(serverName, activeServer.split('-')[1]))}
+              margin="dense"
+              variant="outlined"
+              autoComplete="off"
+            />
+          </Grid>
+          <Grid item xs={12} className="grid-button">
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => renameServer(serverName, activeServer.split('-')[1])}>Rename Server</Button>
+          </Grid>
+        </Grid>
+      </Slide >
+    )
+  }
+
+  // Renders a modal to delete a server
+  const renderServerDelete = () => {
+    return (
+      <Slide direction='left' in={true} mountOnEnter unmountOnExit timeout={500}>
+        <Grid container spacing={3} justify="center" alignItems="center">
+          <Grid item xs={12}>
+            <Typography variant="h5" color="primary" align="center">Delete Server</Typography>
+          </Grid>
+          <Grid item xs={12} className="grid-textfield">
+            <Typography variant="body1" paragraph> Are you sure you want to delete - {activeServer.split('-')[0]} </Typography>
+          </Grid>
+          <Grid item xs={12} className="grid-button">
+            <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'green', marginRight: "8px" }} onClick={() => deleteServer(activeServer.split('-')[1], userId)}>Yes</Button>
+            <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'red', marginLeft: "8px" }} onClick={() => handleSnackMessage('Not deleting channel', false)}>No</Button>
+          </Grid>
+        </Grid>
+      </Slide >
+    )
+  }
+
+
   // Renders the Server Join Modal Window
   const renderServerJoin = () => {
     return (
@@ -253,37 +314,6 @@ export default function CreateJoinModal(props) {
     )
   }
 
-
-  // Renders a modal with an input
-  const renderServerRename = () => {
-    return (
-      <Slide direction='left' in={true} mountOnEnter unmountOnExit timeout={500}>
-        <Grid container spacing={3} justify="center" alignItems="center">
-          <Grid item xs={12}>
-            <Typography variant="h5" color="primary" align="center">Rename Server</Typography>
-          </Grid>
-          <Grid item xs={12} className="grid-textfield">
-            <Typography variant="body1" paragraph> Enter a new Server Name for Server - {activeServer.split('-')[0]} </Typography>
-            <TextField
-              id="create-channel-field"
-              label="Channel Name"
-              value={serverName}
-              onChange={(e) => setServerName(e.target.value)}
-              onKeyPress={(e) => handleKeyPress(e, () => renameServer(serverName, activeServer.split('-')[1]))}
-              margin="dense"
-              variant="outlined"
-              autoComplete="off"
-            />
-          </Grid>
-          <Grid item xs={12} className="grid-button">
-            <Button className="modal-button" variant="contained" color="primary" onClick={() => renameServer(serverName, activeServer.split('-')[1])}>Rename Server</Button>
-          </Grid>
-        </Grid>
-      </Slide >
-    )
-  }
-
-
   // Renders a modal to rename a channel
   const renderChannelRename = () => {
     return (
@@ -319,7 +349,7 @@ export default function CreateJoinModal(props) {
       <Slide direction='left' in={true} mountOnEnter unmountOnExit timeout={500}>
         <Grid container spacing={3} justify="center" alignItems="center">
           <Grid item xs={12}>
-            <Typography variant="h5" color="primary" align="center">Rename Server</Typography>
+            <Typography variant="h5" color="primary" align="center">Delete Channel</Typography>
           </Grid>
           <Grid item xs={12} className="grid-textfield">
             <Typography variant="body1" paragraph> Are you sure you want to delete - {activeChannel.split('-')[0]} </Typography>
@@ -367,6 +397,13 @@ export default function CreateJoinModal(props) {
     return (
       <Paper className="container-prompt">
         {renderChannelDelete()}
+      </Paper>
+    )
+  }
+  else if (modalType === "server-delete") {
+    return (
+      <Paper className="container-prompt">
+        {renderServerDelete()}
       </Paper>
     )
   }
