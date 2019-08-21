@@ -80,6 +80,12 @@ export default function Channels(props) {
     dispatch(signOut(user.userId));
   }
 
+  // Handles saving serverId to clipboard
+  const handleSaveClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    handleSnackMessage(`Server ID ${text} saved to clipboard`, false);
+  }
+
   return (
     <div className="channels-container">
       <List className="channel-list">
@@ -122,7 +128,7 @@ export default function Channels(props) {
       </div>
 
       <Menu id="server-settings-menu" anchorEl={serverAnchorEl} open={Boolean(serverAnchorEl)} onClick={handleClose} onClose={handleClose}>
-        <MenuItem> Server Id - {activeServer.split('-')[1]} </MenuItem>
+        <MenuItem onClick={() => handleSaveClipboard(activeServer.split('-')[1])}> Server Id - {activeServer.split('-')[1]} </MenuItem>
         <MenuItem onClick={() => handleModalShow('server-rename')}> Change Server Name </MenuItem>
         <MenuItem onClick={() => handleModalShow('server-delete')}> Delete Server </MenuItem>
         <MenuItem onClick={() => handleModalShow('channel-create')}> Add Channel </MenuItem>
