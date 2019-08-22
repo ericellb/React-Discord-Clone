@@ -27,7 +27,7 @@ const initialState = {
   activeServer: 'Default-FANfDprXmt',
   activeChannel: 'general-0m5vBsRnfd',
   activeView: 'servers',
-  activePMUser: 'test'
+  activePMUser: 'none'
 }
 
 export const chatReducer = (state = initialState, action) => {
@@ -87,7 +87,7 @@ export const chatReducer = (state = initialState, action) => {
           privateMessages: {
             ...state.privateMessages,
             [action.payload.user]: [
-              ...state.privateMessages[action.payload.user], { from: action.payload.from, to: action.payload.to, msg: action.payload.text }
+              ...state.privateMessages[action.payload.user], { from: action.payload.from, to: action.payload.to, msg: action.payload.msg }
             ]
           }
         }
@@ -97,7 +97,7 @@ export const chatReducer = (state = initialState, action) => {
         privateMessages: {
           ...state.privateMessages,
           [action.payload.user]: [
-            { from: action.payload.from, to: action.payload.to, msg: action.payload.text }
+            { from: action.payload.from, to: action.payload.to, msg: action.payload.msg }
           ]
         }
       }

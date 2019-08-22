@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Typography, makeStyles, TextField } from '@material-ui/core';
-import { NEW_PRIVATE_MESSAGE } from '../../actions/types';
+import { newPrivateMessage } from '../../actions';
 
 const useStyle = makeStyles(theme => ({
   card: {
@@ -48,8 +48,8 @@ export default function UserInfo(props) {
 
   // Calls API to send a Private message
   const sendPrivateMessage = (messageText, userName) => {
-    const msg = { "from": user.userName, "text": messageText, "to": userName };
-    dispatch({ type: NEW_PRIVATE_MESSAGE, payload: msg })
+    const msg = { "from": user.userName, "msg": messageText, "to": userName };
+    dispatch(newPrivateMessage(msg));
   }
 
   return (

@@ -1,4 +1,4 @@
-import { NEW_MESSAGE, ADD_MESSAGE, ADD_CHANNEL, ADD_SERVER, CHANGE_SERVER, CHANGE_CHANNEL, CHANGE_VIEW, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA, CHANGE_PM_USER } from './types';
+import { NEW_MESSAGE, ADD_MESSAGE, ADD_CHANNEL, ADD_SERVER, CHANGE_SERVER, CHANGE_CHANNEL, CHANGE_VIEW, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA, CHANGE_PM_USER, NEW_PRIVATE_MESSAGE } from './types';
 import axios from '../components/Api/api'
 
 
@@ -14,6 +14,12 @@ export const addMessage = (message) => ({
   type: ADD_MESSAGE,
   payload: message
 });
+
+// Action to send new private message
+export const newPrivateMessage = (message) => ({
+  type: NEW_PRIVATE_MESSAGE,
+  payload: message
+})
 
 // Action to add channel to a server
 export const addChannel = (data) => ({
