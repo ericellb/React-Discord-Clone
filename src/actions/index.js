@@ -1,4 +1,4 @@
-import { NEW_MESSAGE, ADD_MESSAGE, ADD_CHANNEL, ADD_SERVER, CHANGE_SERVER, CHANGE_CHANNEL, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA } from './types';
+import { NEW_MESSAGE, ADD_MESSAGE, ADD_CHANNEL, ADD_SERVER, CHANGE_SERVER, CHANGE_CHANNEL, CHANGE_VIEW, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA } from './types';
 import axios from '../components/Api/api'
 
 
@@ -8,7 +8,6 @@ export const newMessage = (message) => ({
   type: NEW_MESSAGE,
   payload: message
 });
-
 
 // Action to add message to a channel
 export const addMessage = (message) => ({
@@ -39,6 +38,12 @@ export const changeChannel = (server) => ({
   type: CHANGE_CHANNEL,
   payload: server
 });
+
+// Action to change the current active view
+export const changeView = (view) => ({
+  type: CHANGE_VIEW,
+  payload: view
+})
 
 // Loads user Data. Gets all Servers + Channel History
 export const loadUserData = (userId) => async dispatch => {

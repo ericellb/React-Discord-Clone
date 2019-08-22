@@ -77,6 +77,29 @@ body {
   height: 48px;
 }
 
+.home-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.menu-seperator {
+  border-top: 2px solid #2f3136;
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.home-icon::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height  : 1px;
+  border-bottom: 2px solid grey;
+  width: 80%;
+
+}
+
 .channel-list {
   width: 100%;
   padding-top: 0 !important;

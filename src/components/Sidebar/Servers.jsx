@@ -1,9 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-import { GroupWork, AddCircleOutline } from '@material-ui/icons';
+import { GroupWork, AddCircleOutline, Home } from '@material-ui/icons';
 import { List, Tooltip, IconButton } from '@material-ui/core';
-import { changeServer } from '../../actions';
+import { changeServer, changeView } from '../../actions';
 
 
 export default function Servers(props) {
@@ -27,19 +27,33 @@ export default function Servers(props) {
     setModalVisible(true);
   }
 
+  // Handles changing the view and calls callback function
+  const handleChangeView = (view, callBack) => {
+    dispatch(changeView(view));
+    if (callBack !== undefined)
+      callBack();
+  }
+
   return (
     <div className="servers-container">
       <List>
+        <Tooltip title='Home' key='home' placement="right" className="tooltip">
+          <IconButton className="home-icon" onClick={() => handleChangeView('home')}>
+            <Home />
+          </IconButton>
+        </Tooltip>
+        <div className="menu-seperator" />
+
         {servers.map(server => (
           <Tooltip title={server.split('-')[0]} key={server} placement="right" className="tooltip">
-            <IconButton className="server-icon" onClick={() => handleServerChange(server)}>
+            <IconButton className="server-icon" onClick={() => handleChangeView('servers', () => handleServerChange(server))}>
               <GroupWork />
             </IconButton>
           </Tooltip>
         ))}
 
         <Tooltip title='Create Server' key='create-server' placement="right" className="tooltip">
-          <IconButton className="server-icon" onClick={() => handleModalShow()}>
+          <IconButton className="server-icon" onClick={() => handleChangeView('servers', () => handleModalShow())}>
             <AddCircleOutline />
           </IconButton>
         </Tooltip>
