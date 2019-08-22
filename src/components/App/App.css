@@ -122,6 +122,7 @@ body {
   justify-content: space-between !important;
 }
 
+
 .channel-item:hover .channel-settings {
   display: inline-block !important;
 }
@@ -148,6 +149,10 @@ body {
   box-sizing: border-box;
   background: #2a2c31;
   list-style: none;
+}
+
+.user-list-name {
+  margin-left: 1em !important;
 }
 
 

@@ -6,7 +6,7 @@ import { List, Tooltip, IconButton } from '@material-ui/core';
 import { changeServer, changeView } from '../../actions';
 
 
-export default function Servers(props) {
+export default function ServerList(props) {
 
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);

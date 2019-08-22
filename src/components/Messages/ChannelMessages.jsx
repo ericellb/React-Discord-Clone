@@ -4,7 +4,7 @@ import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Fade, Popover, Ci
 import Code from 'react-code-prettify';
 import UserInfo from '../UserInfo/UserInfo';
 
-export default function Messages() {
+export default function ChannelMessages() {
 
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);

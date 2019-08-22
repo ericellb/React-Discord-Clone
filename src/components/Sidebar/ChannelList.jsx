@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from '../Api/api';
 
 
-export default function Channels(props) {
+export default function ChannelList(props) {
 
 
   // Get State from Redux Store

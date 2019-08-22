@@ -6,9 +6,9 @@ import Div100vh from 'react-div-100vh';
 
 import createHashHistory from '../../history';
 import Sidebar from '../Sidebar/Sidebar';
-import Messages from '../Messages/Messages';
 import SendMessage from '../SendMessage/SendMessage';
 import Header from '../Header/Header';
+import ChannelMessages from '../Messages/ChannelMessages';
 
 export default function Dashboard() {
 
@@ -38,7 +38,7 @@ export default function Dashboard() {
 
         <div className="messages-grid">
           <Header />
-          <Messages />
+          <ChannelMessages />
         </div>
 
         <div className="send-messages-grid">
