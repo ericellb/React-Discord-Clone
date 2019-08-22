@@ -35,7 +35,7 @@ export default function Channels(props) {
       setIsAdmin(response.data);
     }
     getAdmin();
-  }, [activeServer])
+  }, [activeServer, user])
 
 
   // Handle channel change, and closes drawer if on mobile view

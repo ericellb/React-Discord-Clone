@@ -34,7 +34,7 @@ export default function Messages() {
   // On mount scroll to bottom
   useEffect(() => {
     messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' })
-  }, []);
+  }, [messageContainerBottomRef]);
 
   // Checks is message is a code block
   const isTextCodeBlock = (message) => {

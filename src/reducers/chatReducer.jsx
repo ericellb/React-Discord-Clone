@@ -26,6 +26,7 @@ const initialState = {
   },
   activeServer: 'Default-FANfDprXmt',
   activeChannel: 'general-0m5vBsRnfd',
+  activeView: 'servers'
 }
 
 export const chatReducer = (state = initialState, action) => {
