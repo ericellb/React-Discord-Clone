@@ -19,6 +19,8 @@ API https://github.com/ericellb/React-Discord-API
   - [x] Channel Settings (Change name and delete)
   - [x] Persistent channel history
   - [x] Pretty Print Code Blocks enclodes in three `
+  - [x] Private messaging
 
   Todo
-  - [ ] Private messaging
+  - [ ] Thinking of more features...
+  - [ ] Voice Chat down the road...
