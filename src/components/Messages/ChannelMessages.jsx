@@ -8,7 +8,7 @@ export default function ChannelMessages() {
 
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
-  const { activeServer, activeChannel, activeView, activePMUser } = chatStore;
+  const { activeServer, activeChannel, activeView } = chatStore;
 
   // Get message list from channel or from specific user
   let messages = null;
