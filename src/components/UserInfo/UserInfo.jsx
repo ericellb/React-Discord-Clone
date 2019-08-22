@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Typography, makeStyles, TextField } from '@material-ui/core';
-import { newPrivateMessage } from '../../actions';
+import { newPrivateMessage, changeView } from '../../actions';
 
 const useStyle = makeStyles(theme => ({
   card: {
@@ -35,7 +35,7 @@ export default function UserInfo(props) {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  const { userName } = props;
+  const { userName, setUserInfoVisible } = props;
   const classes = useStyle();
   const [messageText, setMessageText] = useState('');
 
@@ -50,6 +50,8 @@ export default function UserInfo(props) {
   const sendPrivateMessage = (messageText, userName) => {
     const msg = { "from": user.userName, "msg": messageText, "to": userName };
     dispatch(newPrivateMessage(msg));
+    dispatch(changeView('home'));
+    setUserInfoVisible(false);
   }
 
   return (

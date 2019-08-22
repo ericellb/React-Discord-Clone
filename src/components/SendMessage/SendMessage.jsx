@@ -44,7 +44,6 @@ export default function SendMessage(props) {
       if (activeView === "servers")
         dispatch(newMessage(message));
       else if (activeView === "home") {
-        console.log(message);
         dispatch(newPrivateMessage(message));
       }
       setChatMessage("");

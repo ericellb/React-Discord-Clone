@@ -8,7 +8,7 @@ export default function ChannelMessages() {
 
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
-  const { activeServer, activeChannel, activeView } = chatStore;
+  const { activeServer, activeChannel, activeView, activePMUser } = chatStore;
 
   // Get message list from channel or from specific user
   let messages = null;
@@ -18,14 +18,13 @@ export default function ChannelMessages() {
     messagesLength = messages.length;
   }
   else {
-    messages = chatStore.privateMessages[Object.keys(chatStore.privateMessages)[0]];
+    messages = chatStore.privateMessages[activePMUser];
     // Some hacky stuff because API always responds with null message if none in channel
     if (messages === undefined) {
       messages = [];
       messages.push({ from: null, to: null, msg: null });
     }
     messagesLength = messages.length;
-    console.log(messages);
   }
 
   // Local state for user popover
@@ -140,7 +139,7 @@ export default function ChannelMessages() {
           horizontal: 'right'
         }}
       >
-        <UserInfo userName={userName} />
+        <UserInfo userName={userName} setUserInfoVisible={setUserInfoVisible} />
       </Popover>
     </div>
   )

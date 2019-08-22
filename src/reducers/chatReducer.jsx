@@ -79,7 +79,7 @@ export const chatReducer = (state = initialState, action) => {
         }
       }
     case GET_INITIAL_DATA:
-      return { ...state, servers: action.payload, activeServer: Object.keys(action.payload)[0], activeChannel: Object.keys(action.payload[Object.keys(action.payload)[0]]["channels"])[0] };
+      return { ...state, servers: action.payload.servers, privateMessages: action.payload.privateMessages, activeServer: Object.keys(action.payload.servers)[0], activeChannel: Object.keys(action.payload.servers[Object.keys(action.payload.servers)[0]]["channels"])[0] };
     case ADD_PRIVATE_MESSAGE:
       if (state.privateMessages[action.payload.user]) {
         return {
@@ -106,7 +106,7 @@ export const chatReducer = (state = initialState, action) => {
     case CHANGE_CHANNEL:
       return { ...state, activeChannel: action.payload }
     case CHANGE_VIEW:
-      return { ...state, activeView: action.payload }
+      return { ...state, activeView: action.payload, activePMUser: Object.keys(state.privateMessages)[0] }
     case CHANGE_PM_USER:
       return { ...state, activePMUser: action.payload }
     default:
