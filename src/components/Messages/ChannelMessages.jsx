@@ -8,7 +8,25 @@ export default function ChannelMessages() {
 
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
-  const { activeServer, activeChannel } = chatStore;
+  const { activeServer, activeChannel, activeView, activePMUser } = chatStore;
+
+  // Get message list from channel or from specific user
+  let messages = null;
+  let messagesLength = null;
+  if (activeView === "servers") {
+    messages = chatStore.servers[activeServer]["channels"][activeChannel];
+    messagesLength = messages.length;
+  }
+  else {
+    messages = chatStore.privateMessages[Object.keys(chatStore.privateMessages)[0]];
+    // Some hacky stuff because API always responds with null message if none in channel
+    if (messages === undefined) {
+      messages = [];
+      messages.push({ from: null, to: null, msg: null });
+    }
+    messagesLength = messages.length;
+    console.log(messages);
+  }
 
   // Local state for user popover
   const [userInfoVisible, setUserInfoVisible] = useState(false);
@@ -82,8 +100,6 @@ export default function ChannelMessages() {
     }
   }
 
-  const messagesLength = chatStore.servers[activeServer]["channels"][activeChannel].length;
-
   return (
     <div className="messages-container" onScroll={(e) => handleScrollTop(e)} ref={(element) => messageContainerRef = element}>
       {messagesLength >= messageIndex ?
@@ -92,7 +108,7 @@ export default function ChannelMessages() {
         </div>
         : null}
       <List>
-        {chatStore.servers[activeServer]["channels"][activeChannel].slice(messagesLength - messageIndex, messagesLength).map((message, i) => {
+        {messages.slice(messagesLength - messageIndex, messagesLength).map((message, i) => {
           // Filter for null messages (dummy message on backend should fix...)
           if (message.msg !== null)
             return (
