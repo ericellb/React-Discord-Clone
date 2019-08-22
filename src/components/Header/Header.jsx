@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -10,16 +10,26 @@ import { SwipeableDrawer, SvgIcon, Link, Tooltip } from '@material-ui/core';
 
 import Sidebar from '../Sidebar/Sidebar';
 
-export default function Header(props) {
+export default function Header() {
 
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
-  const servers = Object.keys(chatStore.servers);
-  const channels = Object.keys(chatStore.servers[chatStore.activeServer]);
-  const { activeChannel } = chatStore;
+  const { activeChannel, activePMUser, activeView } = chatStore;
 
   // Local state
   const [drawerVisible, setDrawerVisible] = useState(false);
+  const [title, setTitle] = useState(null);
+
+  // On active view change change title
+  useEffect(() => {
+    if (activeView === "servers") {
+      setTitle(activeChannel.split('-')[0].toLowerCase());
+    }
+    else if (activeView === "home") {
+      setTitle(activePMUser);
+    }
+  }, [activeView, activePMUser, activeChannel])
+
 
   return (
     <AppBar position="static">
@@ -32,9 +42,9 @@ export default function Header(props) {
           open={drawerVisible}
           onClose={() => setDrawerVisible(false)}
           onOpen={() => setDrawerVisible(true)}>
-          <Sidebar channels={channels} servers={servers} setDrawerVisible={setDrawerVisible} />
+          <Sidebar setDrawerVisible={setDrawerVisible} />
         </SwipeableDrawer>
-        <Typography variant="h6"> <i className="channel-hashtag">#</i>{activeChannel.split('-')[0].toLowerCase()} </Typography>
+        <Typography variant="h6">{title} </Typography>
         <Link href="https://github.com/ericellb/React-Discord-Clone" target="_blank" style={{ color: 'white' }}>
           <Tooltip title="Check me out on Github!" className="tooltip">
             <IconButton>

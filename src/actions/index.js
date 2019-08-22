@@ -1,4 +1,4 @@
-import { NEW_MESSAGE, ADD_MESSAGE, ADD_CHANNEL, ADD_SERVER, CHANGE_SERVER, CHANGE_CHANNEL, CHANGE_VIEW, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA } from './types';
+import { NEW_MESSAGE, ADD_MESSAGE, ADD_CHANNEL, ADD_SERVER, CHANGE_SERVER, CHANGE_CHANNEL, CHANGE_VIEW, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA, CHANGE_PM_USER } from './types';
 import axios from '../components/Api/api'
 
 
@@ -43,6 +43,12 @@ export const changeChannel = (server) => ({
 export const changeView = (view) => ({
   type: CHANGE_VIEW,
   payload: view
+})
+
+// Action to change active user we have private message open with
+export const changePMUser = (user) => ({
+  type: CHANGE_PM_USER,
+  payload: user
 })
 
 // Loads user Data. Gets all Servers + Channel History

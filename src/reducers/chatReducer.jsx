@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, ADD_CHANNEL, ADD_PRIVATE_MESSAGE, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA, ADD_SERVER, CHANGE_VIEW } from '../actions/types';
+import { ADD_MESSAGE, ADD_CHANNEL, ADD_PRIVATE_MESSAGE, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA, ADD_SERVER, CHANGE_VIEW, CHANGE_PM_USER } from '../actions/types';
 
 const initialState = {
   servers: {
@@ -26,7 +26,8 @@ const initialState = {
   },
   activeServer: 'Default-FANfDprXmt',
   activeChannel: 'general-0m5vBsRnfd',
-  activeView: 'servers'
+  activeView: 'servers',
+  activePMUser: 'test'
 }
 
 export const chatReducer = (state = initialState, action) => {
@@ -106,6 +107,8 @@ export const chatReducer = (state = initialState, action) => {
       return { ...state, activeChannel: action.payload }
     case CHANGE_VIEW:
       return { ...state, activeView: action.payload }
+    case CHANGE_PM_USER:
+      return { ...state, activePMUser: action.payload }
     default:
       return { ...state };
   }

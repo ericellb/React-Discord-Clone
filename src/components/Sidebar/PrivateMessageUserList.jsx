@@ -2,7 +2,7 @@ import React from 'react'
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Slide, Button, Typography } from '@material-ui/core';
 import { Person } from '@material-ui/icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { signOut } from '../../actions';
+import { signOut, changePMUser } from '../../actions';
 
 export default function PrivateMessageUserList() {
 
@@ -18,8 +18,6 @@ export default function PrivateMessageUserList() {
     dispatch(signOut(user.userId));
   }
 
-  console.log(userList);
-
   return (
     <div className="channels-container">
       <List className="channel-list">
@@ -28,7 +26,7 @@ export default function PrivateMessageUserList() {
         </ListItem>
         {userList.map((user, i) => (
           <Slide direction="right" in={true} timeout={200 * (i + 1)} key={i}>
-            <ListItem button className="user-item">
+            <ListItem button className="user-item" onClick={() => dispatch(changePMUser(user))}>
               <Avatar> <img className="user" src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" /> </Avatar>
               <Typography variant="body1" className="user-list-name">{user}</Typography>
             </ListItem>

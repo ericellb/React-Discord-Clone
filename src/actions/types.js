@@ -7,6 +7,7 @@ export const NEW_PRIVATE_MESSAGE = 'NEW_PRIVATE_MESSAGE';
 export const CHANGE_SERVER = 'CHANGE_SERVER';
 export const CHANGE_CHANNEL = 'CHANGE_CHANNEL';
 export const CHANGE_VIEW = 'CHANGE_VIEW';
+export const CHANGE_PM_USER = 'CHANGE_PM_USER';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 export const GET_INITIAL_DATA = 'GET_INITIAL_DATA';
