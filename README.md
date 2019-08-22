@@ -10,12 +10,12 @@ API https://github.com/ericellb/React-Discord-API
 
 ## Features
   Implemented Features
-  - [x] Real time messaging in using Socket IO
+  - [x] Real time messaging using Socket IO
   - [x] Local Authentication
-  - [x] Loading of Servers / Channels / history based on per user basis
+  - [x] Loads User Data upon login (Servers, Channels, Private Messages)
   - [x] Creation and Joining Servers
   - [x] Creation of Channels in a Server
-  - [x] Server Settings (Change name)
+  - [x] Server Settings (Change name and delete)
   - [x] Channel Settings (Change name and delete)
   - [x] Persistent channel history
   - [x] Pretty Print Code Blocks enclodes in three `
