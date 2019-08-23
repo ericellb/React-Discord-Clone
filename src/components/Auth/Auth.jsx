@@ -27,6 +27,7 @@ export default function Auth() {
   const [userPassErrorMsg, setUserPassErrorMsg] = useState(false)
   const [rememberMe, setRememberMe] = useState(false);
 
+  // Shows the main modal (sets transition directions and views to visible / non visible)
   const showMain = () => {
     setMainDirection('left');
     setMainVisible(true);
@@ -52,13 +53,12 @@ export default function Auth() {
     setMainVisible(false);
   }
 
-  // Handles keypress and calls the callback method
-  const handleKeyPress = (e, callbackMethod) => {
+  // Handles and checks keypress and calls the callback method
+  const handleKeyPress = (e, callBack) => {
     if (e.key === "Enter") {
-      callbackMethod();
+      callBack();
     }
   }
-
 
   // Validates input and calls callback function
   const handleOnSubmit = (userName, userPass, callBack) => {
@@ -129,13 +129,12 @@ export default function Auth() {
     }
   }
 
-  // Renders main screen to create or login
+  // Renders options to Create or Login to account
   const renderMain = () => {
     return (
       <Slide direction={mainDirection} in={mainVisible} timeout={350} mountOnEnter unmountOnExit>
         <Grid container spacing={3} justify="center" alignItems="center">
           <Grid item sm={12} xs={12}>
-
             <Typography variant="h5" color="primary" align="center">Create an account, or sign in!</Typography>
           </Grid>
           <Grid item sm={6} xs={12}>
@@ -171,7 +170,7 @@ export default function Auth() {
     )
   }
 
-  // Renders create account form
+  // Renders the form to create an account
   const renderCreateAccount = () => {
     return (
       <Slide direction={createDirection} in={createVisible} timeout={350} mountOnEnter unmountOnExit >
@@ -220,6 +219,7 @@ export default function Auth() {
     )
   }
 
+  // Renders the form to login to account
   const renderLoginAccount = () => {
     return (
       <Slide direction={loginDirection} in={loginVisible} timeout={350} mountOnEnter unmountOnExit>

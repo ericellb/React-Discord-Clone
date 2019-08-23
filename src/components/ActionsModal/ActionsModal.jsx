@@ -6,7 +6,7 @@ import axios from '../Api/api';
 
 import { addChannel, addServer } from '../../actions';
 
-export default function CreateJoinModal(props) {
+export default function ActionsModal(props) {
 
   // Get State from Redux Store
   const { userId } = useSelector(state => state.user);
