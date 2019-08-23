@@ -18,7 +18,7 @@ export default function Sidebar(props) {
   // Dispatch
   const dispatch = useDispatch();
 
-  // Get props from parent
+  // Get props from parent (Used when Sidebar is rendered by header on mobile)
   const { setDrawerVisible } = props;
 
   // Local state
