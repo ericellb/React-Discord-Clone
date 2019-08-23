@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, ADD_CHANNEL, ADD_PRIVATE_MESSAGE, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA, ADD_SERVER, CHANGE_VIEW, CHANGE_PM_USER } from '../actions/types';
+import { RECEIVE_SOCKET_MESSAGE, RECEIVE_SOCKET_PRIVATE_MESSAGE, ADD_CHANNEL, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA, ADD_SERVER, CHANGE_VIEW, CHANGE_PM_USER } from '../actions/types';
 
 const initialState = {
   servers: {
@@ -32,7 +32,7 @@ const initialState = {
 
 export const chatReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_MESSAGE:
+    case RECEIVE_SOCKET_MESSAGE:
       let { server, channel, from, msg } = action.payload;
       return {
         ...state,
@@ -47,6 +47,27 @@ export const chatReducer = (state = initialState, action) => {
               ]
             }
           }
+        }
+      }
+    case RECEIVE_SOCKET_PRIVATE_MESSAGE:
+      if (state.privateMessages[action.payload.user]) {
+        return {
+          ...state,
+          privateMessages: {
+            ...state.privateMessages,
+            [action.payload.user]: [
+              ...state.privateMessages[action.payload.user], { from: action.payload.from, to: action.payload.to, msg: action.payload.msg }
+            ]
+          }
+        }
+      }
+      else return {
+        ...state,
+        privateMessages: {
+          ...state.privateMessages,
+          [action.payload.user]: [
+            { from: action.payload.from, to: action.payload.to, msg: action.payload.msg }
+          ]
         }
       }
     case ADD_CHANNEL:
@@ -80,27 +101,6 @@ export const chatReducer = (state = initialState, action) => {
       }
     case GET_INITIAL_DATA:
       return { ...state, servers: action.payload.servers, privateMessages: action.payload.privateMessages, activeServer: Object.keys(action.payload.servers)[0], activeChannel: Object.keys(action.payload.servers[Object.keys(action.payload.servers)[0]]["channels"])[0] };
-    case ADD_PRIVATE_MESSAGE:
-      if (state.privateMessages[action.payload.user]) {
-        return {
-          ...state,
-          privateMessages: {
-            ...state.privateMessages,
-            [action.payload.user]: [
-              ...state.privateMessages[action.payload.user], { from: action.payload.from, to: action.payload.to, msg: action.payload.msg }
-            ]
-          }
-        }
-      }
-      else return {
-        ...state,
-        privateMessages: {
-          ...state.privateMessages,
-          [action.payload.user]: [
-            { from: action.payload.from, to: action.payload.to, msg: action.payload.msg }
-          ]
-        }
-      }
     case CHANGE_SERVER:
       return { ...state, activeServer: action.payload, activeChannel: Object.keys(state.servers[action.payload]["channels"])[0] }
     case CHANGE_CHANNEL:

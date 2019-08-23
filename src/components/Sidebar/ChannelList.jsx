@@ -10,7 +10,6 @@ import axios from '../Api/api';
 
 export default function ChannelList(props) {
 
-
   // Get State from Redux Store
   const chatStore = useSelector(state => state.chat);
   const channels = Object.keys(chatStore.servers[chatStore.activeServer]["channels"]);
@@ -26,14 +25,15 @@ export default function ChannelList(props) {
   const [channelAchorEl, setChannelAchorEl] = useState(null)
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // Check if admin of active server
-  // Will render admin options for server
+  // When user or active server changes, check if we are admin
   useEffect(() => {
+    // Gets the status if we are admin of current server (allows us to change server settings)
     async function getAdmin() {
       let serverId = activeServer.split('-')[1];
       const response = await axios.get(`/server/admin?serverId=${serverId}&userId=${user.userId}`);
       setIsAdmin(response.data);
     }
+
     getAdmin();
   }, [activeServer, user])
 
@@ -45,6 +45,7 @@ export default function ChannelList(props) {
       setDrawerVisible(false)
   }
 
+  // Checks if only 1 channel, if so does not call callback to delete channel
   const handleChannelDelete = (callBack) => {
     if (channels.length === 1) {
       handleSnackMessage("Please delete the server if only 1 channel");

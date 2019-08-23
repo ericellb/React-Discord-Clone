@@ -15,8 +15,9 @@ function App() {
   // Dispatch 
   const dispatch = useDispatch();
 
+  // Check local storage if have login info
+  // Dispatch sign in action with our userId and redirect to dashboard
   const checkLocalStorageAuth = () => {
-    // Check local storage if we logged in and force login
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       dispatch(signIn(user));

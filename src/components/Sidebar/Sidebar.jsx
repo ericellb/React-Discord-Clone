@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from '@material-ui/core';
 
-import CreateJoinModal from '../Modal/CreateJoinModal';
 import SnackBarContent from '../SnackBar/SnackBarContent';
-import { loadUserData } from '../../actions';
 import PrivateMessageUserList from './PrivateMessageUserList';
 import ChannelList from './ChannelList';
 import ServerList from './ServerList';
+import ActionsModal from '../ActionsModal/ActionsModal';
+import { loadUserData } from '../../actions';
 
 export default function Sidebar(props) {
 
@@ -18,7 +18,7 @@ export default function Sidebar(props) {
   // Dispatch
   const dispatch = useDispatch();
 
-  // Get props from parent
+  // Get props from parent (Used when Sidebar is rendered by header on mobile)
   const { setDrawerVisible } = props;
 
   // Local state
@@ -53,7 +53,7 @@ export default function Sidebar(props) {
         aria-describedby="create a server"
         className="modal-wrapper"
         onClose={() => setModalVisible(false)}>
-        <CreateJoinModal handleSnackMessage={handleSnackMessage} modalType={modalType} />
+        <ActionsModal handleSnackMessage={handleSnackMessage} modalType={modalType} />
       </Modal>
       <SnackBarContent visible={snackVisible} setVisible={setSnackVisible} content={snackContent} />
     </div >

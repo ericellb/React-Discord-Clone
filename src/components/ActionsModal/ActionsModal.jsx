@@ -6,7 +6,7 @@ import axios from '../Api/api';
 
 import { addChannel, addServer } from '../../actions';
 
-export default function CreateJoinModal(props) {
+export default function ActionsModal(props) {
 
   // Get State from Redux Store
   const { userId } = useSelector(state => state.user);
@@ -30,7 +30,7 @@ export default function CreateJoinModal(props) {
 
 
   // Handles showing the Join Server window
-  const showJoinServer = () => {
+  const showhandleJoinServer = () => {
     setMainDirection('right');
     setCreateDirection('left');
     setJoinVisible(true);
@@ -38,7 +38,7 @@ export default function CreateJoinModal(props) {
   }
 
   // Handles showing the Create Server window
-  const showCreateServer = () => {
+  const showhandleCreateServer = () => {
     setMainDirection('right');
     setJoinDirection('left');
     setCreateVisible(true);
@@ -46,7 +46,7 @@ export default function CreateJoinModal(props) {
   }
 
   // Method to handle creation of servers
-  const createServer = async (serverName, userId) => {
+  const handleCreateServer = async (serverName, userId) => {
     try {
       const response = await axios.post(`/server/create?serverName=${serverName}&userId=${userId}`);
       dispatch(addServer(response.data));
@@ -59,7 +59,7 @@ export default function CreateJoinModal(props) {
   }
 
   // Method to handle joining of servers
-  const joinServer = async (serverId, userId) => {
+  const handleJoinServer = async (serverId, userId) => {
     try {
       const response = await axios.post(`/server/join?serverId=${serverId}&userId=${userId}`);
       handleSnackMessage(response.data, true);
@@ -70,7 +70,7 @@ export default function CreateJoinModal(props) {
   }
 
   // Method to handle renaming of servers
-  const renameServer = async (serverName, serverId) => {
+  const handleRenameServer = async (serverName, serverId) => {
     try {
       const response = await axios.post(`/server/rename?serverName=${serverName}&serverId=${serverId}&userId=${userId}`);
       handleSnackMessage(response.data, true);
@@ -81,7 +81,7 @@ export default function CreateJoinModal(props) {
   }
 
   // Method to handle deleting servers
-  const deleteServer = async (serverId, userId) => {
+  const handleDeleteServer = async (serverId, userId) => {
     try {
       const response = await axios.delete(`/server/delete?serverId=${serverId}&userId=${userId}`);
       handleSnackMessage(response.data, true);
@@ -92,7 +92,7 @@ export default function CreateJoinModal(props) {
   }
 
   // Method to handle creation of channels
-  const createChannel = async (channelName, server) => {
+  const handleCreateChannel = async (channelName, server) => {
     try {
       const response = await axios.post(`/channel/create?channelName=${channelName}&server=${server}&userId=${userId}`);
       dispatch(addChannel(response.data));
@@ -105,7 +105,7 @@ export default function CreateJoinModal(props) {
   }
 
   // Method to handle renaming of channels
-  const renameChannel = async (channelName, channelId) => {
+  const handleRenameChannel = async (channelName, channelId) => {
     try {
       const response = await axios.post(`/channel/rename?channelName=${channelName}&channelId=${channelId}&serverId=${activeServer.split('-')[1]}&userId=${userId}`);
       handleSnackMessage(response.data, true);
@@ -116,7 +116,7 @@ export default function CreateJoinModal(props) {
   }
 
   // Method to handle deleting of channels
-  const deleteChannel = async (channelName, channelId) => {
+  const handleDeleteChannel = async (channelName, channelId) => {
     try {
       const response = await axios.delete(`/channel/delete?channelId=${channelId}&serverId=${activeServer.split('-')[1]}&userId=${userId}`);
       handleSnackMessage(response.data, true);
@@ -146,7 +146,7 @@ export default function CreateJoinModal(props) {
           </Grid>
           <Grid item sm={6} xs={12}>
             <Card className="grid-card">
-              <CardActionArea onClick={() => showCreateServer()}>
+              <CardActionArea onClick={() => showhandleCreateServer()}>
                 <CardContent>
                   <Typography variant="h5" color="primary" gutterBottom>Create</Typography>
                   <Typography variant="body1" paragraph>Create a server and invite all your buddies.</Typography>
@@ -160,7 +160,7 @@ export default function CreateJoinModal(props) {
           </Grid>
           <Grid item sm={6} xs={12}>
             <Card className="grid-card">
-              <CardActionArea onClick={() => showJoinServer()}>
+              <CardActionArea onClick={() => showhandleJoinServer()}>
                 <CardContent>
                   <Typography variant="h5" color="secondary" gutterBottom>Join</Typography>
                   <Typography variant="body1" paragraph>Join a friends server and pwn some noobs!</Typography>
@@ -192,14 +192,14 @@ export default function CreateJoinModal(props) {
               label="Server Name"
               value={serverName}
               onChange={(e) => setServerName(e.target.value)}
-              onKeyPress={(e) => handleKeyPress(e, () => createServer(serverName, userId))}
+              onKeyPress={(e) => handleKeyPress(e, () => handleCreateServer(serverName, userId))}
               margin="dense"
               variant="outlined"
               autoComplete="off"
             />
           </Grid>
           <Grid item xs={12} className="grid-button">
-            <Button className="modal-button" variant="contained" color="primary" onClick={() => createServer(serverName, userId)}>Create Server</Button>
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => handleCreateServer(serverName, userId)}>Create Server</Button>
           </Grid>
         </Grid>
       </Slide >
@@ -221,14 +221,14 @@ export default function CreateJoinModal(props) {
               label="Channel Name"
               value={serverName}
               onChange={(e) => setServerName(e.target.value)}
-              onKeyPress={(e) => handleKeyPress(e, () => renameServer(serverName, activeServer.split('-')[1]))}
+              onKeyPress={(e) => handleKeyPress(e, () => handleRenameServer(serverName, activeServer.split('-')[1]))}
               margin="dense"
               variant="outlined"
               autoComplete="off"
             />
           </Grid>
           <Grid item xs={12} className="grid-button">
-            <Button className="modal-button" variant="contained" color="primary" onClick={() => renameServer(serverName, activeServer.split('-')[1])}>Rename Server</Button>
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => handleRenameServer(serverName, activeServer.split('-')[1])}>Rename Server</Button>
           </Grid>
         </Grid>
       </Slide >
@@ -247,7 +247,7 @@ export default function CreateJoinModal(props) {
             <Typography variant="body1" paragraph> Are you sure you want to delete - {activeServer.split('-')[0]} </Typography>
           </Grid>
           <Grid item xs={12} className="grid-button">
-            <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'green', marginRight: "8px" }} onClick={() => deleteServer(activeServer.split('-')[1], userId)}>Yes</Button>
+            <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'green', marginRight: "8px" }} onClick={() => handleDeleteServer(activeServer.split('-')[1], userId)}>Yes</Button>
             <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'red', marginLeft: "8px" }} onClick={() => handleSnackMessage('Not deleting channel', false)}>No</Button>
           </Grid>
         </Grid>
@@ -271,14 +271,14 @@ export default function CreateJoinModal(props) {
               label="Server Id"
               value={serverId}
               onChange={(e) => setServerId(e.target.value)}
-              onKeyPress={(e) => handleKeyPress(e, () => joinServer(serverId, userId))}
+              onKeyPress={(e) => handleKeyPress(e, () => handleJoinServer(serverId, userId))}
               margin="dense"
               variant="outlined"
               autoComplete="off"
             />
           </Grid>
           <Grid item xs={12} className="grid-button">
-            <Button className="modal-button" variant="contained" color="primary" onClick={() => joinServer(serverId, userId)}>Join Server</Button>
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => handleJoinServer(serverId, userId)}>Join Server</Button>
           </Grid>
         </Grid>
       </Slide >
@@ -300,14 +300,14 @@ export default function CreateJoinModal(props) {
               label="Channel Name"
               value={channelName}
               onChange={(e) => setChannelName(e.target.value)}
-              onKeyPress={(e) => handleKeyPress(e, () => createChannel(channelName, activeServer))}
+              onKeyPress={(e) => handleKeyPress(e, () => handleCreateChannel(channelName, activeServer))}
               margin="dense"
               variant="outlined"
               autoComplete="off"
             />
           </Grid>
           <Grid item xs={12} className="grid-button">
-            <Button className="modal-button" variant="contained" color="primary" onClick={() => createChannel(channelName, activeServer)}>Create Channel</Button>
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => handleCreateChannel(channelName, activeServer)}>Create Channel</Button>
           </Grid>
         </Grid>
       </Slide >
@@ -329,14 +329,14 @@ export default function CreateJoinModal(props) {
               label="Channel Name"
               value={channelName}
               onChange={(e) => setChannelName(e.target.value)}
-              onKeyPress={(e) => handleKeyPress(e, () => renameChannel(channelName, activeChannel.split('-')[1]))}
+              onKeyPress={(e) => handleKeyPress(e, () => handleRenameChannel(channelName, activeChannel.split('-')[1]))}
               margin="dense"
               variant="outlined"
               autoComplete="off"
             />
           </Grid>
           <Grid item xs={12} className="grid-button">
-            <Button className="modal-button" variant="contained" color="primary" onClick={() => renameChannel(channelName, activeChannel.split('-')[1])}>Rename Channel</Button>
+            <Button className="modal-button" variant="contained" color="primary" onClick={() => handleRenameChannel(channelName, activeChannel.split('-')[1])}>Rename Channel</Button>
           </Grid>
         </Grid>
       </Slide >
@@ -355,7 +355,7 @@ export default function CreateJoinModal(props) {
             <Typography variant="body1" paragraph> Are you sure you want to delete - {activeChannel.split('-')[0]} </Typography>
           </Grid>
           <Grid item xs={12} className="grid-button">
-            <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'green', marginRight: "8px" }} onClick={() => deleteChannel(channelName, activeChannel.split('-')[1])}>Yes</Button>
+            <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'green', marginRight: "8px" }} onClick={() => handleDeleteChannel(channelName, activeChannel.split('-')[1])}>Yes</Button>
             <Button className="modal-button" variant="contained" color="primary" style={{ backgroundColor: 'red', marginLeft: "8px" }} onClick={() => handleSnackMessage('Not deleting channel', false)}>No</Button>
           </Grid>
         </Grid>

@@ -4,11 +4,22 @@ import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Fade, Popover, Ci
 import Code from 'react-code-prettify';
 import UserInfo from '../UserInfo/UserInfo';
 
-export default function ChannelMessages() {
+export default function Messages() {
 
-  // Get State from Redux Store
+  // Get States from Redux Store
   const chatStore = useSelector(state => state.chat);
   const { activeServer, activeChannel, activeView, activePMUser } = chatStore;
+
+  // Local states
+  const [userInfoVisible, setUserInfoVisible] = useState(false);
+  const [messageIndex, setMessageIndex] = useState(12);
+  const [loadMessages, setLoadMessages] = useState(false);
+  const [userName, setUserName] = useState(null)
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  // ref to message container (for keeping scroll to bottom of chat)
+  let messageContainerBottomRef;
+  let messageContainerRef;
 
   // Get message list from channel or from specific user
   let messages = null;
@@ -19,63 +30,26 @@ export default function ChannelMessages() {
   }
   else {
     messages = chatStore.privateMessages[activePMUser];
-    // Some hacky stuff because API always responds with null message if none in channel
+    // If no messages need to make empty array
     if (messages === undefined) {
       messages = [];
-      messages.push({ from: null, to: null, msg: null });
     }
     messagesLength = messages.length;
   }
 
-  // Local state for user popover
-  const [userInfoVisible, setUserInfoVisible] = useState(false);
-  const [messageIndex, setMessageIndex] = useState(12);
-  const [loadMessages, setLoadMessages] = useState(false);
-  const [userName, setUserName] = useState(null)
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  // ref to message container
-  let messageContainerBottomRef;
-  let messageContainerRef;
-
-  // Scroll bottom of page 
+  // Scroll to bottom of container if were not loading new messages
   useEffect(() => {
-    // Keep scroll on bottom
     if (!loadMessages)
       messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' })
-    else {
+    else
       messageContainerRef.scroll(0, 56);
-    }
-  })
-
-  // On mount scroll to bottom
-  useEffect(() => {
-    messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' })
-  }, [messageContainerBottomRef]);
+  }, [messageContainerBottomRef, messageContainerRef, loadMessages, messages]);
 
   // Checks is message is a code block
   const isTextCodeBlock = (message) => {
     if (message.startsWith("```") && message.endsWith("```"))
       return true;
     else return false;
-  }
-
-  // Formats the code block
-  const formatCode = (message) => {
-    return message.split('```')[1];
-  }
-
-  // Handles clicks for setting anchor
-  const handleUserClick = (e, userName) => {
-    setUserName(userName);
-    setUserInfoVisible(true);
-    setAnchorEl(e.currentTarget);
-  }
-
-  // Closes popup
-  const handlePopoverClose = () => {
-    setUserInfoVisible(false);
-    setAnchorEl(null);
   }
 
   // Handles to load more messages when scroll at top
@@ -99,6 +73,24 @@ export default function ChannelMessages() {
     }
   }
 
+  // Formats the code block
+  const formatCode = (message) => {
+    return message.split('```')[1];
+  }
+
+  // Handles clicks for setting anchor to User Info (To private message)
+  const handleUserClick = (e, userName) => {
+    setUserName(userName);
+    setUserInfoVisible(true);
+    setAnchorEl(e.currentTarget);
+  }
+
+  // Closes popup of User Info
+  const handlePopoverClose = () => {
+    setUserInfoVisible(false);
+    setAnchorEl(null);
+  }
+
   return (
     <div className="messages-container" onScroll={(e) => handleScrollTop(e)} ref={(element) => messageContainerRef = element}>
       {messagesLength >= messageIndex ?
@@ -107,26 +99,24 @@ export default function ChannelMessages() {
         </div>
         : null}
       <List>
-        {messages.slice(messagesLength - messageIndex, messagesLength).map((message, i) => {
+        {messages !== null ? messages.slice(messagesLength - messageIndex, messagesLength).map((message, i) => {
           // Filter for null messages (dummy message on backend should fix...)
-          if (message.msg !== null)
-            return (
-              <Fade in={true} timeout={500}>
-                <ListItem className="message" key={i}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <img className="user" onClick={(e) => handleUserClick(e, message.from)} src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
-                    </Avatar>
-                  </ListItemAvatar>
-                  {isTextCodeBlock(message.msg)
-                    ? <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from}</div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
-                    : <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from}</div>} secondary={message.msg} className="message-text" />
-                  }
-                </ListItem>
-              </Fade>
-            )
-          else return null;
-        })}
+          return (
+            <Fade in={true} timeout={500}>
+              <ListItem className="message" key={i}>
+                <ListItemAvatar>
+                  <Avatar>
+                    <img className="user" onClick={(e) => handleUserClick(e, message.from)} src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
+                  </Avatar>
+                </ListItemAvatar>
+                {isTextCodeBlock(message.msg)
+                  ? <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from}</div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
+                  : <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from}</div>} secondary={message.msg} className="message-text" />
+                }
+              </ListItem>
+            </Fade>
+          )
+        }) : null}
       </List>
       <div ref={(element) => messageContainerBottomRef = element}></div>
       <Popover

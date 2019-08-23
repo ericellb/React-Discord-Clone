@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 
 import { useDispatch } from 'react-redux';
-import { newMessage, newPrivateMessage } from '../../actions';
+import { sendMessage, sendPrivateMessage } from '../../actions';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import 'emoji-mart/css/emoji-mart.css'
@@ -28,11 +28,9 @@ export default function SendMessage(props) {
   useEffect(() => {
     if (activeView === "servers") {
       setPlaceholderTitle(activeChannel.split('-')[0]);
-
     }
     else if (activeView === "home") {
       setPlaceholderTitle(activePMUser);
-
     }
   }, [activeView, activeChannel, activePMUser])
 
@@ -42,9 +40,9 @@ export default function SendMessage(props) {
     if (message.msg.trim() !== "") {
       // Send message to server, or user
       if (activeView === "servers")
-        dispatch(newMessage(message));
+        dispatch(sendMessage(message));
       else if (activeView === "home") {
-        dispatch(newPrivateMessage(message));
+        dispatch(sendPrivateMessage(message));
       }
       setChatMessage("");
     }

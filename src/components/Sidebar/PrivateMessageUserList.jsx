@@ -13,7 +13,7 @@ export default function PrivateMessageUserList() {
   const dispatch = useDispatch();
 
   // Signs the user out
-  const handleSignout = () => {
+  const handleSignOut = () => {
     localStorage.clear("user");
     dispatch(signOut(user.userId));
   }
@@ -42,7 +42,7 @@ export default function PrivateMessageUserList() {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary={user.userName} />
-          <Button onClick={handleSignout}>Sign out</Button>
+          <Button onClick={handleSignOut}>Sign out</Button>
         </ListItem>
       </div>
     </div>
