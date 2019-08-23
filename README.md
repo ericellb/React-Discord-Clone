@@ -25,6 +25,7 @@ API https://github.com/ericellb/React-Discord-API
   - [x] Private messaging
 
   Planned Features
+  - [ ] Timestamps for messages
   - [ ] Show current active users in given channel
   - [ ] Reformat how messages are fetched 
       - Fetch messages on channel change
