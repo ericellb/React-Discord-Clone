@@ -8,7 +8,7 @@ import createHashHistory from '../../history';
 import Sidebar from '../Sidebar/Sidebar';
 import SendMessage from '../SendMessage/SendMessage';
 import Header from '../Header/Header';
-import ChannelMessages from '../Messages/ChannelMessages';
+import Messages from '../Messages/Messages';
 
 export default function Dashboard() {
 
@@ -38,7 +38,7 @@ export default function Dashboard() {
 
         <div className="messages-grid">
           <Header />
-          <ChannelMessages />
+          <Messages />
         </div>
 
         <div className="send-messages-grid">

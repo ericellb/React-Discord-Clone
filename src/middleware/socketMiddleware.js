@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-import { NEW_MESSAGE, ADD_MESSAGE, NEW_PRIVATE_MESSAGE, ADD_PRIVATE_MESSAGE, SIGN_IN } from '../actions/types';
+import { SEND_SOCKET_MESSAGE, RECEIVE_SOCKET_MESSAGE, SEND_SOCKET_PRIVATE_MESSAGE, SIGN_IN, RECEIVE_SOCKET_PRIVATE_MESSAGE } from '../actions/types';
 
 export const socketMiddleware = (baseUrl) => {
   return storeAPI => {
@@ -11,7 +11,7 @@ export const socketMiddleware = (baseUrl) => {
 
     // Check actions and emit from socket if needed
     return next => action => {
-      if (action.type === NEW_MESSAGE) {
+      if (action.type === SEND_SOCKET_MESSAGE) {
         socket.emit('simple-chat-new-message', action.payload);
         return;
       }
@@ -20,7 +20,7 @@ export const socketMiddleware = (baseUrl) => {
         listener.off();
         listener = setupSocketListener(action.payload.userId, socket, storeAPI);
       }
-      else if (action.type === NEW_PRIVATE_MESSAGE) {
+      else if (action.type === SEND_SOCKET_PRIVATE_MESSAGE) {
         socket.emit('simple-chat-new-private-message', action.payload);
         return;
       }
@@ -39,13 +39,13 @@ function setupSocketListener(userId, socket, storeAPI) {
     // Check for action type
     if (action.type === "message") {
       storeAPI.dispatch({
-        type: ADD_MESSAGE,
+        type: RECEIVE_SOCKET_MESSAGE,
         payload: action.payload
       });
     }
     else if (action.type === "private-message") {
       storeAPI.dispatch({
-        type: ADD_PRIVATE_MESSAGE,
+        type: RECEIVE_SOCKET_PRIVATE_MESSAGE,
         payload: action.payload
       })
     }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Typography, makeStyles, TextField } from '@material-ui/core';
-import { newPrivateMessage, changeView } from '../../actions';
+import { sendPrivateMessage, changeView, changePMUser } from '../../actions';
 
 const useStyle = makeStyles(theme => ({
   card: {
@@ -47,10 +47,11 @@ export default function UserInfo(props) {
   }
 
   // Calls API to send a Private message
-  const sendPrivateMessage = (messageText, userName) => {
+  const handleSendPrivateMessage = (messageText, userName) => {
     const msg = { "from": user.userName, "msg": messageText, "to": userName };
-    dispatch(newPrivateMessage(msg));
+    dispatch(sendPrivateMessage(msg));
     dispatch(changeView('home'));
+    dispatch(changePMUser(msg.to));
     setUserInfoVisible(false);
   }
 
@@ -67,7 +68,7 @@ export default function UserInfo(props) {
           placeholder={`Message @ ${userName}`}
           value={messageText}
           onChange={(e) => setMessageText(e.target.value)}
-          onKeyPress={(e) => handleKeyPress(e, () => sendPrivateMessage(messageText, userName))}
+          onKeyPress={(e) => handleKeyPress(e, () => handleSendPrivateMessage(messageText, userName))}
           variant="outlined"
           InputProps={{
             className: classes.input
