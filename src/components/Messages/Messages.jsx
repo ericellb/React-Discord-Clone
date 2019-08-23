@@ -4,9 +4,9 @@ import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Fade, Popover, Ci
 import Code from 'react-code-prettify';
 import UserInfo from '../UserInfo/UserInfo';
 
-export default function ChannelMessages() {
+export default function Messages() {
 
-  // Get State from Redux Store
+  // Get States from Redux Store
   const chatStore = useSelector(state => state.chat);
   const { activeServer, activeChannel, activeView, activePMUser } = chatStore;
 
@@ -22,36 +22,28 @@ export default function ChannelMessages() {
     // Some hacky stuff because API always responds with null message if none in channel
     if (messages === undefined) {
       messages = [];
-      messages.push({ from: null, to: null, msg: null });
     }
     messagesLength = messages.length;
   }
 
-  // Local state for user popover
+  // Local states
   const [userInfoVisible, setUserInfoVisible] = useState(false);
   const [messageIndex, setMessageIndex] = useState(12);
   const [loadMessages, setLoadMessages] = useState(false);
   const [userName, setUserName] = useState(null)
   const [anchorEl, setAnchorEl] = useState(null);
 
-  // ref to message container
+  // ref to message container (for keeping scroll to bottom of chat)
   let messageContainerBottomRef;
   let messageContainerRef;
 
-  // Scroll bottom of page 
+  // Scroll to bottom of container if were not loading new messages
   useEffect(() => {
-    // Keep scroll on bottom
     if (!loadMessages)
       messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' })
-    else {
+    else
       messageContainerRef.scroll(0, 56);
-    }
-  })
-
-  // On mount scroll to bottom
-  useEffect(() => {
-    messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' })
-  }, [messageContainerBottomRef]);
+  }, [messageContainerBottomRef, messageContainerRef, loadMessages, messages]);
 
   // Checks is message is a code block
   const isTextCodeBlock = (message) => {
@@ -65,14 +57,14 @@ export default function ChannelMessages() {
     return message.split('```')[1];
   }
 
-  // Handles clicks for setting anchor
+  // Handles clicks for setting anchor to User Info (To private message)
   const handleUserClick = (e, userName) => {
     setUserName(userName);
     setUserInfoVisible(true);
     setAnchorEl(e.currentTarget);
   }
 
-  // Closes popup
+  // Closes popup of User Info
   const handlePopoverClose = () => {
     setUserInfoVisible(false);
     setAnchorEl(null);
@@ -107,26 +99,24 @@ export default function ChannelMessages() {
         </div>
         : null}
       <List>
-        {messages.slice(messagesLength - messageIndex, messagesLength).map((message, i) => {
+        {messages !== null ? messages.slice(messagesLength - messageIndex, messagesLength).map((message, i) => {
           // Filter for null messages (dummy message on backend should fix...)
-          if (message.msg !== null)
-            return (
-              <Fade in={true} timeout={500}>
-                <ListItem className="message" key={i}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <img className="user" onClick={(e) => handleUserClick(e, message.from)} src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
-                    </Avatar>
-                  </ListItemAvatar>
-                  {isTextCodeBlock(message.msg)
-                    ? <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from}</div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
-                    : <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from}</div>} secondary={message.msg} className="message-text" />
-                  }
-                </ListItem>
-              </Fade>
-            )
-          else return null;
-        })}
+          return (
+            <Fade in={true} timeout={500}>
+              <ListItem className="message" key={i}>
+                <ListItemAvatar>
+                  <Avatar>
+                    <img className="user" onClick={(e) => handleUserClick(e, message.from)} src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
+                  </Avatar>
+                </ListItemAvatar>
+                {isTextCodeBlock(message.msg)
+                  ? <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from}</div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
+                  : <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from}</div>} secondary={message.msg} className="message-text" />
+                }
+              </ListItem>
+            </Fade>
+          )
+        }) : null}
       </List>
       <div ref={(element) => messageContainerBottomRef = element}></div>
       <Popover
