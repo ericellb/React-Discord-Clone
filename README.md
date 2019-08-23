@@ -1,12 +1,15 @@
-## React Discord Clone
+# React Discord Clone
+> Functional Discord Clone using React, Socket IO, NodeJS, Express and MySQL
 
-Originally started off on a test project for learning Functional Components, Hooks and Socket IO, ended up being a Discord Clone.
 
-
-Live Version http://ericellb.github.io/React-Discord-Clone
-API https://github.com/ericellb/React-Discord-API
+Originally started off on a test project for learning Functional Components, Hooks and Socket IO, ended up being a Discord Clone. 
 
 ![layout image](public/readmepic.png)
+
+Live Version http://ericellb.github.io/React-Discord-Clone
+
+API https://github.com/ericellb/React-Discord-API
+
 
 ## Features
   Implemented Features
@@ -21,6 +24,16 @@ API https://github.com/ericellb/React-Discord-API
   - [x] Pretty Print Code Blocks enclodes in three `
   - [x] Private messaging
 
-  Todo
-  - [ ] Thinking of more features...
+  Planned Features
+  - [ ] Show current active users in given channel
+  - [ ] Reformat how messages are fetched 
+      - Fetch messages on channel change
+      - Make API return only X results until we ask for more
+      - Will help scale once Image uploads are implemented
   - [ ] Voice Chat down the road...
+
+
+## Lisence
+Copyright Eric Ellbogen 2019
+
+- This project is under the **GNU V3** license. [Find it here](https://github.com/ericellb/React-Discord-Clone/blob/master/LICENSE).
