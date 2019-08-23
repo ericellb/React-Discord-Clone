@@ -10,22 +10,6 @@ export default function Messages() {
   const chatStore = useSelector(state => state.chat);
   const { activeServer, activeChannel, activeView, activePMUser } = chatStore;
 
-  // Get message list from channel or from specific user
-  let messages = null;
-  let messagesLength = null;
-  if (activeView === "servers") {
-    messages = chatStore.servers[activeServer]["channels"][activeChannel];
-    messagesLength = messages.length;
-  }
-  else {
-    messages = chatStore.privateMessages[activePMUser];
-    // Some hacky stuff because API always responds with null message if none in channel
-    if (messages === undefined) {
-      messages = [];
-    }
-    messagesLength = messages.length;
-  }
-
   // Local states
   const [userInfoVisible, setUserInfoVisible] = useState(false);
   const [messageIndex, setMessageIndex] = useState(12);
@@ -36,6 +20,22 @@ export default function Messages() {
   // ref to message container (for keeping scroll to bottom of chat)
   let messageContainerBottomRef;
   let messageContainerRef;
+
+  // Get message list from channel or from specific user
+  let messages = null;
+  let messagesLength = null;
+  if (activeView === "servers") {
+    messages = chatStore.servers[activeServer]["channels"][activeChannel];
+    messagesLength = messages.length;
+  }
+  else {
+    messages = chatStore.privateMessages[activePMUser];
+    // If no messages need to make empty array
+    if (messages === undefined) {
+      messages = [];
+    }
+    messagesLength = messages.length;
+  }
 
   // Scroll to bottom of container if were not loading new messages
   useEffect(() => {
@@ -50,24 +50,6 @@ export default function Messages() {
     if (message.startsWith("```") && message.endsWith("```"))
       return true;
     else return false;
-  }
-
-  // Formats the code block
-  const formatCode = (message) => {
-    return message.split('```')[1];
-  }
-
-  // Handles clicks for setting anchor to User Info (To private message)
-  const handleUserClick = (e, userName) => {
-    setUserName(userName);
-    setUserInfoVisible(true);
-    setAnchorEl(e.currentTarget);
-  }
-
-  // Closes popup of User Info
-  const handlePopoverClose = () => {
-    setUserInfoVisible(false);
-    setAnchorEl(null);
   }
 
   // Handles to load more messages when scroll at top
@@ -89,6 +71,24 @@ export default function Messages() {
         }, 400)
       }
     }
+  }
+
+  // Formats the code block
+  const formatCode = (message) => {
+    return message.split('```')[1];
+  }
+
+  // Handles clicks for setting anchor to User Info (To private message)
+  const handleUserClick = (e, userName) => {
+    setUserName(userName);
+    setUserInfoVisible(true);
+    setAnchorEl(e.currentTarget);
+  }
+
+  // Closes popup of User Info
+  const handlePopoverClose = () => {
+    setUserInfoVisible(false);
+    setAnchorEl(null);
   }
 
   return (

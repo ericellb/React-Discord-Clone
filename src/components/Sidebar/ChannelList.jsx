@@ -27,15 +27,16 @@ export default function ChannelList(props) {
 
   // When user or active server changes, check if we are admin
   useEffect(() => {
+    // Gets the status if we are admin of current server (allows us to change server settings)
+    async function getAdmin() {
+      let serverId = activeServer.split('-')[1];
+      const response = await axios.get(`/server/admin?serverId=${serverId}&userId=${user.userId}`);
+      setIsAdmin(response.data);
+    }
+
     getAdmin();
   }, [activeServer, user])
 
-  // Gets the status if we are admin of current server (allows us to change server settings)
-  async function getAdmin() {
-    let serverId = activeServer.split('-')[1];
-    const response = await axios.get(`/server/admin?serverId=${serverId}&userId=${user.userId}`);
-    setIsAdmin(response.data);
-  }
 
   // Handle channel change, and closes drawer if on mobile view
   const handleChannelChange = (channel) => {
