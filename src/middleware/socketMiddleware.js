@@ -12,16 +12,16 @@ export const socketMiddleware = (baseUrl) => {
     // Check actions and emit from socket if needed
     return next => action => {
       if (action.type === SEND_SOCKET_MESSAGE) {
-        socket.emit('simple-chat-new-message', action.payload);
+        socket.emit('simple-chat-message', action.payload);
         return;
       }
       else if (action.type === SIGN_IN) {
-        socket.emit('simple-chat-userId', action.payload.userId);
+        socket.emit('simple-chat-sign-in', action.payload.userId);
         listener.off();
         listener = setupSocketListener(action.payload.userId, socket, storeAPI);
       }
       else if (action.type === SEND_SOCKET_PRIVATE_MESSAGE) {
-        socket.emit('simple-chat-new-private-message', action.payload);
+        socket.emit('simple-chat-private-message', action.payload);
         return;
       }
 
