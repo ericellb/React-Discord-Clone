@@ -110,8 +110,8 @@ export default function Messages() {
                   </Avatar>
                 </ListItemAvatar>
                 {isTextCodeBlock(message.msg)
-                  ? <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from}</div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
-                  : <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from}</div>} secondary={message.msg} className="message-text" />
+                  ? <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}</div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
+                  : <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}</div>} secondary={message.msg} className="message-text" />
                 }
               </ListItem>
             </Fade>
