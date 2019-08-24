@@ -82,7 +82,7 @@ export default function Auth() {
   }
 
   // Handles creation of account and calls sign in action
-  const createAccount = async (userName, userPass) => {
+  const handleCreateAccount = async (userName, userPass) => {
     try {
       // encode username and userpass - it may have # $ & + ,  / : ; = ? @ [ ]
       userName = encodeURIComponent(userName);
@@ -105,7 +105,7 @@ export default function Auth() {
   }
 
   // Handles login of account and calls sign in action
-  const loginAccount = async (userName, userPass) => {
+  const handleLoginAccount = async (userName, userPass) => {
     // encode username and userpass - it may have # $ & + ,  / : ; = ? @ [ ]
     userName = encodeURIComponent(userName);
     userPass = encodeURIComponent(userPass);
@@ -190,7 +190,7 @@ export default function Auth() {
               margin="dense"
               autoComplete="off"
               variant="outlined"
-              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass)))}
+              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => handleCreateAccount(userName, userPass)))}
             />
           </Grid>
           <Grid item xs={12} className="grid-textfield">
@@ -205,14 +205,14 @@ export default function Auth() {
               margin="dense"
               autoComplete="off"
               variant="outlined"
-              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass)))}
+              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => handleCreateAccount(userName, userPass)))}
             />
           </Grid>
           <Grid item xs={12} className="grid-button">
             <div>
               Remember Me <Checkbox value={rememberMe} onChange={((e) => setRememberMe(e.target.checked))} />
             </div>
-            <Button variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => createAccount(userName, userPass))}>Create</Button>
+            <Button variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => handleCreateAccount(userName, userPass))}>Create</Button>
           </Grid>
         </Grid>
       </Slide >
@@ -239,7 +239,7 @@ export default function Auth() {
               margin="dense"
               autoComplete="off"
               variant="outlined"
-              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass)))}
+              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => handleLoginAccount(userName, userPass)))}
             />
           </Grid>
           <Grid item xs={12} className="grid-textfield">
@@ -254,14 +254,14 @@ export default function Auth() {
               margin="dense"
               autoComplete="off"
               variant="outlined"
-              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass)))}
+              onKeyPress={(e) => handleKeyPress(e, () => handleOnSubmit(userName, userPass, () => handleLoginAccount(userName, userPass)))}
             />
           </Grid>
           <Grid item xs={12} className="grid-button">
             <div>
               Remember Me <Checkbox vale={rememberMe} onChange={((e) => setRememberMe(e.target.checked))} />
             </div>
-            <Button className="modal-login-button" variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => loginAccount(userName, userPass))}>Login</Button>
+            <Button className="modal-login-button" variant="contained" color="primary" onClick={() => handleOnSubmit(userName, userPass, () => handleLoginAccount(userName, userPass))}>Login</Button>
           </Grid>
         </Grid>
       </Slide >
