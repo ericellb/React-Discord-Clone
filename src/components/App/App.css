@@ -193,8 +193,15 @@ body {
   color: white;
 }
 
-.user {
+.message-user {
   display: inline;
+}
+
+.message-date {
+  display: inline;
+  color: grey;
+  font-size: 13px;
+  padding-left: 4px;
 }
 
 .user:hover {
