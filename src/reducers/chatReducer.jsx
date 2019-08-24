@@ -100,7 +100,7 @@ export const chatReducer = (state = initialState, action) => {
         }
       }
     case GET_INITIAL_DATA:
-      return { ...state, servers: action.payload.servers, privateMessages: action.payload.privateMessages, activeServer: Object.keys(action.payload.servers)[0], activeChannel: "gaming-p9DnvvrfWo" };
+      return { ...state, servers: action.payload.servers, privateMessages: action.payload.privateMessages, activeServer: "Default-FANfDprXmt", activeChannel: "gaming-p9DnvvrfWo" };
     case CHANGE_SERVER:
       return { ...state, activeServer: action.payload, activeChannel: Object.keys(state.servers[action.payload]["channels"])[0] }
     case CHANGE_CHANNEL:

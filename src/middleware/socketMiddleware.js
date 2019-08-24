@@ -25,7 +25,6 @@ export const socketMiddleware = (baseUrl) => {
         return;
       }
 
-
       return next(action);
     }
   }
