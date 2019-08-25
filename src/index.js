@@ -8,10 +8,9 @@ import { socketMiddleware } from './middleware/socketMiddleware';
 
 import reducers from './reducers'
 
-const baseUrl = (process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com');
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk, socketMiddleware(baseUrl))));
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk, socketMiddleware(process.env.REACT_APP_API_URL))));
 
 ReactDOM.render(
   <Provider store={store}>

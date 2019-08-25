@@ -4,6 +4,9 @@
 
 Originally started off on a test project for learning Functional Components, Hooks and Socket IO, ended up being a Discord Clone. 
 
+### Important 
+If you need to use my backend api change the env variable `REACT_APP_API_URL` in `.env` to `https://simple-chat-apix.herokuapp.com`
+
 ![layout image](public/readmepic.png)
 
 Live Version http://ericellb.github.io/React-Discord-Clone
