@@ -41,8 +41,10 @@ export default function Messages() {
   useEffect(() => {
     if (!loadMessages)
       messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' })
-    else
+    else {
+      setLoadMessages(false);
       messageContainerRef.scroll(0, 56);
+    }
   }, [messageContainerBottomRef, messageContainerRef, loadMessages, messages]);
 
   // Checks is message is a code block
