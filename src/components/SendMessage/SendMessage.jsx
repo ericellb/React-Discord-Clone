@@ -34,10 +34,27 @@ export default function SendMessage(props) {
     }
   }, [activeView, activeChannel, activePMUser])
 
+
+  // Checks is message is valid (not just spaces)
+  function isValidMessage(message) {
+    let validMessage = true;
+    // Check if empty stirng
+    if (message.msg.trim() !== "")
+      validMessage = false;
+    return validMessage;
+  }
+
+  // Will format out multiple line breaks to 2 max
+  function formatMessage(message) {
+    console.log(message);
+    return message.replace(/(\r\n|\r|\n){3,}/g, '$1\n\n');
+  }
+
   // Handles submission of messages
   // Dispatches event and sets TextField value to empty
   function handleSubmit(message) {
-    if (message.msg.trim() !== "") {
+    if (isValidMessage) {
+      message.msg = formatMessage(message.msg);
       // Send message to server, or user
       if (activeView === "servers")
         dispatch(sendMessage(message));
@@ -45,6 +62,9 @@ export default function SendMessage(props) {
         dispatch(sendPrivateMessage(message));
       }
       setChatMessage("");
+    }
+    else {
+      // throw some error
     }
   }
 

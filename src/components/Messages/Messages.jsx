@@ -107,9 +107,9 @@ export default function Messages() {
           return (
             <Fade in={true} timeout={500}>
               <ListItem className="message" key={i}>
-                <ListItemAvatar>
+                <ListItemAvatar className="message-user-icon">
                   <Avatar>
-                    <img className="message-user" onClick={(e) => handleUserClick(e, message.from)} src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
+                    <img onClick={(e) => handleUserClick(e, message.from)} src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
                   </Avatar>
                 </ListItemAvatar>
                 {isTextCodeBlock(message.msg)

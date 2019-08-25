@@ -198,6 +198,12 @@ body {
   cursor: pointer;
 }
 
+.message-user-icon {
+  display: inline;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
 .message-user:hover {
   text-decoration: underline;
 }
