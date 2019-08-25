@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f25af1c645ce52a7f8924031e0770381",
+    "revision": "46a2267a389913b047239f56576d636f",
     "url": "/React-Discord-Clone/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/React-Discord-Clone/static/css/2.b0f64131.chunk.css"
   },
   {
-    "revision": "eb4af08217df9390d995",
+    "revision": "992b8bcbe165b8863d6d",
     "url": "/React-Discord-Clone/static/css/main.7df17ae2.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/React-Discord-Clone/static/js/2.11d0e945.chunk.js"
   },
   {
-    "revision": "eb4af08217df9390d995",
-    "url": "/React-Discord-Clone/static/js/main.ea1818c4.chunk.js"
+    "revision": "992b8bcbe165b8863d6d",
+    "url": "/React-Discord-Clone/static/js/main.9e2fea2f.chunk.js"
   },
   {
     "revision": "3caa7863fd9455193c9a",
