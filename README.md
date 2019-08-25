@@ -35,7 +35,7 @@ API https://github.com/ericellb/React-Discord-API
   - [ ] Voice Chat down the road...
 
 
-## Lisence
+## License
 Copyright Eric Ellbogen 2019
 
 - This project is under the **GNU V3** license. [Find it here](https://github.com/ericellb/React-Discord-Clone/blob/master/LICENSE).
