@@ -106,12 +106,12 @@ export default function Messages() {
               <ListItem className="message" key={i}>
                 <ListItemAvatar>
                   <Avatar>
-                    <img className="user" onClick={(e) => handleUserClick(e, message.from)} src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
+                    <img className="message-user" onClick={(e) => handleUserClick(e, message.from)} src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
                   </Avatar>
                 </ListItemAvatar>
                 {isTextCodeBlock(message.msg)
-                  ? <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}</div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
-                  : <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}</div>} secondary={message.msg} className="message-text" />
+                  ? <ListItemText primary={<div className="message-user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}</div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
+                  : <ListItemText primary={<div className="message-user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}</div>} secondary={message.msg} className="message-text" />
                 }
               </ListItem>
             </Fade>

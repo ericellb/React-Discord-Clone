@@ -195,6 +195,11 @@ body {
 
 .message-user {
   display: inline;
+  cursor: pointer;
+}
+
+.message-user:hover {
+  text-decoration: underline;
 }
 
 .message-date {
