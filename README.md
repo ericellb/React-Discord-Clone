@@ -23,14 +23,15 @@ API https://github.com/ericellb/React-Discord-API
   - [x] Persistent channel history
   - [x] Pretty Print Code Blocks enclodes in three `
   - [x] Private messaging
+  - [x] Timestamps for messages
 
   Planned Features
-  - [ ] Timestamps for messages
   - [ ] Show current active users in given channel
   - [ ] Reformat how messages are fetched 
       - Fetch messages on channel change
       - Make API return only X results until we ask for more
       - Will help scale once Image uploads are implemented
+  - [ ] Convert to Typescript
   - [ ] Voice Chat down the road...
 
 
