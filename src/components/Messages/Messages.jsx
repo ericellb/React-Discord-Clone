@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Fade, Popover, CircularProgress } from '@material-ui/core';
+import moment from 'moment';
 import Code from 'react-code-prettify';
 import UserInfo from '../UserInfo/UserInfo';
 
@@ -112,8 +113,8 @@ export default function Messages() {
                   </Avatar>
                 </ListItemAvatar>
                 {isTextCodeBlock(message.msg)
-                  ? <ListItemText primary={<div className="message-user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}</div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
-                  : <ListItemText primary={<div className="message-user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}</div>} secondary={message.msg} className="message-text" />
+                  ? <ListItemText primary={<div className="message-user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}<div className="message-date">{` - ${moment(message.date).format('LLL')}`}</div></div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
+                  : <ListItemText primary={<div className="message-user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}<div className="message-date">{` - ${moment(message.date).format('LLL')}`}</div></div>} secondary={message.msg} className="message-text" />
                 }
               </ListItem>
             </Fade>
