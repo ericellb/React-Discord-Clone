@@ -1,4 +1,4 @@
-import { SEND_SOCKET_MESSAGE, RECEIVE_SOCKET_MESSAGE, ADD_CHANNEL, ADD_SERVER, CHANGE_SERVER, CHANGE_CHANNEL, CHANGE_VIEW, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA, CHANGE_PM_USER, SEND_SOCKET_PRIVATE_MESSAGE, RECEIVE_SOCKET_PRIVATE_MESSAGE, UPDATE_ACTIVE_USERS } from './types';
+import { SEND_SOCKET_MESSAGE, RECEIVE_SOCKET_MESSAGE, ADD_CHANNEL, ADD_SERVER, CHANGE_SERVER, CHANGE_CHANNEL, CHANGE_VIEW, SIGN_IN, SIGN_OUT, GET_INITIAL_DATA, CHANGE_PM_USER, SEND_SOCKET_PRIVATE_MESSAGE, RECEIVE_SOCKET_PRIVATE_MESSAGE, UPDATE_ACTIVE_USERS, UPDATE_ACTIVE_STATE } from './types';
 import axios from '../components/Api/api'
 
 
@@ -39,14 +39,20 @@ export const addServer = (data) => ({
 })
 
 // Get active user list in given server
-export const getActiveUsers = (server) => async dispatch => {
+export const updateActiveUserList = (server) => async dispatch => {
   const response = await axios.get(`/server/activeusers?serverId=${server}`);
   dispatch({ type: UPDATE_ACTIVE_USERS, payload: response.data });
 }
 
+// Action creator to update active state (socket middleware)
+export const updateActiveState = (userId) => ({
+  type: UPDATE_ACTIVE_STATE,
+  payload: userId
+});
+
 // Action to change the current Active Server
 export const changeServer = (server) => dispatch => {
-  dispatch(getActiveUsers(server.split('-')[1]));
+  dispatch(updateActiveUserList(server.split('-')[1]));
   dispatch({ type: CHANGE_SERVER, payload: server })
 };
 
@@ -68,12 +74,13 @@ export const changePMUser = (user) => ({
   payload: user
 })
 
+
 // Loads user Data. Gets all Servers + Channel History
 export const loadUserData = (userId) => async dispatch => {
   let url = `/user/data?userId=${userId}`;
   const res = await axios.get(url);
   // get active user list for first server
-  dispatch(getActiveUsers(Object.keys(res.data.servers)[0].split('-')[1]));
+  dispatch(updateActiveUserList(Object.keys(res.data.servers)[0].split('-')[1]));
   dispatch({ type: GET_INITIAL_DATA, payload: res.data });
 };
 

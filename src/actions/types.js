@@ -10,6 +10,7 @@ export const CHANGE_CHANNEL = 'CHANGE_CHANNEL';
 export const CHANGE_VIEW = 'CHANGE_VIEW';
 export const CHANGE_PM_USER = 'CHANGE_PM_USER';
 export const UPDATE_ACTIVE_USERS = 'UPDATE_ACTIVE_USERS';
+export const UPDATE_ACTIVE_STATE = 'UPDATE_ACTIVE_STATE';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 export const GET_INITIAL_DATA = 'GET_INITIAL_DATA';

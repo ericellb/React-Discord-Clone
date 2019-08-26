@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-import { SEND_SOCKET_MESSAGE, RECEIVE_SOCKET_MESSAGE, SEND_SOCKET_PRIVATE_MESSAGE, SIGN_IN, RECEIVE_SOCKET_PRIVATE_MESSAGE, GET_INITIAL_DATA, ADD_SERVER } from '../actions/types';
+import { SEND_SOCKET_MESSAGE, RECEIVE_SOCKET_MESSAGE, SEND_SOCKET_PRIVATE_MESSAGE, SIGN_IN, RECEIVE_SOCKET_PRIVATE_MESSAGE, GET_INITIAL_DATA, ADD_SERVER, UPDATE_ACTIVE_STATE } from '../actions/types';
 
 export const socketMiddleware = (baseUrl) => {
   return storeAPI => {
@@ -50,6 +50,11 @@ export const socketMiddleware = (baseUrl) => {
         socket.emit('subscribe', serverId);
       }
 
+      // Updates our active state on server
+      if (action.type === UPDATE_ACTIVE_STATE) {
+        socket.emit('ping');
+      }
+
       return next(action);
     }
   }
@@ -73,15 +78,6 @@ function setupSocketListener(socket, storeAPI) {
         payload: action.payload
       })
     }
-
-    // Ping server every 5 minutes to update our active status
-    const updateActiveStatus = () => {
-      socket.emit('ping');
-      setTimeout(updateActiveStatus, 5 * 60000);
-    }
-
-    // Do first call manually
-    updateActiveStatus();
 
   });
 }
