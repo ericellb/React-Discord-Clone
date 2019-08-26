@@ -11,6 +11,10 @@ body {
   justify-content: space-between;
 }
 
+.appbar {
+  box-shadow: 0px 3px 2px -2px black !important;
+}
+
 
 /* Scrollbar */
 
@@ -313,15 +317,43 @@ body {
     flex-wrap: nowrap;
 }
 
+/* Active User List */
+.users-list {
+  width: 100%;
+  padding-top: 0 !important;
+  overflow-y: auto;
+  font-family: "Roboto";
+}
+
+.users-list-title {
+  background: #36393E;
+  height: 64px;
+  font-size: 18px;
+}
+
+.user-list-item {
+  padding: 1.5em;
+  box-sizing: border-box;
+}
+
+.user-list-online {
+  width: 10px;
+  height: 10px;
+  background: #15df0a;
+  position: absolute;
+  border-radius: 50%;
+  bottom: 6px;
+  right: 4px;
+}
 
 
 /* MEDIA QUERIES FOR DESKTOP */
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 90px) {
 
   .grid-container {
     height: 100%;
     display: grid;
-    grid-template-columns: 340px 1fr 1fr 1fr 1fr;
+    grid-template-columns: 340px 1fr 1fr 1fr 250px;
     grid-template-rows: 1fr 1.5fr 0.3fr;
     grid-template-areas: "Sidebar Messages Messages Messages User-List" "Sidebar Messages Messages Messages User-List" "Sidebar Send-Messages Send-Messages Send-Messages User-List";
   }
@@ -335,7 +367,7 @@ body {
 
 /* MEDIA QUERIES FOR MOBILE */
 
-@media only screen and (max-width: 799px) {
+@media only screen and (max-width: 899px) {
   .grid-container {
     height: 100%;
     display: grid;
@@ -356,6 +388,10 @@ body {
   }
 
   .title-container {
+    height: 56px;
+  }
+
+  .users-list-title {
     height: 56px;
   }
 

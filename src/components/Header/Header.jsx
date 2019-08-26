@@ -34,7 +34,7 @@ export default function Header() {
 
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className="appbar">
       <Toolbar className="navbar">
         <IconButton edge="start" color="inherit" aria-label="menu" className="menu-burger-button" onClick={() => setSideBarDrawerVisible(true)}>
           <MenuIcon />
