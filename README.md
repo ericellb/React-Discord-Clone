@@ -4,7 +4,7 @@
 
 Originally started off on a test project for learning Functional Components, Hooks and Socket IO, ended up being a Discord Clone. 
 
-![layout image](public/application.png)
+![layout image](public/app.png)
 
 Live Version http://ericellb.github.io/React-Discord-Clone
 
