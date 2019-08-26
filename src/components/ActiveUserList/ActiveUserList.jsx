@@ -1,11 +1,30 @@
-import React from 'react'
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@material-ui/core';
+import React, { useState } from 'react'
+import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Popover } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import UserInfo from '../UserInfo/UserInfo';
 
 export default function ActiveUserList() {
 
   // Get user list from redux store
   const { activeUserList } = useSelector(state => state.chat);
+
+  // Local state
+  const [userInfoVisible, setUserInfoVisible] = useState(false);
+  const [userName, setUserName] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  // Handles clicks for setting anchor to User Info (To private message)
+  const handleUserClick = (e, userName) => {
+    setUserName(userName);
+    setUserInfoVisible(true);
+    setAnchorEl(e.currentTarget);
+  }
+
+  // Closes popup of User Info
+  const handlePopoverClose = () => {
+    setUserInfoVisible(false);
+    setAnchorEl(null);
+  }
 
   return (
     <div className="user-list-container">
@@ -14,7 +33,7 @@ export default function ActiveUserList() {
 
         {activeUserList.map((user) => {
           return (
-            <ListItem button className="user-list-item">
+            <ListItem button className="user-list-item" onClick={(e) => handleUserClick(e, user.user_name)}>
               <ListItemAvatar className="message-user-icon">
                 <Avatar>
                   <img src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
@@ -28,6 +47,19 @@ export default function ActiveUserList() {
 
 
       </List>
+
+      <Popover
+        id="user-info"
+        open={userInfoVisible}
+        anchorEl={anchorEl}
+        onClose={handlePopoverClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right'
+        }}
+      >
+        <UserInfo userName={userName} setUserInfoVisible={setUserInfoVisible} />
+      </Popover>
     </div>
   )
 }
