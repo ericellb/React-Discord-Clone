@@ -8,7 +8,7 @@ export default function ActiveUserList() {
   const { activeUserList } = useSelector(state => state.chat);
 
   return (
-    <div className="users-container">
+    <div className="user-list-container">
       <List className="users-list">
         <ListItem className="users-list-title"> Active Users </ListItem>
 

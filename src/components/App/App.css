@@ -318,6 +318,10 @@ body {
 }
 
 /* Active User List */
+
+.user-list-container {
+  width: 250px;
+}
 .users-list {
   width: 100%;
   padding-top: 0 !important;
@@ -359,7 +363,6 @@ body {
     grid-template-areas: "Sidebar Messages Messages Messages User-List" "Sidebar Messages Messages Messages User-List" "Sidebar Send-Messages Send-Messages Send-Messages User-List";
   }
   
-
   .menu-burger-button {
     display: none !important;
   }
