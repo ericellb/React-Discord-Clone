@@ -4,7 +4,7 @@
 
 Originally started off on a test project for learning Functional Components, Hooks and Socket IO, ended up being a Discord Clone. 
 
-![layout image](public/readmepic.png)
+![layout image](public/application.png)
 
 Live Version http://ericellb.github.io/React-Discord-Clone
 
@@ -24,9 +24,9 @@ API https://github.com/ericellb/React-Discord-API
   - [x] Pretty Print Code Blocks enclodes in three `
   - [x] Private messaging
   - [x] Timestamps for messages
+  - [x] Show current active users in given server
 
   Planned Features
-  - [ ] Show current active users in given channel
   - [ ] Reformat how messages are fetched 
       - Fetch messages on channel change
       - Make API return only X results until we ask for more
