@@ -9,6 +9,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import SendMessage from '../SendMessage/SendMessage';
 import Header from '../Header/Header';
 import Messages from '../Messages/Messages';
+import ActiveUserList from '../ActiveUserList/ActiveUserList';
 
 export default function Dashboard() {
 
@@ -39,6 +40,10 @@ export default function Dashboard() {
         <div className="messages-grid">
           <Header />
           <Messages />
+        </div>
+
+        <div className="user-list-grid">
+          <ActiveUserList />
         </div>
 
         <div className="send-messages-grid">

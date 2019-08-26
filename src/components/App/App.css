@@ -16,8 +16,8 @@ body {
 
 
 ::-webkit-scrollbar { width: 14px; height: 18px;}
-::-webkit-scrollbar-track { background-clip: padding-box; background-color: #2f3136; border-radius: 10px;}
-::-webkit-scrollbar-thumb { border: 3px solid rgba(0,0,0,0); background-clip: padding-box; background-color: #0e0f0f; border-radius: 10px;}
+::-webkit-scrollbar-track { background-clip: padding-box; border-radius: 10px;}
+::-webkit-scrollbar-thumb { border: 4px solid rgba(0,0,0,0); background-clip: padding-box; background-color: #0e0f0f; border-radius: 10px;}
 ::-webkit-scrollbar-button { width: 0; height: 0; display: none;}
 
 
@@ -43,6 +43,12 @@ body {
   justify-content: center;
 }
 
+
+.user-list-grid { 
+  grid-area: User-List; 
+  background: #2f3136;
+  color: white;
+}
 
 /* Sidebar.jsx */
 .sidebar-container {
@@ -310,15 +316,16 @@ body {
 
 
 /* MEDIA QUERIES FOR DESKTOP */
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 800px) {
 
   .grid-container {
     height: 100%;
     display: grid;
-    grid-template-columns: 340px 1fr 1fr 1fr;
+    grid-template-columns: 340px 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1.5fr 0.3fr;
-    grid-template-areas: "Sidebar Messages Messages Messages" "Sidebar Messages Messages Messages" "Sidebar Send-Messages Send-Messages Send-Messages";
+    grid-template-areas: "Sidebar Messages Messages Messages User-List" "Sidebar Messages Messages Messages User-List" "Sidebar Send-Messages Send-Messages Send-Messages User-List";
   }
+  
 
   .menu-burger-button {
     display: none !important;
@@ -328,13 +335,17 @@ body {
 
 /* MEDIA QUERIES FOR MOBILE */
 
-@media only screen and (max-width: 599px) {
+@media only screen and (max-width: 799px) {
   .grid-container {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1.7fr 0.1fr;
     grid-template-areas: "Messages" "Send-Messages";
+  }
+
+  .user-list-grid {
+    display: none;
   }
 
   .sidebar-container {
