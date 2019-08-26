@@ -34,8 +34,8 @@ export default function Dashboard() {
   // Ping server every 5 minutes to update our active status
   // Also fetches new list of active users in activeServer
   const updateActiveStatus = () => {
-    dispatch(updateActiveState);
-    dispatch(updateActiveUserList(activeServer));
+    dispatch(updateActiveState());
+    dispatch(updateActiveUserList(activeServer.split('-')[1]));
     setTimeout(updateActiveStatus, 5 * 60000);
   }
 
