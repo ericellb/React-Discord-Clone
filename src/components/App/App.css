@@ -320,7 +320,7 @@ body {
 /* Active User List */
 
 .user-list-container {
-  width: 250px;
+  width: 230px;
 }
 .users-list {
   width: 100%;
@@ -358,7 +358,7 @@ body {
   .grid-container {
     height: 100%;
     display: grid;
-    grid-template-columns: 340px 1fr 1fr 1fr 250px;
+    grid-template-columns: 340px 1fr 1fr 1fr 230px;
     grid-template-rows: 1fr 1.5fr 0.3fr;
     grid-template-areas: "Sidebar Messages Messages Messages User-List" "Sidebar Messages Messages Messages User-List" "Sidebar Send-Messages Send-Messages Send-Messages User-List";
   }
