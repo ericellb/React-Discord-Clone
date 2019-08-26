@@ -349,7 +349,7 @@ body {
 
 
 /* MEDIA QUERIES FOR DESKTOP */
-@media only screen and (min-width: 90px) {
+@media only screen and (min-width: 900px) {
 
   .grid-container {
     height: 100%;
