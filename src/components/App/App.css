@@ -329,6 +329,7 @@ body {
   background: #36393E;
   height: 64px;
   font-size: 18px;
+  box-shadow: 0 2px 0 0 #202225;
 }
 
 .user-list-item {
