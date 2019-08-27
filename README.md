@@ -13,6 +13,10 @@ API https://github.com/ericellb/React-Discord-API
 ### Important 
 If you need to use my backend api change the env variable `REACT_APP_API_URL` in `.env` to `https://simple-chat-apix.herokuapp.com`
 
+
+### Important 
+If you need to use my backend api change the env variable `REACT_APP_API_URL` in `.env` to `https://simple-chat-apix.herokuapp.com`
+
 ## Features
   Implemented Features
   - [x] Real time messaging using Socket IO
