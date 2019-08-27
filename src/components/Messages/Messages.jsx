@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText, Fade, Popover, CircularProgress } from '@material-ui/core';
+import moment from 'moment';
 import Code from 'react-code-prettify';
 import UserInfo from '../UserInfo/UserInfo';
 
@@ -41,8 +42,10 @@ export default function Messages() {
   useEffect(() => {
     if (!loadMessages)
       messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' })
-    else
+    else {
+      setLoadMessages(false);
       messageContainerRef.scroll(0, 56);
+    }
   }, [messageContainerBottomRef, messageContainerRef, loadMessages, messages]);
 
   // Checks is message is a code block
@@ -104,14 +107,14 @@ export default function Messages() {
           return (
             <Fade in={true} timeout={500}>
               <ListItem className="message" key={i}>
-                <ListItemAvatar>
+                <ListItemAvatar className="message-user-icon">
                   <Avatar>
-                    <img className="user" onClick={(e) => handleUserClick(e, message.from)} src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
+                    <img onClick={(e) => handleUserClick(e, message.from)} src={process.env.PUBLIC_URL + "/user.png"} alt="user icon" height="48" />
                   </Avatar>
                 </ListItemAvatar>
                 {isTextCodeBlock(message.msg)
-                  ? <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}</div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
-                  : <ListItemText primary={<div className="user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}</div>} secondary={message.msg} className="message-text" />
+                  ? <ListItemText primary={<div className="message-user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}<div className="message-date">{` - ${moment(message.date).format('LLL')}`}</div></div>} secondary={<Code codeString={formatCode(message.msg)} />} className="message-text" />
+                  : <ListItemText primary={<div className="message-user" onClick={(e) => handleUserClick(e, message.from)}>{message.from.toLowerCase()}<div className="message-date">{` - ${moment(message.date).format('LLL')}`}</div></div>} secondary={message.msg} className="message-text" />
                 }
               </ListItem>
             </Fade>

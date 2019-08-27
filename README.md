@@ -4,15 +4,18 @@
 
 Originally started off on a test project for learning Functional Components, Hooks and Socket IO, ended up being a Discord Clone. 
 
-### Important 
-If you need to use my backend api change the env variable `REACT_APP_API_URL` in `.env` to `https://simple-chat-apix.herokuapp.com`
-
-![layout image](public/readmepic.png)
+![layout image](public/app.png)
 
 Live Version http://ericellb.github.io/React-Discord-Clone
 
 API https://github.com/ericellb/React-Discord-API
 
+### Important 
+If you need to use my backend api change the env variable `REACT_APP_API_URL` in `.env` to `https://simple-chat-apix.herokuapp.com`
+
+
+### Important 
+If you need to use my backend api change the env variable `REACT_APP_API_URL` in `.env` to `https://simple-chat-apix.herokuapp.com`
 
 ## Features
   Implemented Features
@@ -26,18 +29,19 @@ API https://github.com/ericellb/React-Discord-API
   - [x] Persistent channel history
   - [x] Pretty Print Code Blocks enclodes in three `
   - [x] Private messaging
+  - [x] Timestamps for messages
+  - [x] Show current active users in given server
 
   Planned Features
-  - [ ] Timestamps for messages
-  - [ ] Show current active users in given channel
   - [ ] Reformat how messages are fetched 
       - Fetch messages on channel change
       - Make API return only X results until we ask for more
       - Will help scale once Image uploads are implemented
+  - [ ] Convert to Typescript
   - [ ] Voice Chat down the road...
 
 
-## Lisence
+## License
 Copyright Eric Ellbogen 2019
 
 - This project is under the **GNU V3** license. [Find it here](https://github.com/ericellb/React-Discord-Clone/blob/master/LICENSE).

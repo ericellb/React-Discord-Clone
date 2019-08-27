@@ -51,7 +51,7 @@ export default function UserInfo(props) {
     const msg = { "from": user.userName, "msg": messageText, "to": userName };
     dispatch(sendPrivateMessage(msg));
     dispatch(changeView('home'));
-    dispatch(changePMUser(msg.to));
+    dispatch(changePMUser(msg.to.toLowerCase()));
     setUserInfoVisible(false);
   }
 

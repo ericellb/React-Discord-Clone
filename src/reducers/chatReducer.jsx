@@ -1,4 +1,4 @@
-import { RECEIVE_SOCKET_MESSAGE, RECEIVE_SOCKET_PRIVATE_MESSAGE, ADD_CHANNEL, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA, ADD_SERVER, CHANGE_VIEW, CHANGE_PM_USER } from '../actions/types';
+import { RECEIVE_SOCKET_MESSAGE, RECEIVE_SOCKET_PRIVATE_MESSAGE, ADD_CHANNEL, CHANGE_SERVER, CHANGE_CHANNEL, GET_INITIAL_DATA, ADD_SERVER, CHANGE_VIEW, CHANGE_PM_USER, UPDATE_ACTIVE_USERS } from '../actions/types';
 
 const initialState = {
   servers: {
@@ -16,16 +16,14 @@ const initialState = {
         ],
         "/b/-Ry06VYrX3x": [
         ]
-      },
-      "activeUsers": [
-
-      ]
+      }
     }
   },
   privateMessages: {
   },
   activeServer: 'Default-FANfDprXmt',
   activeChannel: 'general-0m5vBsRnfd',
+  activeUserList: [],
   activeView: 'servers',
   activePMUser: 'none'
 }
@@ -109,6 +107,8 @@ export const chatReducer = (state = initialState, action) => {
       return { ...state, activeView: action.payload, activePMUser: Object.keys(state.privateMessages)[0] }
     case CHANGE_PM_USER:
       return { ...state, activePMUser: action.payload }
+    case UPDATE_ACTIVE_USERS:
+      return { ...state, activeUserList: action.payload }
     default:
       return { ...state };
   }

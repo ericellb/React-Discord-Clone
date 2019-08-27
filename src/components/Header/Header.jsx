@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { SwipeableDrawer, SvgIcon, Link, Tooltip } from '@material-ui/core';
 
 import Sidebar from '../Sidebar/Sidebar';
+import ActiveUserList from '../ActiveUserList/ActiveUserList';
 
 export default function Header() {
 
@@ -17,7 +18,8 @@ export default function Header() {
   const { activeChannel, activePMUser, activeView } = chatStore;
 
   // Local state
-  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [sideBarDrawerVisible, setSideBarDrawerVisible] = useState(false);
+  const [userListDrawerVisible, setUserListDrawerVisible] = useState(false);
   const [title, setTitle] = useState(null);
 
   // On active view change change title
@@ -32,17 +34,24 @@ export default function Header() {
 
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className="appbar">
       <Toolbar className="navbar">
-        <IconButton edge="start" color="inherit" aria-label="menu" className="menu-burger-button" onClick={() => setDrawerVisible(true)}>
+        <IconButton edge="start" color="inherit" aria-label="menu" className="menu-burger-button" onClick={() => setSideBarDrawerVisible(true)}>
           <MenuIcon />
         </IconButton>
         <SwipeableDrawer
           anchor="left"
-          open={drawerVisible}
-          onClose={() => setDrawerVisible(false)}
-          onOpen={() => setDrawerVisible(true)}>
-          <Sidebar setDrawerVisible={setDrawerVisible} />
+          open={sideBarDrawerVisible}
+          onClose={() => setSideBarDrawerVisible(false)}
+          onOpen={() => setSideBarDrawerVisible(true)}>
+          <Sidebar setDrawerVisible={sideBarDrawerVisible} />
+        </SwipeableDrawer>
+        <SwipeableDrawer
+          anchor="right"
+          open={userListDrawerVisible}
+          onClose={() => setUserListDrawerVisible(false)}
+          onOpen={() => setUserListDrawerVisible(true)}>
+          <ActiveUserList setDrawerVisible={setUserListDrawerVisible} />
         </SwipeableDrawer>
         <Typography variant="h6">{title} </Typography>
         <Link href="https://github.com/ericellb/React-Discord-Clone" target="_blank" style={{ color: 'white' }}>
