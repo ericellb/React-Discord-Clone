@@ -11,8 +11,8 @@ interface UserStore {
 const initialState = {
   isSignedIn: false,
   isAdmin: false,
-  userId: null,
-  userName: null
+  userId: '',
+  userName: ''
 };
 
 export const userReducer = (state = initialState, action: AnyAction) => {

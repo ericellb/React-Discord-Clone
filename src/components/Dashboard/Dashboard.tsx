@@ -9,12 +9,21 @@ import SendMessage from '../SendMessage/SendMessage';
 import Header from '../Header/Header';
 import Messages from '../Messages/Messages';
 import ActiveUserList from '../ActiveUserList/ActiveUserList';
+import { StoreState } from '../../reducers';
 
 export default function Dashboard() {
   // Get State from Redux Store
-  const user = useSelector((state: any) => state.user);
-  const { activeServer } = useSelector((state: any) => state.chat);
+  const user = useSelector((state: StoreState) => state.user);
+  const { activeServer } = useSelector((state: StoreState) => state.chat);
   const dispatch = useDispatch();
+
+  // Ping server every 5 minutes to update our active status
+  // Also fetches new list of active users in activeServer
+  const updateActiveStatus = () => {
+    dispatch(updateActiveState());
+    dispatch(updateActiveUserList(activeServer.split('-')[1]));
+    setTimeout(updateActiveStatus, 5 * 60000);
+  };
 
   // Listens for changes on isSignedIn
   // Gets initial user data upon change
@@ -33,14 +42,6 @@ export default function Dashboard() {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     console.log(vh);
   });
-
-  // Ping server every 5 minutes to update our active status
-  // Also fetches new list of active users in activeServer
-  const updateActiveStatus = () => {
-    dispatch(updateActiveState());
-    dispatch(updateActiveUserList(activeServer.split('-')[1]));
-    setTimeout(updateActiveStatus, 5 * 60000);
-  };
 
   return (
     <div className="dashboard">

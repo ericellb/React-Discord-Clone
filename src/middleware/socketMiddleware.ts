@@ -1,14 +1,16 @@
 import io from 'socket.io-client';
 
 import { ACTION } from '../actions/types';
+import { Dispatch } from 'react';
+import { AnyAction, MiddlewareAPI } from 'redux';
 
-export const socketMiddleware = baseUrl => {
-  return storeAPI => {
+export const socketMiddleware = (baseUrl: string) => {
+  return (storeAPI: MiddlewareAPI) => {
     let socket = io(baseUrl);
     let listener = null;
 
     // Check actions and emit from socket if needed
-    return next => action => {
+    return (next: Dispatch<AnyAction>) => (action: AnyAction) => {
       // Send message over socket
       if (action.type === ACTION.SEND_SOCKET_MESSAGE) {
         socket.emit('simple-chat-message', action.payload);
@@ -32,9 +34,9 @@ export const socketMiddleware = baseUrl => {
       if (action.type === ACTION.GET_INITIAL_DATA) {
         // Get list of server Ids (used for "room" names on socket server)
         let servers = Object.keys(action.payload.servers);
-        let serverIds = [];
+        let serverIds: string[] = [];
         servers.forEach((server, i) => {
-          serverIds[i] = servers[i].split('-')[1];
+          serverIds[i] = server.split('-')[1];
         });
 
         // Subscribe to each server (Creates a room on socket io)
@@ -62,8 +64,8 @@ export const socketMiddleware = baseUrl => {
 // Listens on socket with our userId
 // Listens to socket server for specific events for messages / private messages
 // TODO listen for listen for types of Server + payload of message
-function setupSocketListener(socket, storeAPI) {
-  return socket.on('update', action => {
+function setupSocketListener(socket: SocketIOClient.Socket, storeAPI: MiddlewareAPI) {
+  return socket.on('update', (action: AnyAction) => {
     // Check for action type
     if (action.type === 'message') {
       storeAPI.dispatch({

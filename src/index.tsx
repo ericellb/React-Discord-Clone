@@ -10,7 +10,7 @@ import { socketMiddleware } from './middleware/socketMiddleware';
 
 const store = createStore(
   reducers,
-  composeWithDevTools(applyMiddleware(thunk, socketMiddleware(process.env.REACT_APP_API_URL)))
+  composeWithDevTools(applyMiddleware(thunk, socketMiddleware(process.env.REACT_APP_API_URL || '')))
 );
 
 ReactDOM.render(
