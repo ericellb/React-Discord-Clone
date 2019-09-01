@@ -23,12 +23,7 @@ const initialState = {
   servers: {
     'Default-FANfDprXmt': {
       channels: {
-        'general-0m5vBsRnfd': [],
-        'gaming-p9DnvvrfWo': [],
-        'programming-aRoD4umYpb': [],
-        'cooking-v88UngJkiD': [],
-        'misc-uSje5DwUH0': [],
-        '/b/-Ry06VYrX3x': []
+        'general-0m5vBsRnfd': []
       }
     }
   },
@@ -108,15 +103,14 @@ export const chatReducer = (state: ChatStore = initialState, action: AnyAction) 
         ...state,
         servers: action.payload.servers,
         privateMessages: action.payload.privateMessages,
-        activeServer: 'Default-FANfDprXmt',
-        activeChannel: 'gaming-p9DnvvrfWo'
+        activeServer: Object.keys(action.payload.servers)[0],
+        activeChannel: Object.keys(state.servers[Object.keys(action.payload.servers)[0]].channels)[0]
       };
     case ACTION.CHANGE_SERVER:
-      let tempActiveServer = action.payload;
       return {
         ...state,
         activeServer: action.payload,
-        activeChannel: Object.keys(state.servers[tempActiveServer].channels)[0]
+        activeChannel: Object.keys(state.servers[action.payload].channels)[0]
       };
     case ACTION.CHANGE_CHANNEL:
       return { ...state, activeChannel: action.payload };
