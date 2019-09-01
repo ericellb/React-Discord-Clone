@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { HashRouter, Route } from 'react-router-dom';
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
 import './App.css';
@@ -11,19 +11,18 @@ import { signIn } from '../../actions';
 import createHashHistory from '../../history';
 
 function App() {
-
-  // Dispatch 
+  // Dispatch
   const dispatch = useDispatch();
 
   // Check local storage if have login info
   // Dispatch sign in action with our userId and redirect to dashboard
   const checkLocalStorageAuth = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('user')!);
     if (user) {
       dispatch(signIn(user));
       createHashHistory.push('/dashboard');
     }
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,13 +37,11 @@ function App() {
 
 export default App;
 
-
-
 const theme = createMuiTheme({
   overrides: {
     MuiTooltip: {
       tooltip: {
-        fontSize: "14px",
+        fontSize: '14px',
         backgroundColor: 'black'
       }
     },
@@ -71,11 +68,10 @@ const theme = createMuiTheme({
     }
   },
   typography: {
-    "fontFamily": "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
-    "fontSize": 14,
-    "fontWeightLight": 400,
-    "fontWeightRegular": 500,
-    "fontWeightMedium": 600
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontSize: 14,
+    fontWeightLight: 400,
+    fontWeightRegular: 500,
+    fontWeightMedium: 600
   }
-
 });
