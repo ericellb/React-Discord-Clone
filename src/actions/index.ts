@@ -46,9 +46,9 @@ export const updateActiveUserList = (serverId: string) => async (dispatch: Thunk
 };
 
 // Action creator to update active state (socket middleware)
-export const updateActiveState = (userId: string) => ({
+export const updateActiveState = () => ({
   type: ACTION.UPDATE_ACTIVE_STATE,
-  payload: userId
+  payload: null
 });
 
 // Action to change the current Active Server

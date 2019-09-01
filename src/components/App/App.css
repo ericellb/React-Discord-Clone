@@ -2,7 +2,6 @@ body {
   margin: 0;
 }
 
-
 /* Header.jsx */
 
 .navbar {
@@ -15,41 +14,56 @@ body {
   box-shadow: 0px 3px 2px -2px black !important;
 }
 
-
 /* Scrollbar */
 
-
-::-webkit-scrollbar { width: 14px; height: 18px;}
-::-webkit-scrollbar-track { background-clip: padding-box; border-radius: 10px;}
-::-webkit-scrollbar-thumb { border: 4px solid rgba(0,0,0,0); background-clip: padding-box; background-color: #0e0f0f; border-radius: 10px;}
-::-webkit-scrollbar-button { width: 0; height: 0; display: none;}
-
-
+::-webkit-scrollbar {
+  width: 14px;
+  height: 18px;
+}
+::-webkit-scrollbar-track {
+  background-clip: padding-box;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  background-color: #0e0f0f;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
 
 /* Dashboard */
 
-.sidebar-grid { 
-  grid-area: Sidebar; 
-  box-shadow: inset -2px 0px 10px -4px rgba(0,0,0,0.75);
+.dashboard {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 }
 
-.messages-grid { 
-  grid-area: Messages; 
+.sidebar-grid {
+  grid-area: Sidebar;
+  box-shadow: inset -2px 0px 10px -4px rgba(0, 0, 0, 0.75);
+}
+
+.messages-grid {
+  grid-area: Messages;
   position: relative;
-  background: #36393E;
+  background: #36393e;
 }
 
-.send-messages-grid { 
+.send-messages-grid {
   grid-area: Send-Messages;
-  background: #36393E;
+  background: #36393e;
   position: relative;
   display: flex;
   justify-content: center;
 }
 
-
-.user-list-grid { 
-  grid-area: User-List; 
+.user-list-grid {
+  grid-area: User-List;
   background: #2f3136;
   color: white;
 }
@@ -104,10 +118,9 @@ body {
   position: absolute;
   left: 0;
   bottom: 0;
-  height  : 1px;
+  height: 1px;
   border-bottom: 2px solid grey;
   width: 80%;
-
 }
 
 .channel-list {
@@ -123,7 +136,7 @@ body {
   display: flex;
   align-items: center;
   font-size: 18px;
-  font-family: "Roboto";
+  font-family: 'Roboto';
   justify-content: space-between !important;
 }
 
@@ -131,7 +144,6 @@ body {
   display: flex;
   justify-content: space-between !important;
 }
-
 
 .channel-item:hover .channel-settings {
   display: inline-block !important;
@@ -165,7 +177,6 @@ body {
   margin-left: 1em !important;
 }
 
-
 /* Messages.jsx */
 .messages-container {
   bottom: 0px;
@@ -193,9 +204,9 @@ body {
 
 .progress-container {
   display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 .channel-title {
@@ -256,14 +267,14 @@ body {
 
 .message-text-area {
   background: #484b52;
-    width: 100%;
-    resize: none;
-    color: white;
-    border-radius: 4px;
-    padding: 1em;
-    font-family: "Roboto";
-    font-size: 15px;
-    border: 1px solid #484b52;
+  width: 100%;
+  resize: none;
+  color: white;
+  border-radius: 4px;
+  padding: 1em;
+  font-family: 'Roboto';
+  font-size: 15px;
+  border: 1px solid #484b52;
 }
 
 .message-text-area:focus {
@@ -287,7 +298,6 @@ body {
 .emoji-mart {
   border-radius: 0px !important;
 }
-
 
 .send-message-emoji-menu {
   position: fixed;
@@ -314,7 +324,7 @@ body {
   box-sizing: border-box;
   position: relative;
   display: flex;
-    flex-wrap: nowrap;
+  flex-wrap: nowrap;
 }
 
 /* Active User List */
@@ -326,11 +336,11 @@ body {
   width: 100%;
   padding-top: 0 !important;
   overflow-y: auto;
-  font-family: "Roboto";
+  font-family: 'Roboto';
 }
 
 .users-list-title {
-  background: #36393E;
+  background: #36393e;
   height: 64px;
   font-size: 18px;
   box-shadow: 0 2px 0 0 #202225;
@@ -351,23 +361,20 @@ body {
   right: 4px;
 }
 
-
 /* MEDIA QUERIES FOR DESKTOP */
 @media only screen and (min-width: 900px) {
-
   .grid-container {
     height: 100%;
     display: grid;
     grid-template-columns: 340px 1fr 1fr 1fr 230px;
     grid-template-rows: 1fr 1.5fr 0.3fr;
-    grid-template-areas: "Sidebar Messages Messages Messages User-List" "Sidebar Messages Messages Messages User-List" "Sidebar Send-Messages Send-Messages Send-Messages User-List";
+    grid-template-areas: 'Sidebar Messages Messages Messages User-List' 'Sidebar Messages Messages Messages User-List' 'Sidebar Send-Messages Send-Messages Send-Messages User-List';
   }
-  
+
   .menu-burger-button {
     display: none !important;
   }
 }
-
 
 /* MEDIA QUERIES FOR MOBILE */
 
@@ -377,7 +384,7 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1.7fr 0.1fr;
-    grid-template-areas: "Messages" "Send-Messages";
+    grid-template-areas: 'Messages' 'Send-Messages';
   }
 
   .user-list-grid {
@@ -402,7 +409,6 @@ body {
   .send-message-emoji-button {
     display: none !important;
   }
-
 }
 
 /* Emoji Mart */
@@ -414,7 +420,6 @@ body {
   display: none;
 }
 
-
 /* Auth.jsx */
 .auth-wrapper {
   height: calc(100vh);
@@ -423,7 +428,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 
 /* Material UI Grid Fixes */
 .grid-card {

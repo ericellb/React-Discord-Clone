@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { loadUserData, updateActiveState, updateActiveUserList } from '../../actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import Div100vh from 'react-div-100vh';
 
 import createHashHistory from '../../history';
 import Sidebar from '../Sidebar/Sidebar';
@@ -12,10 +11,9 @@ import Messages from '../Messages/Messages';
 import ActiveUserList from '../ActiveUserList/ActiveUserList';
 
 export default function Dashboard() {
-
   // Get State from Redux Store
-  const user = useSelector(state => state.user);
-  const { activeServer } = useSelector(state => state.chat);
+  const user = useSelector((state: any) => state.user);
+  const { activeServer } = useSelector((state: any) => state.chat);
   const dispatch = useDispatch();
 
   // Listens for changes on isSignedIn
@@ -23,13 +21,18 @@ export default function Dashboard() {
   useEffect(() => {
     if (!user.isSignedIn) {
       createHashHistory.push('/');
-    }
-    else {
+    } else {
       dispatch(loadUserData(user.userId));
       updateActiveStatus();
     }
+  }, [dispatch, user.isSignedIn, user.userId]);
 
-  }, [dispatch, user.isSignedIn, user.userId])
+  // Watches viewport height (fix for mobile address bar size)
+  window.addEventListener('resize', () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    console.log(vh);
+  });
 
   // Ping server every 5 minutes to update our active status
   // Also fetches new list of active users in activeServer
@@ -37,13 +40,11 @@ export default function Dashboard() {
     dispatch(updateActiveState());
     dispatch(updateActiveUserList(activeServer.split('-')[1]));
     setTimeout(updateActiveStatus, 5 * 60000);
-  }
-
+  };
 
   return (
-    <Div100vh>
+    <div className="dashboard">
       <div className="grid-container">
-
         <div className="sidebar-grid">
           <Sidebar />
         </div>
@@ -60,8 +61,7 @@ export default function Dashboard() {
         <div className="send-messages-grid">
           <SendMessage />
         </div>
-
-      </div >
-    </Div100vh>
-  )
+      </div>
+    </div>
+  );
 }

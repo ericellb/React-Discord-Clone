@@ -1,6 +1,13 @@
 import { ACTION } from '../actions/types';
 import { AnyAction } from 'redux';
 
+interface UserStore {
+  isSignedIn: boolean;
+  isAdmin: boolean;
+  userId: string;
+  userName: string;
+}
+
 const initialState = {
   isSignedIn: false,
   isAdmin: false,
