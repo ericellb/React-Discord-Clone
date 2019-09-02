@@ -31,7 +31,6 @@ export default function SendMessage() {
 
   // Checks is message is valid (not just spaces)
   function isValidMessage(msg: string) {
-    console.log(msg);
     let validMessage = true;
     // Check if empty stirng
     if (msg.trim() === '') validMessage = false;
@@ -40,7 +39,6 @@ export default function SendMessage() {
 
   // Will format out multiple line breaks to 2 max
   function formatMessage(msg: string) {
-    console.log(msg);
     return msg.replace(/(\r\n|\r|\n){3,}/g, '$1\n\n');
   }
 
