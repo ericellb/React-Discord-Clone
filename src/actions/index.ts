@@ -3,26 +3,55 @@ import { ACTION } from './types';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
+export interface SendChannelMessage {
+  type: 'channelMessage';
+  server: string;
+  channel: string;
+  from: string;
+  msg: string;
+}
+
+export interface SendPrivateMessage {
+  type: 'privateMessage';
+  from: string;
+  to: string;
+  msg: string;
+}
+
+export interface ReceiveChannelMessage {
+  server: string;
+  channel: string;
+  from: string;
+  msg: string;
+}
+
+export interface ReceivePrivateMessage {
+  user: string;
+  from: string;
+  to: string;
+  msg: string;
+}
+
 // Action to send a message (Handled by socket middleware)
-export const sendMessage = (message: string) => ({
+export const sendMessage = (message: SendChannelMessage) => ({
   type: ACTION.SEND_SOCKET_MESSAGE,
   payload: message
 });
 
 // Action to add message to a channel (Handled by socket middleware)
-export const receiveMessage = (message: string) => ({
+export const receiveMessage = (message: ReceiveChannelMessage) => ({
   type: ACTION.RECEIVE_SOCKET_MESSAGE,
   payload: message
 });
 
 // Action to send new private message (Handled by socket middleware)
-export const sendPrivateMessage = (message: string) => ({
+export const sendPrivateMessage = (message: SendPrivateMessage) => ({
   type: ACTION.SEND_SOCKET_PRIVATE_MESSAGE,
   payload: message
 });
 
 // Action to send new private message (Handled by socket middleware)
-export const receivePrivateMessage = (message: string) => ({
+export const receivePrivateMessage = (message: ReceivePrivateMessage) => ({
   type: ACTION.RECEIVE_SOCKET_PRIVATE_MESSAGE,
   payload: message
 });

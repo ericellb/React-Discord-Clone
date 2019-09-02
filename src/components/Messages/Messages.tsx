@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import {
   List,
@@ -35,8 +35,8 @@ export default function Messages() {
   const [anchorEl, setAnchorEl] = useState(null);
 
   // ref to message container (for keeping scroll to bottom of chat)
-  let messageContainerBottomRef: HTMLDivElement | null = new HTMLDivElement();
-  let messageContainerRef: HTMLDivElement | null = new HTMLDivElement();
+  let messageContainerBottomRef = document.getElementById('messagesContainerBottom');
+  let messageContainerRef = document.getElementById('messagesContainer');
 
   // Get message list from channel or from specific user
   let messages: MessageList[] = [];
@@ -110,6 +110,7 @@ export default function Messages() {
 
   return (
     <div
+      id="messagesContainer"
       className="messages-container"
       onScroll={e => handleScrollTop(e)}
       ref={element => (messageContainerRef = element)}
@@ -165,7 +166,7 @@ export default function Messages() {
             })
           : null}
       </List>
-      <div ref={element => (messageContainerBottomRef = element)}></div>
+      <div ref={element => (messageContainerBottomRef = element)} id="messagesContainerBottom"></div>
       <Popover
         id="user-info"
         open={userInfoVisible}
