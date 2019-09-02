@@ -1,12 +1,13 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { sendMessage, sendPrivateMessage, SendChannelMessage, SendPrivateMessage } from '../../actions';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import SmileyFace from '@material-ui/icons/SentimentVerySatisfied';
 import { StoreState } from '../../reducers';
+import { sendMessage, sendPrivateMessage } from '../../actions';
+import { SendMessageData, SendPrivateMessageData } from '../../actions/types';
 
 export default function SendMessage() {
   // Get State from Redux Store
@@ -45,8 +46,7 @@ export default function SendMessage() {
 
   // Handles submission of messages
   // Dispatches event and sets TextField value to empty
-  function handleSubmit(message: SendChannelMessage | SendPrivateMessage) {
-    console.log('sendin!');
+  function handleSubmit(message: SendMessageData | SendPrivateMessageData) {
     if (isValidMessage(message.msg)) {
       message.msg = formatMessage(message.msg);
       // Send message to server, or user

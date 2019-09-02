@@ -1,16 +1,15 @@
-import { ACTION } from '../actions/types';
-import { AnyAction } from 'redux';
+import { ACTION, ChatActionTypes } from '../actions/types';
 
 export interface ChatStore {
   servers: {
     [serverName: string]: {
       channels: {
-        [channelName: string]: { from: string; to: string; msg: string; date: Date }[];
+        [channelName: string]: { from: string; msg: string; date: Date }[];
       };
     };
   };
   privateMessages: {
-    [userPM: string]: { from: string; to: string; msg: string; user: string; date: Date }[];
+    [userPM: string]: { from: string; to: string; msg: string; date: Date }[];
   };
   activeServer: string;
   activeChannel: string;
@@ -30,15 +29,15 @@ const initialState = {
   privateMessages: {},
   activeServer: 'Default-FANfDprXmt',
   activeChannel: 'general-0m5vBsRnfd',
-  activeUserList: [{ user_name: 'eric' }, { user_name: 'ron' }],
+  activeUserList: [],
   activeView: 'servers',
   activePMUser: 'none'
 };
 
-export const chatReducer = (state: ChatStore = initialState, action: AnyAction) => {
+export const chatReducer = (state: ChatStore = initialState, action: ChatActionTypes): ChatStore => {
   switch (action.type) {
     case ACTION.RECEIVE_SOCKET_MESSAGE:
-      let { server, channel, from, msg } = action.payload;
+      let { server, channel, from, msg, date } = action.payload;
       return {
         ...state,
         servers: {
@@ -47,7 +46,7 @@ export const chatReducer = (state: ChatStore = initialState, action: AnyAction) 
             ...state.servers[server],
             channels: {
               ...state.servers[server].channels,
-              [channel]: [...state.servers[server]['channels'][channel], { from: from, msg: msg }]
+              [channel]: [...state.servers[server]['channels'][channel], { from: from, msg: msg, date: date }]
             }
           }
         }
@@ -60,7 +59,7 @@ export const chatReducer = (state: ChatStore = initialState, action: AnyAction) 
             ...state.privateMessages,
             [action.payload.user]: [
               ...state.privateMessages[action.payload.user],
-              { from: action.payload.from, to: action.payload.to, msg: action.payload.msg }
+              { from: action.payload.from, to: action.payload.to, msg: action.payload.msg, date: action.payload.date }
             ]
           }
         };
@@ -69,7 +68,9 @@ export const chatReducer = (state: ChatStore = initialState, action: AnyAction) 
           ...state,
           privateMessages: {
             ...state.privateMessages,
-            [action.payload.user]: [{ from: action.payload.from, to: action.payload.to, msg: action.payload.msg }]
+            [action.payload.user]: [
+              { from: action.payload.from, to: action.payload.to, msg: action.payload.msg, date: action.payload.date }
+            ]
           }
         };
     case ACTION.ADD_CHANNEL:

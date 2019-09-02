@@ -1,69 +1,70 @@
 import axios from '../components/Api/api';
-import { ACTION } from './types';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-export interface SendChannelMessage {
-  type: 'channelMessage';
-  server: string;
-  channel: string;
-  from: string;
-  msg: string;
-}
-
-export interface SendPrivateMessage {
-  type: 'privateMessage';
-  from: string;
-  to: string;
-  msg: string;
-}
-
-export interface ReceiveChannelMessage {
-  server: string;
-  channel: string;
-  from: string;
-  msg: string;
-}
-
-export interface ReceivePrivateMessage {
-  user: string;
-  from: string;
-  to: string;
-  msg: string;
-}
+import {
+  ACTION,
+  UpdateActiveStateAction,
+  ChangeServerAction,
+  ChangeChannelAction,
+  ChangeViewAction,
+  ChangePmUserAction,
+  LoadUserDataAction,
+  LoadInitialData,
+  SignInAction,
+  SignInData,
+  SignOutAction
+} from './types';
+import {
+  SendMessageData,
+  ReceiveMessageData,
+  SendPrivateMessageData,
+  ReceivePrivateMessageData,
+  AddChannelData,
+  AddServerData
+} from './types';
+import {
+  SendMessageAction,
+  ReceiveMessageAction,
+  SendPrivateMessageAction,
+  ReceivePrivateMessageAction,
+  AddChannelAction,
+  AddServerAction,
+  UpdateActiveUsersAction
+} from './types';
 
 // Action to send a message (Handled by socket middleware)
-export const sendMessage = (message: SendChannelMessage) => ({
+export const sendMessage = (message: SendMessageData): SendMessageAction => ({
   type: ACTION.SEND_SOCKET_MESSAGE,
   payload: message
 });
 
 // Action to add message to a channel (Handled by socket middleware)
-export const receiveMessage = (message: ReceiveChannelMessage) => ({
+export const receiveMessage = (message: ReceiveMessageData): ReceiveMessageAction => ({
   type: ACTION.RECEIVE_SOCKET_MESSAGE,
   payload: message
 });
 
 // Action to send new private message (Handled by socket middleware)
-export const sendPrivateMessage = (message: SendPrivateMessage) => ({
+export const sendPrivateMessage = (message: SendPrivateMessageData): SendPrivateMessageAction => ({
   type: ACTION.SEND_SOCKET_PRIVATE_MESSAGE,
   payload: message
 });
 
 // Action to send new private message (Handled by socket middleware)
-export const receivePrivateMessage = (message: ReceivePrivateMessage) => ({
+export const receivePrivateMessage = (message: ReceivePrivateMessageData): ReceivePrivateMessageAction => ({
   type: ACTION.RECEIVE_SOCKET_PRIVATE_MESSAGE,
   payload: message
 });
 
 // Action to add Channel to a Server
-export const addChannel = (channel: string) => ({
+export const addChannel = (channel: AddChannelData): AddChannelAction => ({
   type: ACTION.ADD_CHANNEL,
   payload: channel
 });
 
 // Action to add Server to server list
-export const addServer = (server: string) => ({
+export const addServer = (server: AddServerData): AddServerAction => ({
   type: ACTION.ADD_SERVER,
   payload: server
 });
@@ -75,7 +76,7 @@ export const updateActiveUserList = (serverId: string) => async (dispatch: Thunk
 };
 
 // Action creator to update active state (socket middleware)
-export const updateActiveState = () => ({
+export const updateActiveState = (): UpdateActiveStateAction => ({
   type: ACTION.UPDATE_ACTIVE_STATE,
   payload: null
 });
@@ -83,23 +84,23 @@ export const updateActiveState = () => ({
 // Action to change the current Active Server
 export const changeServer = (server: string) => (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
   dispatch(updateActiveUserList(server.split('-')[1]));
-  dispatch({ type: ACTION.CHANGE_SERVER, payload: server });
+  dispatch<ChangeServerAction>({ type: ACTION.CHANGE_SERVER, payload: server });
 };
 
 // Action to change the current Active Channel
-export const changeChannel = (channel: string) => ({
+export const changeChannel = (channel: string): ChangeChannelAction => ({
   type: ACTION.CHANGE_CHANNEL,
   payload: channel
 });
 
 // Action to change the current active view
-export const changeView = (view: string) => ({
+export const changeView = (view: string): ChangeViewAction => ({
   type: ACTION.CHANGE_VIEW,
   payload: view
 });
 
 // Action to change active user we have private message open with
-export const changePMUser = (user: string) => ({
+export const changePMUser = (user: string): ChangePmUserAction => ({
   type: ACTION.CHANGE_PM_USER,
   payload: user
 });
@@ -107,20 +108,20 @@ export const changePMUser = (user: string) => ({
 // Loads user Data. Gets all Servers + Channel History
 export const loadUserData = (userId: string) => async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
   let url = `/user/data?userId=${userId}`;
-  const res = await axios.get(url);
+  const res = await axios.get<LoadInitialData>(url);
   // get active user list for first server
   dispatch(updateActiveUserList(Object.keys(res.data.servers)[0].split('-')[1]));
-  dispatch({ type: ACTION.GET_INITIAL_DATA, payload: res.data });
+  dispatch<LoadUserDataAction>({ type: ACTION.GET_INITIAL_DATA, payload: res.data });
 };
 
 // On sign in
-export const signIn = (user: string) => ({
+export const signIn = (user: SignInData): SignInAction => ({
   type: ACTION.SIGN_IN,
   payload: user
 });
 
 // On sign out
-export const signOut = (user: string) => ({
+export const signOut = (): SignOutAction => ({
   type: ACTION.SIGN_OUT,
-  payload: user
+  payload: null
 });

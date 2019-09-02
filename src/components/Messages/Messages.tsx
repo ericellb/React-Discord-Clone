@@ -17,7 +17,7 @@ import { StoreState } from '../../reducers';
 
 interface MessageList {
   from: string;
-  to: string;
+  to?: string;
   msg: string;
   date: Date;
 }

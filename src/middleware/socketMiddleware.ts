@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-import { ACTION } from '../actions/types';
+import { ACTION, SocketActions, SendMessageAction, SendPrivateMessageAction } from '../actions/types';
 import { Dispatch } from 'react';
 import { AnyAction, MiddlewareAPI } from 'redux';
 
@@ -10,7 +10,7 @@ export const socketMiddleware = (baseUrl: string) => {
     let listener: SocketIOClient.Emitter;
 
     // Check actions and emit from socket if needed
-    return (next: Dispatch<AnyAction>) => (action: AnyAction) => {
+    return (next: Dispatch<AnyAction>) => (action: SocketActions) => {
       // Send message over socket
       if (action.type === ACTION.SEND_SOCKET_MESSAGE) {
         socket.emit('simple-chat-message', action.payload);
@@ -65,7 +65,7 @@ export const socketMiddleware = (baseUrl: string) => {
 // Listens to socket server for specific events for messages / private messages
 // TODO listen for listen for types of Server + payload of message
 function setupSocketListener(socket: SocketIOClient.Socket, storeAPI: MiddlewareAPI): SocketIOClient.Emitter {
-  return socket.on('update', (action: AnyAction) => {
+  return socket.on('update', (action: any) => {
     // Check for action type
     if (action.type === 'message') {
       storeAPI.dispatch({

@@ -90,7 +90,7 @@ export default function ChannelList(props: ChannelListProps) {
   // Signs the user out
   const handleSignOut = () => {
     localStorage.clear();
-    dispatch(signOut(user.userId));
+    dispatch(signOut());
   };
 
   // Handles saving serverId to clipboard

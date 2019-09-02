@@ -15,7 +15,7 @@ export default function PrivateMessageUserList() {
   // Signs the user out
   const handleSignOut = () => {
     localStorage.clear();
-    dispatch(signOut(user.userId));
+    dispatch(signOut());
   };
 
   return (
