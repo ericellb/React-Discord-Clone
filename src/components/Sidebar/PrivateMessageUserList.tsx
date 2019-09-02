@@ -22,9 +22,9 @@ export default function PrivateMessageUserList() {
     <div className="channels-container">
       <List className="channel-list">
         <ListItem className="title-container">Home</ListItem>
-        {userList.map((user, i) => (
+        {userList.map((userItem, i) => (
           <Slide direction="right" in={true} timeout={200 * (i + 1)} key={i}>
-            <ListItem button className="user-item" onClick={() => dispatch(changePMUser(user))}>
+            <ListItem button className="user-item" onClick={() => dispatch(changePMUser(userItem))}>
               <Avatar>
                 {' '}
                 <img className="user" src={process.env.PUBLIC_URL + '/user.png'} alt="user icon" height="48" />{' '}
