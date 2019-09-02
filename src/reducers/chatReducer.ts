@@ -1,20 +1,20 @@
 import { ACTION } from '../actions/types';
 import { AnyAction } from 'redux';
 
-interface ChatStore {
+export interface ChatStore {
   servers: {
     [serverName: string]: {
       channels: {
-        [channelName: string]: { from: string; to: string; msg: string }[];
+        [channelName: string]: { from: string; to: string; msg: string; date: Date }[];
       };
     };
   };
   privateMessages: {
-    [userPM: string]: { from: string; to: string; msg: string; user: string }[];
+    [userPM: string]: { from: string; to: string; msg: string; user: string; date: Date }[];
   };
   activeServer: string;
   activeChannel: string;
-  activeUserList: string[];
+  activeUserList: { user_name: string }[];
   activeView: string;
   activePMUser: string;
 }
@@ -30,7 +30,7 @@ const initialState = {
   privateMessages: {},
   activeServer: 'Default-FANfDprXmt',
   activeChannel: 'general-0m5vBsRnfd',
-  activeUserList: [],
+  activeUserList: [{ user_name: 'eric' }, { user_name: 'ron' }],
   activeView: 'servers',
   activePMUser: 'none'
 };
