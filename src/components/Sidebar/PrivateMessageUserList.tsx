@@ -30,7 +30,7 @@ export default function PrivateMessageUserList() {
                 <img className="user" src={process.env.PUBLIC_URL + '/user.png'} alt="user icon" height="48" />{' '}
               </Avatar>
               <Typography variant="body1" className="user-list-name">
-                {user}
+                {userItem}
               </Typography>
             </ListItem>
           </Slide>

@@ -58,13 +58,13 @@ export default function Messages() {
   // Scroll to bottom of container if were not loading new messages
   useEffect(() => {
     if (messageContainerBottomRef && messageContainerRef) {
-      if (!loadMessages) messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' });
-      else {
-        setLoadMessages(false);
-        messageContainerRef.scroll(0, 56);
+      if (loadMessages) {
+        messageContainerRef.scroll(0, 60);
+      } else {
+        messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' });
       }
     }
-  }, [messageContainerBottomRef, messageContainerRef, loadMessages, messages]);
+  }, [loadMessages, messages]);
 
   // Checks is message is a code block
   const isTextCodeBlock = (message: string) => {
@@ -75,7 +75,7 @@ export default function Messages() {
   // Handles to load more messages when scroll at top
   const handleScrollTop = (e: any) => {
     const element = e.target;
-    if (element.scrollTop > 100) {
+    if (element.scrollTop > 60) {
       setLoadMessages(false);
     }
     if (element.scrollTop === 0) {
@@ -113,7 +113,7 @@ export default function Messages() {
   // Load pretty print on every render change
   useEffect(() => {
     PR.prettyPrint();
-  }, [messages]);
+  });
 
   return (
     <div
