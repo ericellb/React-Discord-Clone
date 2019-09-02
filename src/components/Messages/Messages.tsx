@@ -22,6 +22,8 @@ interface MessageList {
   date: Date;
 }
 
+declare var PR: any;
+
 export default function Messages() {
   // Get States from Redux Store
   const chatStore = useSelector((state: StoreState) => state.chat);
@@ -108,6 +110,11 @@ export default function Messages() {
     setAnchorEl(null);
   };
 
+  // Load pretty print on every render change
+  useEffect(() => {
+    PR.prettyPrint();
+  }, [messages]);
+
   return (
     <div
       id="messagesContainer"
@@ -145,7 +152,11 @@ export default function Messages() {
                             <div className="message-date">{` - ${moment(message.date).format('LLL')}`}</div>
                           </div>
                         }
-                        secondary={formatCode(message.msg)}
+                        secondary={
+                          <pre className="prettyprint">
+                            <div dangerouslySetInnerHTML={{ __html: formatCode(message.msg) }}></div>
+                          </pre>
+                        }
                         className="message-text"
                       />
                     ) : (
