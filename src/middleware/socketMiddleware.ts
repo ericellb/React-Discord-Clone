@@ -7,7 +7,7 @@ import { AnyAction, MiddlewareAPI } from 'redux';
 export const socketMiddleware = (baseUrl: string) => {
   return (storeAPI: MiddlewareAPI) => {
     let socket = io(baseUrl);
-    let listener = null;
+    let listener: SocketIOClient.Emitter;
 
     // Check actions and emit from socket if needed
     return (next: Dispatch<AnyAction>) => (action: AnyAction) => {
@@ -64,7 +64,7 @@ export const socketMiddleware = (baseUrl: string) => {
 // Listens on socket with our userId
 // Listens to socket server for specific events for messages / private messages
 // TODO listen for listen for types of Server + payload of message
-function setupSocketListener(socket: SocketIOClient.Socket, storeAPI: MiddlewareAPI) {
+function setupSocketListener(socket: SocketIOClient.Socket, storeAPI: MiddlewareAPI): SocketIOClient.Emitter {
   return socket.on('update', (action: AnyAction) => {
     // Check for action type
     if (action.type === 'message') {

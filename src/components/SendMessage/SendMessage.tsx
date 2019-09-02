@@ -1,13 +1,10 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
-
 import { useDispatch } from 'react-redux';
 import { sendMessage, sendPrivateMessage, SendChannelMessage, SendPrivateMessage } from '../../actions';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
-
 import SmileyFace from '@material-ui/icons/SentimentVerySatisfied';
 import { StoreState } from '../../reducers';
 
