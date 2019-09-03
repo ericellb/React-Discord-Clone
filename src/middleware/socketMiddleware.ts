@@ -1,12 +1,13 @@
 import io from 'socket.io-client';
 
-import { ACTION, SocketActions, SendMessageAction, SendPrivateMessageAction } from '../actions/types';
+import { ACTION, SocketActions } from '../actions/types';
 import { Dispatch } from 'react';
 import { AnyAction, MiddlewareAPI } from 'redux';
 
 export const socketMiddleware = (baseUrl: string) => {
   return (storeAPI: MiddlewareAPI) => {
     let socket = io(baseUrl);
+    // eslint-disable-next-line
     let listener: SocketIOClient.Emitter;
 
     // Check actions and emit from socket if needed

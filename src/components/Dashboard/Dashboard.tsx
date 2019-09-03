@@ -33,7 +33,7 @@ export default function Dashboard() {
     } else {
       dispatch(loadUserData(user.userId));
       updateActiveStatus();
-    }
+    } // eslint-disable-next-line
   }, [dispatch, user.isSignedIn, user.userId]);
 
   // Watches viewport height (fix for mobile address bar size)

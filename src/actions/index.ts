@@ -29,8 +29,7 @@ import {
   SendPrivateMessageAction,
   ReceivePrivateMessageAction,
   AddChannelAction,
-  AddServerAction,
-  UpdateActiveUsersAction
+  AddServerAction
 } from './types';
 
 // Action to send a message (Handled by socket middleware)

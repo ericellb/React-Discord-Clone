@@ -64,7 +64,7 @@ export default function Messages() {
         messageContainerBottomRef.scrollIntoView({ block: 'end', behavior: 'smooth' });
       }
     }
-  }, [loadMessages, messages]);
+  }, [loadMessages, messages, messageContainerRef, messageContainerBottomRef]);
 
   // Checks is message is a code block
   const isTextCodeBlock = (message: string) => {
