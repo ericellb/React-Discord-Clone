@@ -36,11 +36,7 @@ Implemented Features
 
 Planned Features
 
-- [ ] Reformat how messages are fetched
-  - Fetch messages on channel change
-  - Make API return only X results until we ask for more
-  - Will help scale once Image uploads are implemented
-- [ ] Voice Chat down the road...
+- [ ] Voice Chat
 
 ## License
 
