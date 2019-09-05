@@ -8,7 +8,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from 'redux';
 import { socketMiddleware } from './middleware/socketMiddleware';
 
-const baseUrl = process.env.REACT_APP_API_URL;
+const baseUrl =
+  process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://simple-chat-apix.herokuapp.com';
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk, socketMiddleware(baseUrl || ''))));
 
