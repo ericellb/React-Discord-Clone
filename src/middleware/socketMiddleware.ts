@@ -54,7 +54,7 @@ export const socketMiddleware = (baseUrl: string) => {
 
       // Updates our active state on server
       if (action.type === ACTION.UPDATE_ACTIVE_STATE) {
-        socket.emit('ping');
+        socket.emit('update-active');
       }
 
       return next(action);
