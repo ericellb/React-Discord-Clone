@@ -4,7 +4,7 @@
 
 Currently learning WebRTC to implement voice!
 
-Originally started off on a test project for learning Functional Components, Hooks and Socket IO and TypeScript ended up being a Discord Clone.
+Originally started off on a test project for learning Functional Components, Hooks, Socket IO and TypeScript ended up being a Discord Clone.
 
 ![layout image](public/app.png)
 
@@ -14,7 +14,7 @@ API https://github.com/ericellb/React-Discord-API
 
 ### Important
 
-If you need to use my backend api change the env variable `REACT_APP_API_URL` in `.env` to `https://simple-chat-apix.herokuapp.com`
+If you need to use my backend api change the env variable `REACT_APP_API_URL` in `.env` to `https://simple-chat-apix.herokuapp.com`, otherwise host the API yourself and set this environment variable appropriately.
 
 ## Features
 
