@@ -2,9 +2,9 @@
 
 > Functional Discord Clone using React, Socket IO, NodeJS, Express and MySQL
 
-Project on semi halt while I learn TypeScript, plans to convert this to typescript after.
+Currently learning WebRTC to implement voice!
 
-Originally started off on a test project for learning Functional Components, Hooks and Socket IO, ended up being a Discord Clone.
+Originally started off on a test project for learning Functional Components, Hooks and Socket IO and TypeScript ended up being a Discord Clone.
 
 ![layout image](public/app.png)
 
