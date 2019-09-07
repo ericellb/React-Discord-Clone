@@ -33,10 +33,11 @@ Implemented Features
 - [x] Timestamps for messages
 - [x] Show current active users in given server
 - [x] Convert to Typescript (Still need to fix a lot of any types i applied)
+- [x] Voice Chat (Still work to do, but main functionality works)
 
 Planned Features
 
-- [ ] Voice Chat
+- [] Bug fixes + optimize
 
 ## License
 
