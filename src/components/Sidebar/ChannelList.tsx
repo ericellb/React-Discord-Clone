@@ -145,16 +145,18 @@ export default function ChannelList(props: ChannelListProps) {
 
   // Listens for changes on new voice clients
   useEffect(() => {
-    if (voiceJoinUserId && voiceClients) {
+    if (voiceJoinUserId && voiceClients && localStream) {
       onUserJoin(voiceJoinUserId, voiceClients);
     }
   }, [voiceJoinUserId, voiceClients]);
 
   // Listens for changes on our signaling data
   useEffect(() => {
-    const userId = rtcSignalData.userId;
-    const message = rtcSignalData;
-    if (voiceJoinUserId !== '') gotMessageFromServer(userId, message);
+    if (voiceJoinUserId !== '') {
+      const userId = rtcSignalData.userId;
+      const message = rtcSignalData;
+      gotMessageFromServer(userId, message);
+    }
   }, [rtcSignalData, voiceJoinUserId]);
 
   // Listens for changes on users leaving voice channel
