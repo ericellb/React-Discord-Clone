@@ -26,7 +26,7 @@ export const socketMiddleware = (baseUrl: string) => {
 
       // Pull sign in action and login to send socket server our userId (identify individual socket connectins)
       if (action.type === ACTION.SIGN_IN) {
-        socket.emit('simple-chat-sign-in', action.payload.userId);
+        socket.emit('simple-chat-sign-in', action.payload);
         listener = setupSocketListener(socket, storeAPI);
       }
 
@@ -57,6 +57,18 @@ export const socketMiddleware = (baseUrl: string) => {
         socket.emit('update-active');
       }
 
+      if (action.type === ACTION.SEND_SOCKET_JOIN_VOICE) {
+        socket.emit('user-join-voice', action.payload);
+      }
+
+      if (action.type === ACTION.SEND_SOCKET_LEAVE_VOICE) {
+        socket.emit('user-leave-voice', action.payload);
+      }
+
+      if (action.type === ACTION.SEND_SOCKET_RTC_SIGNAL) {
+        socket.emit('voice-signal', action.payload);
+      }
+
       return next(action);
     };
   };
@@ -76,6 +88,21 @@ function setupSocketListener(socket: SocketIOClient.Socket, storeAPI: Middleware
     } else if (action.type === 'private-message') {
       storeAPI.dispatch({
         type: ACTION.RECEIVE_SOCKET_PRIVATE_MESSAGE,
+        payload: action.payload
+      });
+    } else if (action.type === 'user-join-voice') {
+      storeAPI.dispatch({
+        type: ACTION.RECEIVE_SOCKET_JOIN_VOICE,
+        payload: action.payload
+      });
+    } else if (action.type === 'user-leave-voice') {
+      storeAPI.dispatch({
+        type: ACTION.RECEIVE_SOCKET_LEAVE_VOICE,
+        payload: action.payload
+      });
+    } else if (action.type === 'voice-signal') {
+      storeAPI.dispatch({
+        type: ACTION.RECEIVE_SOCKET_RTC_SIGNAL,
         payload: action.payload
       });
     }

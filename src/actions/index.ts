@@ -13,7 +13,20 @@ import {
   LoadInitialData,
   SignInAction,
   SignInData,
-  SignOutAction
+  SignOutAction,
+  SendJoinVoiceData,
+  SendJoinVoiceAction,
+  ReceiveJoinVoiceData,
+  ReceiveJoinVoiceAction,
+  SendRtcSignalData,
+  ReceiveRtcSignalData,
+  ReceiveRtcSignalAction,
+  SendRtcSignalAction,
+  SendLeaveVoiceAction,
+  ReceiveLeaveVoiceAction,
+  SendLeaveVoiceData,
+  ReceiveLeaveVoiceData,
+  ClearVoiceConnectionAction
 } from './types';
 import {
   SendMessageData,
@@ -54,6 +67,43 @@ export const sendPrivateMessage = (message: SendPrivateMessageData): SendPrivate
 export const receivePrivateMessage = (message: ReceivePrivateMessageData): ReceivePrivateMessageAction => ({
   type: ACTION.RECEIVE_SOCKET_PRIVATE_MESSAGE,
   payload: message
+});
+
+// Action to send a join voice channel message (Handles by socket middleware)
+export const sendJoinVoice = (data: SendJoinVoiceData): SendJoinVoiceAction => ({
+  type: ACTION.SEND_SOCKET_JOIN_VOICE,
+  payload: data
+});
+
+// Action to receive join voice channel message (Handles by socket middlware)
+export const receiveJoinVoice = (data: ReceiveJoinVoiceData): ReceiveJoinVoiceAction => ({
+  type: ACTION.RECEIVE_SOCKET_JOIN_VOICE,
+  payload: data
+});
+
+export const sendRtcSignal = (data: SendRtcSignalData): SendRtcSignalAction => ({
+  type: ACTION.SEND_SOCKET_RTC_SIGNAL,
+  payload: data
+});
+
+export const sendLeaveVoice = (data: SendLeaveVoiceData): SendLeaveVoiceAction => ({
+  type: ACTION.SEND_SOCKET_LEAVE_VOICE,
+  payload: data
+});
+
+export const receiveLeaveVoice = (data: ReceiveLeaveVoiceData): ReceiveLeaveVoiceAction => ({
+  type: ACTION.RECEIVE_SOCKET_LEAVE_VOICE,
+  payload: data
+});
+
+export const clearVoiceConnection = (): ClearVoiceConnectionAction => ({
+  type: ACTION.CLEAR_VOICE_CONNECTION,
+  payload: null
+});
+
+export const receiveRtcSignal = (data: ReceiveRtcSignalData): ReceiveRtcSignalAction => ({
+  type: ACTION.RECEIVE_SOCKET_RTC_SIGNAL,
+  payload: data
 });
 
 // Action to add Channel to a Server

@@ -1,8 +1,14 @@
 export enum ACTION {
   RECEIVE_SOCKET_MESSAGE,
   RECEIVE_SOCKET_PRIVATE_MESSAGE,
+  RECEIVE_SOCKET_JOIN_VOICE,
+  RECEIVE_SOCKET_RTC_SIGNAL,
+  RECEIVE_SOCKET_LEAVE_VOICE,
   SEND_SOCKET_MESSAGE,
   SEND_SOCKET_PRIVATE_MESSAGE,
+  SEND_SOCKET_JOIN_VOICE,
+  SEND_SOCKET_RTC_SIGNAL,
+  SEND_SOCKET_LEAVE_VOICE,
   ADD_SERVER,
   ADD_PRIVATE_MESSAGE,
   ADD_CHANNEL,
@@ -10,6 +16,7 @@ export enum ACTION {
   CHANGE_SERVER,
   CHANGE_VIEW,
   CHANGE_PM_USER,
+  CLEAR_VOICE_CONNECTION,
   UPDATE_ACTIVE_USERS,
   UPDATE_ACTIVE_STATE,
   SIGN_IN,
@@ -20,6 +27,10 @@ export enum ACTION {
 export type ChatActionTypes =
   | ReceiveMessageAction
   | ReceivePrivateMessageAction
+  | ReceiveJoinVoiceAction
+  | ReceiveRtcSignalAction
+  | ReceiveLeaveVoiceAction
+  | ClearVoiceConnectionAction
   | AddChannelAction
   | AddServerAction
   | ChangeServerAction
@@ -35,7 +46,10 @@ export type SocketActions =
   | SignInAction
   | LoadUserDataAction
   | AddServerAction
-  | UpdateActiveStateAction;
+  | UpdateActiveStateAction
+  | SendJoinVoiceAction
+  | SendRtcSignalAction
+  | SendLeaveVoiceAction;
 
 export type UserActionTypes = SignInAction | SignOutAction;
 
@@ -58,6 +72,41 @@ export type SendPrivateMessageAction = {
 export type ReceivePrivateMessageAction = {
   type: ACTION.RECEIVE_SOCKET_PRIVATE_MESSAGE;
   payload: ReceivePrivateMessageData;
+};
+
+export type SendJoinVoiceAction = {
+  type: ACTION.SEND_SOCKET_JOIN_VOICE;
+  payload: SendJoinVoiceData;
+};
+
+export type ReceiveJoinVoiceAction = {
+  type: ACTION.RECEIVE_SOCKET_JOIN_VOICE;
+  payload: ReceiveJoinVoiceData;
+};
+
+export type SendLeaveVoiceAction = {
+  type: ACTION.SEND_SOCKET_LEAVE_VOICE;
+  payload: SendLeaveVoiceData;
+};
+
+export type ReceiveLeaveVoiceAction = {
+  type: ACTION.RECEIVE_SOCKET_LEAVE_VOICE;
+  payload: ReceiveLeaveVoiceData;
+};
+
+export type SendRtcSignalAction = {
+  type: ACTION.SEND_SOCKET_RTC_SIGNAL;
+  payload: SendRtcSignalData;
+};
+
+export type ReceiveRtcSignalAction = {
+  type: ACTION.RECEIVE_SOCKET_RTC_SIGNAL;
+  payload: ReceiveRtcSignalData;
+};
+
+export type ClearVoiceConnectionAction = {
+  type: ACTION.CLEAR_VOICE_CONNECTION;
+  payload: null;
 };
 
 export type AddChannelAction = {
@@ -169,6 +218,39 @@ export interface LoadInitialData {
   privateMessages: {
     [userPM: string]: { from: string; to: string; msg: string; user: string; date: Date }[];
   };
+}
+
+export interface SendJoinVoiceData {
+  userId: string;
+  userName: string;
+  channelId: string;
+}
+
+export interface ReceiveJoinVoiceData {
+  userId: string;
+  clients: { userId: string; userName: string }[];
+}
+
+export interface SendLeaveVoiceData {
+  userId: string;
+  userName: string;
+  channelId: string;
+}
+
+export interface ReceiveLeaveVoiceData {
+  userId: string;
+  clients: { userId: string; userName: string }[];
+}
+
+export interface SendRtcSignalData {
+  userId: string;
+  ice?: any;
+  sdp?: any;
+}
+
+export interface ReceiveRtcSignalData {
+  userId: string;
+  clients: string[];
 }
 
 export interface SignInData {
