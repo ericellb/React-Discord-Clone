@@ -452,3 +452,16 @@ body {
   border: 2px solid #2a2c31 !important;
   border-radius: 6px !important;
 }
+
+/* Channel List Voice Users */
+
+.user-voice-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+  padding-left: 2em;
+}
+
+.user-voice-name {
+  padding-left: 1em;
+}

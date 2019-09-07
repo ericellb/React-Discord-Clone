@@ -16,6 +16,10 @@ export interface ChatStore {
   activeUserList: { user_name: string }[];
   activeView: string;
   activePMUser: string;
+  voiceClients: { userId: string; userName: string }[];
+  voiceJoinUserId: string;
+  voiceLeaveUserId: string;
+  rtcSignalData: { userId: string; ice?: any; sdp?: any };
 }
 
 const initialState = {
@@ -31,7 +35,11 @@ const initialState = {
   activeChannel: 'general-0m5vBsRnfd',
   activeUserList: [],
   activeView: 'servers',
-  activePMUser: 'none'
+  activePMUser: 'none',
+  voiceClients: [{ userId: '', userName: '' }],
+  voiceJoinUserId: '',
+  voiceLeaveUserId: '',
+  rtcSignalData: { userId: '' }
 };
 
 export const chatReducer = (state: ChatStore = initialState, action: ChatActionTypes): ChatStore => {
@@ -73,6 +81,19 @@ export const chatReducer = (state: ChatStore = initialState, action: ChatActionT
             ]
           }
         };
+    case ACTION.RECEIVE_SOCKET_JOIN_VOICE:
+      return {
+        ...state,
+        voiceClients: action.payload.clients,
+        voiceJoinUserId: action.payload.userId,
+        voiceLeaveUserId: ''
+      };
+    case ACTION.RECEIVE_SOCKET_RTC_SIGNAL:
+      return { ...state, rtcSignalData: action.payload };
+    case ACTION.RECEIVE_SOCKET_LEAVE_VOICE:
+      return { ...state, voiceLeaveUserId: action.payload.userId, voiceClients: action.payload.clients };
+    case ACTION.CLEAR_VOICE_CONNECTION:
+      return { ...state, voiceClients: [], voiceLeaveUserId: '', voiceJoinUserId: '' };
     case ACTION.ADD_CHANNEL:
       return {
         ...state,
