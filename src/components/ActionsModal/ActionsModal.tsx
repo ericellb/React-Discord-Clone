@@ -177,7 +177,7 @@ export default function ActionsModal(props: ActionsModalProps) {
                     <AddToQueue className="modal-card-icon" />
                   </CardMedia>
                   <Button variant="contained" color="primary" className="modal-button">
-                    Join a server
+                    Create a server
                   </Button>
                 </CardContent>
               </CardActionArea>
