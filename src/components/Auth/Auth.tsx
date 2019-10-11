@@ -38,6 +38,7 @@ export default function Auth() {
   const [userPassError, setUserPassError] = useState(false);
   const [userPassErrorMsg, setUserPassErrorMsg] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [serverIdle, setServerIdle] = useState(false);
 
   // Shows the main modal (sets transition directions and views to visible / non visible)
   const showMain = () => {
@@ -97,8 +98,11 @@ export default function Auth() {
       // encode username and userpass - it may have # $ & + ,  / : ; = ? @ [ ]
       userName = encodeURIComponent(userName);
       userPass = encodeURIComponent(userPass);
-
+      setTimeout(() => {
+        setServerIdle(true);
+      }, 2000);
       const response = await axios.post(`/user/create?userName=${userName}&userPass=${userPass}`);
+      setServerIdle(false);
       if (rememberMe) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
@@ -120,7 +124,11 @@ export default function Auth() {
     userPass = encodeURIComponent(userPass);
 
     try {
+      setTimeout(() => {
+        setServerIdle(true);
+      }, 2000);
       const response = await axios.get(`/user/login?userName=${userName}&userPass=${userPass}`);
+      setServerIdle(false);
       if (rememberMe) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
@@ -254,6 +262,11 @@ export default function Auth() {
               Create
             </Button>
           </Grid>
+          {serverIdle && (
+            <div style={{ marginTop: '1em', fontSize: '18px', textAlign: 'center', fontFamily: 'roboto' }}>
+              The server just woke up! Hold on for 5 seconds, while he munches a quick byte!
+            </div>
+          )}
         </Grid>
       </Slide>
     );
@@ -322,6 +335,11 @@ export default function Auth() {
               Login
             </Button>
           </Grid>
+          {serverIdle && (
+            <div style={{ marginTop: '1em', fontSize: '18px', textAlign: 'center', fontFamily: 'roboto' }}>
+              The server just woke up! Hold on for 5 seconds, while he munches a quick byte!
+            </div>
+          )}
         </Grid>
       </Slide>
     );

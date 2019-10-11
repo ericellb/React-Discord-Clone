@@ -116,80 +116,103 @@ export default function Messages() {
   });
 
   return (
-    <div
-      id="messagesContainer"
-      className="messages-container"
-      onScroll={e => handleScrollTop(e)}
-      ref={element => (messageContainerRef = element)}
-    >
-      {messagesLength >= messageIndex ? (
-        <div className="progress-container">
-          <CircularProgress color="primary" />
+    <React.Fragment>
+      {messages.length === 0 && (
+        <div style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              textAlign: 'center',
+              padding: '1em',
+              fontFamily: 'roboto'
+            }}
+          >
+            <CircularProgress />{' '}
+            <div style={{ marginTop: '1em', flexBasis: '100%', color: 'white' }}>
+              {' '}
+              The server just woke up! Hold on for 5 seconds, while he munches a quick byte!{' '}
+            </div>
+          </div>
         </div>
-      ) : null}
-      <List>
-        {messages !== null
-          ? messages.slice(messagesLength - messageIndex, messagesLength).map((message, i) => {
-              // Filter for null messages (dummy message on backend should fix...)
-              return (
-                <Fade in={true} timeout={500}>
-                  <ListItem className="message" key={i}>
-                    <ListItemAvatar className="message-user-icon">
-                      <Avatar>
-                        <img
-                          onClick={e => handleUserClick(e, message.from)}
-                          src={process.env.PUBLIC_URL + '/user.png'}
-                          alt="user icon"
-                          height="48"
-                        />
-                      </Avatar>
-                    </ListItemAvatar>
-                    {isTextCodeBlock(message.msg) ? (
-                      <ListItemText
-                        primary={
-                          <div className="message-user" onClick={e => handleUserClick(e, message.from)}>
-                            {message.from.toLowerCase()}
-                            <div className="message-date">{` - ${moment(message.date).format('LLL')}`}</div>
-                          </div>
-                        }
-                        secondary={
-                          <pre className="prettyprint">
-                            <div dangerouslySetInnerHTML={{ __html: formatCode(message.msg) }}></div>
-                          </pre>
-                        }
-                        className="message-text"
-                      />
-                    ) : (
-                      <ListItemText
-                        primary={
-                          <div className="message-user" onClick={e => handleUserClick(e, message.from)}>
-                            {message.from.toLowerCase()}
-                            <div className="message-date">{` - ${moment(message.date).format('LLL')}`}</div>
-                          </div>
-                        }
-                        secondary={message.msg}
-                        className="message-text"
-                      />
-                    )}
-                  </ListItem>
-                </Fade>
-              );
-            })
-          : null}
-      </List>
-      <div ref={element => (messageContainerBottomRef = element)} id="messagesContainerBottom"></div>
-      <Popover
-        id="user-info"
-        open={userInfoVisible}
-        anchorEl={anchorEl}
-        onClose={handlePopoverClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right'
-        }}
+      )}
+      <div
+        id="messagesContainer"
+        className="messages-container"
+        onScroll={e => handleScrollTop(e)}
+        ref={element => (messageContainerRef = element)}
       >
-        <UserInfo userName={userName} setUserInfoVisible={setUserInfoVisible} />
-      </Popover>
-    </div>
+        {messagesLength >= messageIndex ? (
+          <div className="progress-container">
+            <CircularProgress color="primary" />
+          </div>
+        ) : null}
+        <List>
+          {messages !== null
+            ? messages.slice(messagesLength - messageIndex, messagesLength).map((message, i) => {
+                // Filter for null messages (dummy message on backend should fix...)
+                return (
+                  <Fade in={true} timeout={500}>
+                    <ListItem className="message" key={i}>
+                      <ListItemAvatar className="message-user-icon">
+                        <Avatar>
+                          <img
+                            onClick={e => handleUserClick(e, message.from)}
+                            src={process.env.PUBLIC_URL + '/user.png'}
+                            alt="user icon"
+                            height="48"
+                          />
+                        </Avatar>
+                      </ListItemAvatar>
+                      {isTextCodeBlock(message.msg) ? (
+                        <ListItemText
+                          primary={
+                            <div className="message-user" onClick={e => handleUserClick(e, message.from)}>
+                              {message.from.toLowerCase()}
+                              <div className="message-date">{` - ${moment(message.date).format('LLL')}`}</div>
+                            </div>
+                          }
+                          secondary={
+                            <pre className="prettyprint">
+                              <div dangerouslySetInnerHTML={{ __html: formatCode(message.msg) }}></div>
+                            </pre>
+                          }
+                          className="message-text"
+                        />
+                      ) : (
+                        <ListItemText
+                          primary={
+                            <div className="message-user" onClick={e => handleUserClick(e, message.from)}>
+                              {message.from.toLowerCase()}
+                              <div className="message-date">{` - ${moment(message.date).format('LLL')}`}</div>
+                            </div>
+                          }
+                          secondary={message.msg}
+                          className="message-text"
+                        />
+                      )}
+                    </ListItem>
+                  </Fade>
+                );
+              })
+            : null}
+        </List>
+        <div ref={element => (messageContainerBottomRef = element)} id="messagesContainerBottom"></div>
+        <Popover
+          id="user-info"
+          open={userInfoVisible}
+          anchorEl={anchorEl}
+          onClose={handlePopoverClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right'
+          }}
+        >
+          <UserInfo userName={userName} setUserInfoVisible={setUserInfoVisible} />
+        </Popover>
+      </div>
+    </React.Fragment>
   );
 }
