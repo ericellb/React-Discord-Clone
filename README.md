@@ -1,10 +1,10 @@
 # React Discord Clone
 
-> Functional Discord Clone using React, Socket IO, NodeJS, Express and MySQL
+> Functional Discord Clone written in Typescript using React, Socket IO, NodeJS, Express and MySQL
 
-Currently learning WebRTC to implement voice!
+** This project is not currently maintained. If you have any inquiries please reach out to me ericellb@gmail.com **
 
-Originally started off on a test project for learning Functional Components, Hooks, Socket IO and TypeScript ended up being a Discord Clone.
+Originally started as a simple chatting application to test my Frontend + Backend skills, magically turned into a Discord Clone.
 
 ![layout image](public/app.png)
 
@@ -12,9 +12,6 @@ Live Version http://ericellb.github.io/React-Discord-Clone
 
 API https://github.com/ericellb/React-Discord-API
 
-### Important
-
-If you need to use my backend api change the env variable `REACT_APP_API_URL` in `.env` to `https://simple-chat-apix.herokuapp.com`, otherwise host the API yourself and set this environment variable appropriately.
 
 ## Features
 
@@ -32,12 +29,9 @@ Implemented Features
 - [x] Private messaging
 - [x] Timestamps for messages
 - [x] Show current active users in given server
-- [x] Convert to Typescript (Still need to fix a lot of any types i applied)
-- [x] Voice Chat (Still work to do, but main functionality works)
+- [x] Convert to Typescript
+- [x] Voice Chat (Buggy, but main features work)
 
-Planned Features
-
-- [] Bug fixes + optimize
 
 ## License
 
