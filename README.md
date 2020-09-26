@@ -2,15 +2,15 @@
 
 > Functional Discord Clone written in Typescript using React, Socket IO, NodeJS, Express and MySQL
 
+View the live verison at -> http://ericellb.github.io/React-Discord-Clone
+
+Check out the backend code! -> https://github.com/ericellb/React-Discord-API
+
 ** This project is not currently maintained. If you have any inquiries please reach out to me ericellb@gmail.com **
 
 Originally started as a simple chatting application to test my Frontend + Backend skills, magically turned into a Discord Clone.
 
 ![layout image](public/app.png)
-
-Live Version http://ericellb.github.io/React-Discord-Clone
-
-API https://github.com/ericellb/React-Discord-API
 
 
 ## Features
