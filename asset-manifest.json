@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/React-Discord-Clone/static/css/main.011f88f9.chunk.css",
-    "main.js": "/React-Discord-Clone/static/js/main.36cf3bcf.chunk.js",
-    "main.js.map": "/React-Discord-Clone/static/js/main.36cf3bcf.chunk.js.map",
+    "main.css": "/React-Discord-Clone/static/css/main.089ee2a6.chunk.css",
+    "main.js": "/React-Discord-Clone/static/js/main.3a6d44ee.chunk.js",
+    "main.js.map": "/React-Discord-Clone/static/js/main.3a6d44ee.chunk.js.map",
     "runtime~main.js": "/React-Discord-Clone/static/js/runtime~main.3fa648ab.js",
     "runtime~main.js.map": "/React-Discord-Clone/static/js/runtime~main.3fa648ab.js.map",
-    "static/css/2.b0f64131.chunk.css": "/React-Discord-Clone/static/css/2.b0f64131.chunk.css",
-    "static/js/2.f4d6dab3.chunk.js": "/React-Discord-Clone/static/js/2.f4d6dab3.chunk.js",
-    "static/js/2.f4d6dab3.chunk.js.map": "/React-Discord-Clone/static/js/2.f4d6dab3.chunk.js.map",
+    "static/css/2.c1f95b34.chunk.css": "/React-Discord-Clone/static/css/2.c1f95b34.chunk.css",
+    "static/js/2.fdee59c0.chunk.js": "/React-Discord-Clone/static/js/2.fdee59c0.chunk.js",
+    "static/js/2.fdee59c0.chunk.js.map": "/React-Discord-Clone/static/js/2.fdee59c0.chunk.js.map",
     "index.html": "/React-Discord-Clone/index.html",
-    "precache-manifest.bb0d7a45908cff38b4299c39f4852ebb.js": "/React-Discord-Clone/precache-manifest.bb0d7a45908cff38b4299c39f4852ebb.js",
+    "precache-manifest.d03b056f59bc8fd814d9f0b6d6220429.js": "/React-Discord-Clone/precache-manifest.d03b056f59bc8fd814d9f0b6d6220429.js",
     "service-worker.js": "/React-Discord-Clone/service-worker.js",
-    "static/css/2.b0f64131.chunk.css.map": "/React-Discord-Clone/static/css/2.b0f64131.chunk.css.map",
-    "static/css/main.011f88f9.chunk.css.map": "/React-Discord-Clone/static/css/main.011f88f9.chunk.css.map"
+    "static/css/2.c1f95b34.chunk.css.map": "/React-Discord-Clone/static/css/2.c1f95b34.chunk.css.map",
+    "static/css/main.089ee2a6.chunk.css.map": "/React-Discord-Clone/static/css/main.089ee2a6.chunk.css.map"
   }
 }
