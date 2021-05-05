@@ -6,7 +6,7 @@ View the live verison at -> http://ericellb.github.io/React-Discord-Clone
 
 Check out the backend code! -> https://github.com/ericellb/React-Discord-API
 
-** This project is not currently maintained. If you have any inquiries please reach out to me ericellb@gmail.com **
+** NOTE - This project is not currently maintained. **
 
 Originally started as a simple chatting application to test my Frontend + Backend skills, magically turned into a Discord Clone.
 
