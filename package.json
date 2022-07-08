@@ -18,7 +18,7 @@
     "@types/socket.io-client": "^1.4.32",
     "axios": "^0.19.0",
     "emoji-mart": "^2.11.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react": "^16.8.6",
     "react-code-prettify": "0.0.1",
     "react-div-100vh": "^0.3.4",
