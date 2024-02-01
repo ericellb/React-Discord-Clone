@@ -70,15 +70,15 @@ export default function Messages() {
   // Checks is message is a code block
   const isTextCodeBlock = (message: string) => {
     if (message.startsWith('```') && message.endsWith('```')) return true;
-    else return false;
+    
+    return false;
   };
 
   // Handles to load more messages when scroll at top
   const handleScrollTop = (e: any) => {
     const element = e.target;
-    if (element.scrollTop > 60) {
-      setLoadMessages(false);
-    }
+    if (element.scrollTop > 60) setLoadMessages(false);
+    
     if (element.scrollTop === 0) {
       if (messagesLength > messageIndex) {
         setTimeout(() => {
